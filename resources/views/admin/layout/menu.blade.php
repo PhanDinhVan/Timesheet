@@ -9,6 +9,12 @@
 	          <li><a href="index3.html">Dashboard3</a></li>
 	        </ul>
 	      </li>
+	      <li><a><i class="fa fa-users"></i> Employee Types <span class="fa fa-chevron-down"></span></a>
+	        <ul class="nav child_menu">
+	          <li><a href="admin/employee_type/add">Add New Employee Type</a></li>
+	          <li><a href="admin/employee_type/list">List Employee Types</a></li>
+	        </ul>
+	      </li>
 	      <li><a><i class="fa fa-user"></i> Users <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
 	          <li><a href="admin/user/add">Add New User</a></li>

@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Users
-                        <small>Add new</small>
+                        <small>Edit</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -36,24 +36,24 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/user/add" method="POST">
+                        <form action="admin/user/edit/{{$user->id}}" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input class="form-control" name="firstname" placeholder="Please enter your name" />
+                                <input class="form-control" name="firstname" value="{{$user->firstname}}" placeholder="Please enter your name" />
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input class="form-control" name="lastname" placeholder="Please enter your name" />
+                                <input class="form-control" name="lastname" value="{{$user->lastname}}" placeholder="Please enter your name" />
                             </div>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input class="form-control" type="email" name="email" placeholder="Please enter your email" />
+                                <input class="form-control" type="email" name="email" value="{{$user->username}}" placeholder="Please enter your email" readonly="" />
                             </div>
                             <div class="form-group">
                                 <label>Start Date</label>
-   								<input class="date form-control" type="text" name="start_date">
+   								<input class="date form-control" type="text" name="start_date" value="{{$user->start_date}}">
                             </div>
                             <!-- datepicker -->
                             <script type="text/javascript">
@@ -64,7 +64,7 @@
 
 							<div class="form-group">
                                 <label>End Date</label>
-   								<input class="enddate form-control" type="text" name="end_date">
+   								<input class="enddate form-control" type="text" name="end_date" value="{{$user->end_date}}">
                             </div>
                             <!-- datepicker -->
                             <script type="text/javascript">
@@ -77,31 +77,42 @@
                                 <label>Employee Type</label>
    								<select class="form-control" name="employee_type_id">
                                     @foreach($employee_types as $value)
-                                    <option value="{{$value->id}}">{{$value->type}}</option>
+                                    <option 
+                                        @if($user->employee_type_id == $value->id) {{"selected"}} @endif 
+                                        value="{{$value->id}}">{{$value->type}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
-                                <input class="form-control" type="password" name="password" placeholder="Please enter your password" />
+                            	<input type="checkbox" name="changePassword" id="changePassword">
+                                <label>Change Password</label>
+                                <input class="form-control password" type="password" name="password" placeholder="Please enter your password" disabled="" />
                             </div>
                             <div class="form-group">
                                 <label>Password Again</label>
-                                <input class="form-control" type="password" name="passwordAgain" placeholder="Please enter your password" />
+                                <input class="form-control password" type="password" name="passwordAgain" placeholder="Please enter your password" disabled="" />
                             </div>
                             <div class="form-group">
                                 <label>Position</label>
                                 <label class="radio-inline">
-                                    <input name="quyen" value="1" type="radio">Admin
+                                    <input name="quyen" value="1" type="radio"
+                                    	@if($user->position == 1)
+                                            {{"checked"}}
+                                        @endif
+                                    >Admin
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="quyen" value="0" checked="" type="radio">User
+                                    <input name="quyen" value="0" type="radio"
+                                    	@if($user->position == 0)
+                                            {{"checked"}}
+                                        @endif
+                                    >User
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-default">Add</button>
+                            <button type="submit" class="btn btn-default">Save</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
-                    </div>
+                </div>
                
             </div>
             <!-- /.row -->
@@ -112,6 +123,18 @@
        
 <!-- /#page-wrapper -->	
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $("#changePassword").change(function(){
+                if($(this).is(":checked")){
+                    $(".password").removeAttr('disabled');
+                }else{
+                    $(".password").attr('disabled','');
+                }
+            });
+        });
+    </script>
  @endsection
-
-

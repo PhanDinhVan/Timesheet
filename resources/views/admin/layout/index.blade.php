@@ -125,6 +125,8 @@
 
     <!-- Custom Theme Scripts -->
     <script src="admin_asset/build/js/custom.min.js"></script>
+
+    @yield('script')
     
   </body>
 </html>

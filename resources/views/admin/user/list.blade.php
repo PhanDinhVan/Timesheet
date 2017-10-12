@@ -9,16 +9,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">User
+                    <h1 class="page-header">Users
                         <small>List</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                @if(session('thongbao'))
+                <div class="col-lg-7">
+                  @if(session('thongbao'))
                     <div class="alert alert-success">
                         {{session('thongbao')}}    
                     </div>
-                @endif
+                  @endif
+                </div>
+                
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                      
@@ -27,6 +30,7 @@
                             <th>Username</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Employee Type</th>
                             <th>Position </th>
                             <th>Start Date</th>
                             <th>End Date </th>
@@ -43,6 +47,7 @@
                           <td>{{$value->username}}</td>
                           <td>{{$value->firstname}}</td>
                           <td>{{$value->lastname}}</td>
+                          <td>{{$value->employee_types->type}}</td>
                           <td>
                             @if($value->position == 1)
                               {{"Admin"}}
@@ -50,8 +55,8 @@
                               {{"User"}}
                             @endif
                           </td>
-                          <td>{{$value->startdate}}</td>
-                          <td>{{$value->enddate}}</td>
+                          <td>{{$value->start_date}}</td>
+                          <td>{{$value->end_date}}</td>
                           <td>
                             @if($value->status == 1)
                               {{"Active"}}
@@ -59,8 +64,8 @@
                               {{"Close"}}
                             @endif
                           </td>
-                          <td class="center"><i class="fa fa-trash-o"></i><a href="admin/user/delete"> Delete</a></td>
-                          <td class="center"><i class="fa fa-pencil-square-o"></i> <a href="admin/user/edit">Edit</a></td>
+                          <td class="center"><i class="fa fa-trash-o"></i><a href="admin/user/delete/{{$value->id}}"> Delete</a></td>
+                          <td class="center"><i class="fa fa-pencil-square-o"></i> <a href="admin/user/edit/{{$value->id}}">Edit</a></td>
                         </tr>
                        @endforeach
                     </tbody>
