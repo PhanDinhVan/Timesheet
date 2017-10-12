@@ -25,19 +25,19 @@
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr align="center">
-                            <th class="thcenter">ID</th>
-                            <th class="thcenter">Employee Type</th>
-                            <th class="thcenter">Delete</th>
-                            <th class="thcenter">Edit</th>
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">Employee Type</th>
+                            <th style="text-align: center;">Delete</th>
+                            <th style="text-align: center;">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($employee_type as $value)
                         <tr class="odd gradeX" align="center">
-                          <td class="thcenter">{{$value->id}}</td>
-                          <td class="thcenter">{{$value->type}}</td>
-                          <td class="thcenter"><i class="fa fa-trash-o"></i><a href="admin/user/delete/{{$value->id}}"> Delete</a></td>
-                          <td class="thcenter"><i class="fa fa-pencil-square-o"></i> <a href="admin/user/edit/{{$value->id}}">Edit</a></td>
+                          <td style="text-align: center;">{{$value->id}}</td>
+                          <td style="text-align: center;">{{$value->type}}</td>
+                          <td style="text-align: center;"><i class="fa fa-trash-o"></i><a href="admin/employee_type/delete/{{$value->id}}"> Delete</a></td>
+                          <td style="text-align: center;"><i class="fa fa-pencil-square-o"></i> <a href="admin/employee_type/edit/{{$value->id}}">Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -51,11 +51,4 @@
        
 <!-- /#page-wrapper --> 
 
- @endsection
-
-<style type="text/css">
-    .thcenter{
-        text-align: center;
-        font-size: 13px;
-    }
-</style>
+@endsection
