@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2017 at 01:34 PM
+-- Generation Time: Oct 13, 2017 at 12:53 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -32,8 +32,22 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
-  `country` varchar(50) NOT NULL
+  `country` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `city`, `country`, `email`) VALUES
+(1, 'Roman Abramovich', 'Saratov', 'Russian', 'roman@gmail.com'),
+(2, 'Bill Gates', 'Washington', 'USA', 'bill@gmail.com'),
+(3, 'Jack Ma', 'Hangzhou', 'China', 'jack@gmail.com'),
+(4, 'Dinh Van', 'Ho Chi Minh', 'Viet Nam', 'dinhvan@gmail.com'),
+(5, 'William', 'Brasília', 'Brasil', 'william@gmail.com'),
+(7, 'Amagumo', 'Paris', 'France', 'amagumo@gmail.com'),
+(10, 'Ronaldo', 'Lisboa', 'Portugal', 'ronaldo@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -53,7 +67,10 @@ CREATE TABLE `employee_types` (
 INSERT INTO `employee_types` (`id`, `type`) VALUES
 (1, 'Developer'),
 (2, 'Manager'),
-(3, 'HR');
+(3, 'HR'),
+(4, 'CEO'),
+(5, 'Director'),
+(6, 'Board of directors');
 
 -- --------------------------------------------------------
 
@@ -71,6 +88,18 @@ CREATE TABLE `projects` (
   `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `name`, `department`, `status`, `start_date`, `end_date`, `customer_id`) VALUES
+(1, 'Project 10', 'Director', 0, '2017-10-13 08:55:33', '2017-12-31 17:00:00', 1),
+(2, 'Project 2', 'HR', 1, '2017-08-10 17:00:00', '2018-11-10 17:00:00', 3),
+(5, 'Project 5', 'CEO', 1, '2017-10-13 08:54:43', '2018-12-26 17:00:00', 7),
+(6, 'Project 6', 'Manager', 1, '2017-10-25 17:00:00', '2018-01-25 17:00:00', 10),
+(7, 'Project 7', 'HR', 0, '2017-10-17 17:00:00', '2018-01-17 17:00:00', 3),
+(8, 'Project 8', 'Board of directors', 1, '2017-10-26 17:00:00', '2017-12-07 17:00:00', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +112,14 @@ CREATE TABLE `tasks` (
   `taskname` varchar(50) NOT NULL,
   `comments` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `project_id`, `taskname`, `comments`) VALUES
+(2, 1, 'Task 1', 'Hoan thanh 50%'),
+(3, 2, 'Task 2', 'Hoan thanh 60%');
 
 -- --------------------------------------------------------
 
@@ -99,6 +136,17 @@ CREATE TABLE `time_entries` (
   `note` varchar(250) DEFAULT NULL,
   `task_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `time_entries`
+--
+
+INSERT INTO `time_entries` (`id`, `user_id`, `working_time`, `overtime`, `date`, `note`, `task_id`) VALUES
+(1, 1, 8, 0, '2017-10-12 17:00:00', 'Happy', 1),
+(2, 2, 8, 2, '2017-10-12 17:00:00', 'Happy', 2),
+(3, 3, 8, 1, '2017-10-12 17:00:00', 'Happy', 3),
+(5, 2, 8, 2, '2017-10-13 17:00:00', 'Happy', 2),
+(12, 3, 8, 1, '2017-10-13 17:00:00', 'Happy', 3);
 
 -- --------------------------------------------------------
 
@@ -188,37 +236,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `employee_types`
 --
 ALTER TABLE `employee_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `time_entries`
 --
 ALTER TABLE `time_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

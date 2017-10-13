@@ -1,15 +1,15 @@
 @extends('admin.layout.index')
- @section('content')
+@section('content')
 
 <!-- Page Content --> 
-	
+    
 <div class="right_col" role="main">
       <!-- top tiles -->
      <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Users
+                    <h1 class="page-header">Project
                         <small>List</small>
                     </h1>
                 </div>
@@ -24,50 +24,38 @@
                 
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
-                     
                         <tr align="center">
                             <th>ID</th>
-                            <th>Username</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Employee Type</th>
-                            <th>Position </th>
-                            <th>Start Date</th>
-                            <th>End Date </th>
+                            <th>Name</th>
+                            <th>Department</th>
                             <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Customer Name</th>
                             <th>Delete</th>
                             <th>Edit</th>
                         </tr>
-                     
                     </thead>
                     <tbody>
-                       @foreach($user as $value)
+                        @foreach($project as $value)
                         <tr class="odd gradeX">
                           <td>{{$value->id}}</td>
-                          <td>{{$value->username}}</td>
-                          <td>{{$value->firstname}}</td>
-                          <td>{{$value->lastname}}</td>
-                          <td>{{$value->employee_types->type}}</td>
-                          <td>
-                            @if($value->position == 1)
-                              {{"Admin"}}
-                            @else
-                              {{"User"}}
-                            @endif
-                          </td>
-                          <td>{{$value->start_date}}</td>
-                          <td>{{$value->end_date}}</td>
+                          <td>{{$value->name}}</td>
+                          <td>{{$value->department }}</td>
                           <td>
                             @if($value->status == 1)
-                              {{"Active"}}
+                                {{"Active"}}
                             @else
-                              {{"Close"}}
+                                {{"Close"}}
                             @endif
                           </td>
-                          <td class="center"><i class="fa fa-trash-o"></i><a href="admin/user/delete/{{$value->id}}"> Delete</a></td>
-                          <td class="center"><i class="fa fa-pencil-square-o"></i> <a href="admin/user/edit/{{$value->id}}">Edit</a></td>
+                          <td>{{$value->start_date }}</td>
+                          <td>{{$value->end_date}}</td>
+                          <td>{{$value->customer->name}}</td>
+                          <td><i class="fa fa-trash-o"></i><a href="admin/project/delete/{{$value->id}}"> Delete</a></td>
+                          <td><i class="fa fa-pencil-square-o"></i> <a href="admin/project/edit/{{$value->id}}">Edit</a></td>
                         </tr>
-                       @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -77,6 +65,6 @@
     </div>
 </div>
        
-<!-- /#page-wrapper -->	
+<!-- /#page-wrapper --> 
 
- @endsection
+@endsection

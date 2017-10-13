@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Users
+                    <h1 class="page-header">Customers
                         <small>List</small>
                     </h1>
                 </div>
@@ -26,18 +26,24 @@
                     <thead>
                         <tr align="center">
                             <th>ID</th>
-                            <th>Employee Type</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Country</th>
                             <th>Delete</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($employee_type as $value)
-                        <tr class="odd gradeX">
+                    @foreach($customer as $value)
+                        <tr class="odd gradeX" >
                           <td>{{$value->id}}</td>
-                          <td>{{$value->type}}</td>
-                          <td><i class="fa fa-trash-o"></i><a href="admin/employee_type/delete/{{$value->id}}"> Delete</a></td>
-                          <td><i class="fa fa-pencil-square-o"></i> <a href="admin/employee_type/edit/{{$value->id}}">Edit</a></td>
+                          <td>{{$value->name}}</td>
+                          <td>{{$value->email}}</td>
+                          <td>{{$value->city}}</td>
+                          <td>{{$value->country}}</td>
+                          <td><i class="fa fa-trash-o"></i><a href="admin/customer/delete/{{$value->id}}"> Delete</a></td>
+                          <td><i class="fa fa-pencil-square-o"></i> <a href="admin/customer/edit/{{$value->id}}">Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>
