@@ -18,8 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/login','LoginController@getLoginAdmin');
+Route::post('admin/login','LoginController@postLoginAdmin');
+Route::get('admin/logout','LoginController@getLogoutAdmin');
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	
 	Route::group(['prefix'=>'user'],function(){
 		Route::get('list','UserController@getList');

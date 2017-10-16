@@ -28,8 +28,8 @@
                           <th>Project Name</th>
                           <th>Taks Name</th>
                           <th>Comments</th>
-                          <th>Edit</th>
                           <th>Delete</th>
+                          <th>Edit</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -39,8 +39,8 @@
                           <td>{{$value->project->name}}</td>
                           <td>{{$value->taskname}}</td>
                           <td>{{$value->comments}}</td>
-                          <td><i class="fa fa-trash-o"></i><a href="#"> Delete</a></td>
-                          <td><i class="fa fa-pencil-square-o"></i> <a href="#">Edit</a></td>
+                          <td><i class="fa fa-trash-o"></i><a href="admin/task/delete/{{$value->id}}"> Delete</a></td>
+                          <td><i class="fa fa-pencil-square-o"></i> <a href="admin/task/edit/{{$value->id}}">Edit</a></td>
                         </tr>
                         @endforeach
                       </tbody>

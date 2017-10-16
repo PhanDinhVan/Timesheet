@@ -124,4 +124,6 @@ class UserController extends Controller
 
         return redirect('admin/user/list')->with('thongbao','You delete success');
     }
+
+    
 }

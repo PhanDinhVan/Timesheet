@@ -20,7 +20,7 @@ class AdminLoginMiddleware
     {
         if(Auth::check()){
             $user = Auth::user();
-            if($user->quyen == 1){
+            if($user->position  == 1){
                 return $next($request);
             }
             else{
