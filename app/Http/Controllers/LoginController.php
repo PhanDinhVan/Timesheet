@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //
-      // Ham login with admin
+    // Ham login with admin
     public function getLoginAdmin(){
         return view('admin.login');
     }
@@ -37,9 +37,39 @@ class LoginController extends Controller
 
     // Ham logout
     public function getLogoutAdmin(){
-        Auth::logout();
 
+    	//$users->rememberToken();
+        Auth::logout();
         return redirect('admin/login');
+    }
+
+    function getLoginUser(){
+        return view('pages.login');
+    }
+
+    function postLoginUser(Request $request){
+
+        $this->validate($request,
+            [
+                'email'=>'required',
+                'password'=>'required'
+            ],
+            [
+                'email.required'=>'Email is not empty',
+                'password.required'=>'Passwords is not empty'
+            ]); 
+
+        if(Auth::attempt(['username'=>$request->email, 'password'=>$request->password])){
+
+            return redirect('timesheet');
+        }else{
+            return redirect('login')->with('thongbao','Login unsuccessful...!!!');
+        }
+    }
+
+    function getLogoutUser(){
+        Auth::logout();
+        return redirect('login');
     }
 }
 

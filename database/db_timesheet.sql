@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2017 at 12:53 PM
+-- Generation Time: Oct 17, 2017 at 09:37 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -33,7 +33,7 @@ CREATE TABLE `customers` (
   `name` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `country` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -57,7 +57,7 @@ INSERT INTO `customers` (`id`, `name`, `city`, `country`, `email`) VALUES
 
 CREATE TABLE `employee_types` (
   `id` int(11) NOT NULL,
-  `type` varchar(100) NOT NULL
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -118,8 +118,11 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `project_id`, `taskname`, `comments`) VALUES
-(2, 1, 'Task 1', 'Hoan thanh 50%'),
-(3, 2, 'Task 2', 'Hoan thanh 60%');
+(1, 5, 'Task 11', 'Mr Van'),
+(2, 8, 'Task 10', 'Mr Philippe'),
+(4, 6, 'Task Add', 'Mr Minh'),
+(5, 2, 'Task Romove', 'Miss Trang'),
+(7, 7, 'Task 13', 'Jack Ma');
 
 -- --------------------------------------------------------
 
@@ -142,11 +145,7 @@ CREATE TABLE `time_entries` (
 --
 
 INSERT INTO `time_entries` (`id`, `user_id`, `working_time`, `overtime`, `date`, `note`, `task_id`) VALUES
-(1, 1, 8, 0, '2017-10-12 17:00:00', 'Happy', 1),
-(2, 2, 8, 2, '2017-10-12 17:00:00', 'Happy', 2),
-(3, 3, 8, 1, '2017-10-12 17:00:00', 'Happy', 3),
-(5, 2, 8, 2, '2017-10-13 17:00:00', 'Happy', 2),
-(12, 3, 8, 1, '2017-10-13 17:00:00', 'Happy', 3);
+(16, 10, 8, 2, '2017-10-15 17:00:00', 'Mr. Dinh Van', 4);
 
 -- --------------------------------------------------------
 
@@ -164,22 +163,23 @@ CREATE TABLE `users` (
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `employee_type_id` int(11) NOT NULL
+  `employee_type_id` int(11) NOT NULL,
+  `remember_token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `status`, `position`, `firstname`, `start_date`, `end_date`, `password`, `lastname`, `username`, `employee_type_id`) VALUES
-(1, 1, 1, 'Phan', '2017-10-12 10:34:01', '2020-05-20 17:00:00', '$2y$10$HT8Lbzr6BHy331EzZ8jEg.eYwNipRVc65.jzuLY8.nZmHRiq5vxmG', 'Dinh Van', 'pdvan.it@gmail.com', 1),
-(2, 1, 0, 'Phan', '2017-10-12 10:34:34', '2018-11-27 17:00:00', '123', 'Thu', 'thuphan@gmail.com', 1),
-(3, 0, 0, 'Phan', '2017-10-12 10:35:27', '2019-06-09 17:00:00', '123', 'Dinh Vu', 'pdvu@gmail.com', 1),
-(5, 1, 0, 'Le', '2017-10-12 04:08:34', '0000-00-00 00:00:00', '123', 'Quang Khai', 'quangkhai@gmail.com', 1),
-(7, 1, 1, 'Nguyen', '2014-12-31 17:00:00', '0000-00-00 00:00:00', '123', 'Philippe', 'bnc3.mailjet.com ', 2),
-(8, 1, 1, 'My', '2014-12-31 17:00:00', '0000-00-00 00:00:00', '123', 'Trang', 'admin@amagumolabs.com', 3),
-(10, 1, 0, 'Ly', '2017-10-30 17:00:00', '2017-10-12 09:37:18', '$2y$10$yJrvCxOxQ64.i42neoRpHu4SfdaLiAijHNfqN6B4H4SrytbTe5Lsa', 'Hai', 'lyhai@gmail.com', 1),
-(12, 1, 0, 'Đàm', '2017-10-24 17:00:00', '2018-07-12 17:00:00', '$2y$10$WIv7FTOqZaQQ8RGeSouoaOWubzYpub3DAH8uAWNP2i5s6xJRCjfby', 'Vĩnh Hưng', 'dvhung@gmail.com', 1);
+INSERT INTO `users` (`id`, `status`, `position`, `firstname`, `start_date`, `end_date`, `password`, `lastname`, `username`, `employee_type_id`, `remember_token`) VALUES
+(1, 1, 1, 'Phan', '2017-10-17 06:47:57', '2020-05-20 17:00:00', '$2y$10$HT8Lbzr6BHy331EzZ8jEg.eYwNipRVc65.jzuLY8.nZmHRiq5vxmG', 'Dinh Van', 'pdvan.it@gmail.com', 1, 'SpObdphIli1Fg5wkplhSyVTxkPJ6zUzH3pEvvCwmTs9gh4c8Ri5wiajETw5u'),
+(2, 1, 1, 'Phan', '2017-10-17 06:48:45', '2018-11-27 17:00:00', '$2y$10$KR7DQRF0UvPa1IGNfXiEfudwI6PU2.sslbekNeQIWRrWgS37jJwm6', 'Thu', 'thuphan@gmail.com', 1, '8RSwjr7KFD1HmCNiWkBFirla6JdizNkpkni3Pp7Zk2VJ1F0zp97ozu0VD3tK'),
+(3, 0, 0, 'Phan', '2017-10-12 10:35:27', '2019-06-09 17:00:00', '123', 'Dinh Vu', 'pdvu@gmail.com', 1, ''),
+(5, 1, 0, 'Le', '2017-10-12 04:08:34', '0000-00-00 00:00:00', '123', 'Quang Khai', 'quangkhai@gmail.com', 1, ''),
+(7, 1, 1, 'Nguyen', '2014-12-31 17:00:00', '0000-00-00 00:00:00', '123', 'Philippe', 'bnc3.mailjet.com ', 2, ''),
+(8, 1, 1, 'My', '2014-12-31 17:00:00', '0000-00-00 00:00:00', '123', 'Trang', 'admin@amagumolabs.com', 3, ''),
+(10, 1, 0, 'Ly', '2017-10-17 07:27:29', '2017-10-12 09:37:18', '$2y$10$yJrvCxOxQ64.i42neoRpHu4SfdaLiAijHNfqN6B4H4SrytbTe5Lsa', 'Hai', 'lyhai@gmail.com', 1, 'nb9vkU642KXgI5wXxlSHgT1g02wvmTcUp3ZsZPNLGKBsXIdUa2P53wUyExVA'),
+(12, 1, 0, 'Đàm', '2017-10-24 17:00:00', '2018-07-12 17:00:00', '$2y$10$WIv7FTOqZaQQ8RGeSouoaOWubzYpub3DAH8uAWNP2i5s6xJRCjfby', 'Vĩnh Hưng', 'dvhung@gmail.com', 1, '');
 
 --
 -- Indexes for dumped tables
@@ -209,17 +209,15 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `task_ind` (`project_id`),
-  ADD KEY `task_project_ind` (`project_id`),
-  ADD KEY `task_ind1` (`id`);
+  ADD KEY `project_id` (`project_id`);
 
 --
 -- Indexes for table `time_entries`
 --
 ALTER TABLE `time_entries`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `timesheet_ind` (`user_id`),
-  ADD KEY `timesheet_ind1` (`task_id`);
+  ADD KEY `time_ind` (`task_id`);
 
 --
 -- Indexes for table `users`
@@ -260,7 +258,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `time_entries`
 --
 ALTER TABLE `time_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -282,8 +280,7 @@ ALTER TABLE `projects`
 -- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `fk_project` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_timesheet_task` FOREIGN KEY (`id`) REFERENCES `time_entries` (`task_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_project` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `time_entries`

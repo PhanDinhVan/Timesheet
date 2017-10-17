@@ -83,5 +83,10 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('delete/{id}','TaskController@getDelete');
 	});
-
 });
+
+Route::get('timesheet','TimesheetController@getTimesheet');
+
+Route::get('login','LoginController@getLoginUser');
+Route::post('login','LoginController@postLoginUser');
+Route::get('logout','LoginController@getLogoutUser');
