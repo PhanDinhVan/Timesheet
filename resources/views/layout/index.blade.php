@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link href="admin_asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,9 +32,7 @@
 
 </head>
 
-<body>
-
-	@include('layout.header')
+<body">
 
 	@yield('content')
 
