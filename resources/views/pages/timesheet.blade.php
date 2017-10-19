@@ -2,6 +2,8 @@
 
 @include('layout.header')
 
+
+
 @section('content')
 <!-- Page Content --> 
 
@@ -31,8 +33,11 @@
 
 
 <!-- Modal trong laravel -->
+
 @include('pages.modal')
 @include('pages.calendar')
+
+
 <!-- /#page-wrapper -->	
 
 @endsection

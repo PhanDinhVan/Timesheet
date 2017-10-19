@@ -86,6 +86,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 });
 
 Route::get('timesheet','TimesheetController@getTimesheet');
+Route::post('timesheet','TimesheetController@postAddTimesheet');
+Route::get('fullcalendar','TimesheetController@getFullCalendar');
+
 
 Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
