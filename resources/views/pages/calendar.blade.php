@@ -20,26 +20,16 @@
         .agenda .agenda-date .shortdate {
             font-size: 0.75em;
         }
-        /* Times */
-        
-        .agenda .agenda-time {
-            width: 140px;
-        }
-        /* Events */
-        
-        .agenda .agenda-events {}
-        
-        .agenda .agenda-events .agenda-event {}
-        
-        @media (max-width: 767px) {}
+
+       
     </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-
-
+<p id="demo"></p>
 <div class="container">
         <h1 class="thick-heading" style="text-align: center;">Timesheet</h1>
         <!-- First Featurette -->
@@ -48,6 +38,7 @@
                 <div class="agenda">
                     <div class="table-responsive">
                     	<div class="form-group">
+
 						    <label>Today</label>
 							<input class="date form-control" type="text" id="datepicker" style="width: 9%;">
 						</div>
@@ -62,7 +53,7 @@
                         <table class="table table-condensed table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Mon</th>
+                                    <th>Fri</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,6 +71,9 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        
+
                     </div>
                 </div>
             </div>
@@ -92,13 +86,32 @@
         </script>
     </div>
 
+@include('pages.test')
+
 @section('script')
     <script>
-        $(document).ready(function(){
-            $("#datepicker").change(function(){
-                console.log("day_name");
+        document.getElementById("datepicker").onchange = function() {myFunction()};
+        function myFunction() {
+           
+           $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
             });
-        });
+
+            var x = document.getElementById('datepicker').value;
+
+            document.getElementById("demo").innerHTML = x;
+           $.ajax({
+               type:'GET',
+               url:'timesheet/'+x,
+               
+               success:function(data){
+                    // alert(data);
+                    $('#ajax_data').html(data);
+               }
+            });
+        }
     </script>
 @endsection
 

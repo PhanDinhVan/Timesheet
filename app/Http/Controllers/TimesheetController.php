@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Task;
 use App\Timesheet;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 class TimesheetController extends Controller
 {
@@ -19,6 +21,19 @@ class TimesheetController extends Controller
     	$project = Project::all();
     	$task = Task::all();
     	return view('pages.timesheet',['project'=>$project,'task'=>$task,'time_entries'=>$time_entries]);
+    }
+
+    public function getTimesheet2(Request $request){
+        $data = $request->x;
+        $time_entries = Timesheet::where('create_date',$data)->get();
+        
+        $project = Project::all();
+        $task = Task::all();
+
+        echo($time_entries);
+        // echo($project);
+        // echo($task);
+        
     }
 
 

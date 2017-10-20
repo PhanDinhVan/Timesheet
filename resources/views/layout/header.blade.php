@@ -1,4 +1,5 @@
 <head>
+    <base href="{{asset('')}}">
     <link href="admin_asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">

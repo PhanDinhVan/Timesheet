@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 09:37 AM
+-- Generation Time: Oct 20, 2017 at 11:44 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -135,17 +135,30 @@ CREATE TABLE `time_entries` (
   `user_id` int(11) NOT NULL,
   `working_time` int(11) DEFAULT NULL,
   `overtime` int(11) DEFAULT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `note` varchar(250) DEFAULT NULL,
-  `task_id` int(11) NOT NULL
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `note` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `task_id` int(11) NOT NULL,
+  `start_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `time_entries`
 --
 
-INSERT INTO `time_entries` (`id`, `user_id`, `working_time`, `overtime`, `date`, `note`, `task_id`) VALUES
-(16, 10, 8, 2, '2017-10-15 17:00:00', 'Mr. Dinh Van', 4);
+INSERT INTO `time_entries` (`id`, `user_id`, `working_time`, `overtime`, `create_date`, `note`, `task_id`, `start_date`) VALUES
+(16, 10, 8, 2, '2017-10-19 02:57:45', 'Mr. Dinh Van', 4, '2017-10-18 17:00:00'),
+(17, 1, 8, NULL, '2017-10-19 08:47:25', 'asghgfds', 7, '2017-10-18 17:00:00'),
+(19, 1, 8, NULL, '2017-10-19 08:51:33', 'Dinh Van Add', 4, '2017-10-18 17:00:00'),
+(20, 1, 8, 0, '2017-10-19 08:56:22', 'Test overtime', 7, '2017-10-18 17:00:00'),
+(21, 1, 9, 0, '2017-10-19 09:08:10', 'Dinh Van Add', 4, '2017-10-29 17:00:00'),
+(22, 1, 8, 0, '2017-10-18 17:00:00', 'Dinh Van Add', 2, '2017-10-28 17:00:00'),
+(23, 1, 8, 0, '2017-10-18 17:00:00', 'Hnay la ngay dep troi', 7, '2017-10-30 17:00:00'),
+(24, 1, 8, 0, '2017-10-18 17:00:00', 'Dinh Van Test', 7, '2017-10-24 17:00:00'),
+(25, 1, 9, 0, '2017-10-18 17:00:00', 'William test', 2, '2017-10-29 17:00:00'),
+(26, 1, 8, 0, '2017-10-19 17:00:00', 'H?m nay l? ng?y....', 7, '2017-10-29 17:00:00'),
+(27, 1, 8, 0, '2017-10-19 17:00:00', 'H?m nay l?....', 7, '2017-10-29 17:00:00'),
+(28, 1, 8, 0, '2017-10-19 17:00:00', 'Hôm nay là ngày phụ nữ Việt Nam', 7, '2017-11-29 17:00:00'),
+(29, 1, 8, 0, '2017-10-19 17:00:00', 'Hôm nay là ngày phụ nữ Việt Nam\r\nMình mới gọi điện thoại về cho má lúc sáng, trưa nay sẽ gọi cho bà nội', 2, '2017-11-09 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -172,7 +185,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `status`, `position`, `firstname`, `start_date`, `end_date`, `password`, `lastname`, `username`, `employee_type_id`, `remember_token`) VALUES
-(1, 1, 1, 'Phan', '2017-10-17 06:47:57', '2020-05-20 17:00:00', '$2y$10$HT8Lbzr6BHy331EzZ8jEg.eYwNipRVc65.jzuLY8.nZmHRiq5vxmG', 'Dinh Van', 'pdvan.it@gmail.com', 1, 'SpObdphIli1Fg5wkplhSyVTxkPJ6zUzH3pEvvCwmTs9gh4c8Ri5wiajETw5u'),
+(1, 1, 1, 'Phan', '2017-10-20 04:40:06', '2020-05-20 17:00:00', '$2y$10$HT8Lbzr6BHy331EzZ8jEg.eYwNipRVc65.jzuLY8.nZmHRiq5vxmG', 'Dinh Van', 'pdvan.it@gmail.com', 1, 'O07VpifgMXGMY4Cu9OD9mlOhjprzGqTss1Jw1QJaEvTcp7S7NkerW43bh0hR'),
 (2, 1, 1, 'Phan', '2017-10-17 06:48:45', '2018-11-27 17:00:00', '$2y$10$KR7DQRF0UvPa1IGNfXiEfudwI6PU2.sslbekNeQIWRrWgS37jJwm6', 'Thu', 'thuphan@gmail.com', 1, '8RSwjr7KFD1HmCNiWkBFirla6JdizNkpkni3Pp7Zk2VJ1F0zp97ozu0VD3tK'),
 (3, 0, 0, 'Phan', '2017-10-12 10:35:27', '2019-06-09 17:00:00', '123', 'Dinh Vu', 'pdvu@gmail.com', 1, ''),
 (5, 1, 0, 'Le', '2017-10-12 04:08:34', '0000-00-00 00:00:00', '123', 'Quang Khai', 'quangkhai@gmail.com', 1, ''),
@@ -258,7 +271,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `time_entries`
 --
 ALTER TABLE `time_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
