@@ -1,4 +1,7 @@
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
  <style>
         .agenda {}
@@ -23,11 +26,6 @@
 
        
     </style>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <p id="demo"></p>
 <div class="container">
@@ -98,7 +96,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
             });
-
             var x = document.getElementById('datepicker').value;
 
             document.getElementById("demo").innerHTML = x;
@@ -107,7 +104,7 @@
                url:'timesheet/'+x,
                
                success:function(data){
-                    // alert(data);
+                    alert(data);
                     $('#ajax_data').html(data);
                }
             });
