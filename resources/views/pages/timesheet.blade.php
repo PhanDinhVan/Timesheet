@@ -2,8 +2,6 @@
 
 @include('layout.header')
 
-
-
 @section('content')
 <!-- Page Content --> 
 

@@ -1,4 +1,7 @@
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
  <style>
     .agenda {}
@@ -22,11 +25,6 @@
     }
 
 </style>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <p id="demo"></p>
 <div class="container">
@@ -117,6 +115,7 @@
               }
             });
 
+
             // create_date hien thi thu trong tuan khi change date va dung trong ajax
             var create_date = document.getElementById('datepicker').value;
             var d = new Date(create_date);
@@ -132,12 +131,16 @@
             var n = weekday[d.getDay()];
             document.getElementById("dayofweek_change").innerHTML = n;  
 
+            var x = document.getElementById('datepicker').value;
+
+
             // document.getElementById("demo").innerHTML = x;
             // get data khi thay doi date
            $.ajax({
                type:'GET',
                url:'timesheet/'+create_date,
                
+
                 success:function(data){
 
                     var temp = jQuery.parseJSON(data);
@@ -158,7 +161,12 @@
 
                     });
                 }
-            });
+
+               success:function(data){
+                    alert(data);
+                    $('#ajax_data').html(data);
+               }
+
 
            // an table 1 hien thi table 2
            document.getElementById("tab1").style.display = "none";
