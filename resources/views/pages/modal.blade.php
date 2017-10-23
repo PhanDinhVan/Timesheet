@@ -46,8 +46,11 @@
               <div class="form-group">
                   <label>Project Name</label>
                   <select class="form-control" name="project_id">
-                      @foreach($task as $value)
+                      <!-- @foreach($task as $value)
                       <option value="{{$value->project_id}}">{{$value->project->name}}</option>
+                      @endforeach -->
+                      @foreach($project as $value)
+                      <option value="{{$value->id}}">{{$value->name}}</option>
                       @endforeach
                   </select>
               </div>
@@ -58,9 +61,10 @@
                       <option value="{{$value->id}}">{{$value->taskname}}</option>
                       @endforeach -->
                       @foreach($task as $value)
-                      <option 
+                      <!-- <option 
                           @if($value->project->id == $value->project_id) {{"selected"}} @endif 
-                          value="{{$value->id}}">{{$value->taskname}}</option>
+                          value="{{$value->id}}">{{$value->taskname}}</option> -->
+                          <option value="{{$value->id}}">{{$value->taskname}}</option>
                       @endforeach
                   </select>
               </div>

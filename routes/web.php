@@ -86,7 +86,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 });
 
 Route::get('timesheet','TimesheetController@getTimesheet');
-Route::get('timesheet/{x}','TimesheetController@getTimesheet2');
+Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
 Route::post('timesheet','TimesheetController@postAddTimesheet');
 Route::get('fullcalendar','TimesheetController@getFullCalendar');
 

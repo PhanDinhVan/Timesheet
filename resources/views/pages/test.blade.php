@@ -1,21 +1,38 @@
-<table class="table table-condensed table-bordered" id="ajax_data">
-      	<!-- <thead>
-            <tr>
-                <th>Mon</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-        	 	
-                	<td class="agenda-date" class="active" rowspan="1">
-                		<div class="shortdate text-muted">Project name: </div>
-                        <div class="shortdate text-muted">Task name: </div>
-                        <div class="shortdate text-muted">Working time: </div>
-                        <div class="shortdate text-muted">Over time: </div>
-                        <div class="shortdate text-muted">Start date: </div>
-                        <button class="shortdate text-muted">Detail</button>
-                	</td>
-            	
-            </tr>
-        </tbody>       -->                
-</table> 
+
+<style>
+    .agenda {}
+    /* Dates */
+    
+    .agenda .agenda-date {
+        width: 170px;
+    }
+    
+    .agenda .agenda-date .dayofmonth {
+        width: 40px;
+        font-size: 36px;
+        line-height: 36px;
+        float: left;
+        text-align: right;
+        margin-right: 10px;
+    }
+    
+    .agenda .agenda-date .shortdate {
+        font-size: 0.75em;
+    }
+   
+</style>
+
+
+
+<table class="table table-condensed table-bordered" id="tab2" style="display: none;">
+    <thead>
+        <tr>
+            <th id="dayofweek_change"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="ajax_data">
+            
+        </tr>
+    </tbody>
+</table>

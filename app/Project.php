@@ -17,4 +17,8 @@ class Project extends Model
     public function task(){
     	return $this->hasMany('App\Task','project_id','id');
     }
+
+        public function timesheet(){
+    	return $this->hasManyThrough('App\Timesheet','App\Task','project_id','task_id','id');
+    }
 }

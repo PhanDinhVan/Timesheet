@@ -24,7 +24,7 @@ class TimesheetController extends Controller
     }
 
     public function getTimesheet2(Request $request){
-        $data = $request->x;
+        $data = $request->create_date;
         $time_entries = Timesheet::where('create_date',$data)->get();
         
         $project = Project::all();
