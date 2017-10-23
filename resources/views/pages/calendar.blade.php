@@ -161,11 +161,8 @@
 
                     });
                 }
+            });
 
-               success:function(data){
-                    alert(data);
-                    $('#ajax_data').html(data);
-               }
 
 
            // an table 1 hien thi table 2
@@ -176,6 +173,3 @@
        
     </script>
 @endsection
-
-
-
