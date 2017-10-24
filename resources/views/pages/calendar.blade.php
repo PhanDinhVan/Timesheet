@@ -1,7 +1,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
  <style>
     .agenda {}
@@ -57,7 +57,7 @@
                                 <tr>
                                 	 @foreach($time_entries as $value)
 	                                	<td class="agenda-date" class="active" rowspan="1">
-	                                		<div class="shortdate text-muted" id="projectname">Project name: {{$value->create_date}}</div>
+	                                		<div class="shortdate text-muted" id="projectname">Project name: <span class="projectname">{{$value->task_id}}</span></div>
 	                                        <div class="shortdate text-muted">Task name: <span class="taskname">{{$value->task_id}}</span></div>
 	                                        <div class="shortdate text-muted">Working time: {{$value->working_time}}</div>
 	                                        <div class="shortdate text-muted">Over time: {{$value->overtime}}</div>
@@ -74,15 +74,7 @@
                 </div>
             </div>
         <!-- /.container -->
-        <!-- jQuery -->
-        <script src="http://www.tutorialspoint.com/bootstrap/scripts/jquery.min.js">
-        </script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="http://www.tutorialspoint.com/bootstrap/js/bootstrap.min.js">
-        </script>
     </div>
-
-
 
 @section('script')
     <script>
@@ -143,8 +135,8 @@
                     temp.forEach(function(element) {
 
                         innerHtml = '<td class="agenda-date" class="active" rowspan="1">' 
-                        + '<div class="shortdate text-muted">' + 'Project name:' + element.create_date + '</div>' 
-                        + '<div class="shortdate text-muted">' + 'Task name:' + '<span class="taskname">' + element.task_id + '</span>' + '</div>'
+                        + '<div class="shortdate text-muted">' + 'Project name: ' + '<span class="projectname_1">' + element.task_id +'</span>' + '</div>' 
+                        + '<div class="shortdate text-muted">' + 'Task name: ' + '<span class="taskname_1">' + element.task_id + '</span>' + '</div>'
                         + '<div class="shortdate text-muted">' + 'Working time:' + element.working_time + '</div>'
                         + '<div class="shortdate text-muted">' + 'Over time:' + element.overtime + '</div>'
                         + '<div class="shortdate text-muted">' + 'Start date:' + element.start_date + '</div>'
@@ -154,36 +146,40 @@
                         $('#ajax_data').append(innerHtml);
 
                     });
+
+                    //show task name when change date
+                    var temp_change = $('.agenda-date > div .taskname_1');
+                    // console.log(temp_change);
+                    temp_change.each(function() {
+                        var a = $(this);
+                        var task_id = a.text();
+                        // alert(task_id);
+                        $.get("taskname/"+task_id, function(data){
+                            // alert(data);
+                            a.text(data);
+                        });
+                    });
+
+                    // show project name when change date
+                    var temp = $('.agenda-date > div .projectname_1');
+                    temp.each(function() {
+                        var a = $(this);
+                        var task_id = a.text();
+                        // get project name
+                        $.get("projectname/"+task_id, function(data){
+                            // alert(data);
+                            a.text(data);
+                        });
+                    });
                 }
             });
 
            // an table 1 hien thi table 2
            document.getElementById("tab1").style.display = "none";
            document.getElementById("tab2").style.display = "";
-
-           // cho nay chua duoc
-           $(document).ready(function(){
-            
-            function getTaskname(){
-
-                // jQuery get taskname
-                var temp = $('.agenda-date > div .taskname');
-                temp.each(function() {
-                    var a = $(this);
-                    var task_id = a.text();
-                    // alert(task_id);
-                    $.get("taskname/"+task_id, function(data){
-                        // alert(data);
-                        a.text(data);
-                    });
-
-                    });
-                 }
-                getTaskname();
-            });
         }
 
-        // hien thi taskname dung voi tung projectname trong modal
+        // show taskname dung voi tung projectname trong modal
         $(document).ready(function(){
             $("#project").change(function(){
                 var project_id = $(this).val();
@@ -194,7 +190,7 @@
             });
         });
 
-
+        // show task name when first load page timesheet
         $(document).ready(function(){
             
             function getTaskname(){
@@ -221,6 +217,23 @@
                 });
              }
             getTaskname();
+
+
+            function getProjectName(){
+
+                // jQuery get task_id -> get project name
+                var temp = $('.agenda-date > div .projectname');
+                temp.each(function() {
+                    var a = $(this);
+                    var task_id = a.text();
+                    // get project name
+                    $.get("projectname/"+task_id, function(data){
+                        // alert(data);
+                        a.text(data);
+                    });
+                });
+             }
+            getProjectName();
         });
 
     </script>

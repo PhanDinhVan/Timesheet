@@ -85,6 +85,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	});
 });
 
+
 Route::get('timesheet','TimesheetController@getTimesheet');
 Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
 Route::post('timesheet','TimesheetController@postAddTimesheet');
@@ -97,3 +98,4 @@ Route::get('logout','LoginController@getLogoutUser');
 
 Route::get('task/{project_id}','AjaxController@getTask');  
 Route::get('taskname/{task_id}','AjaxController@getTaskName');
+Route::get('projectname/{task_id}','AjaxController@getProjectName');

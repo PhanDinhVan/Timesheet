@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use App\Project;
 
 class AjaxController extends Controller
 {
@@ -22,5 +23,22 @@ class AjaxController extends Controller
     		$string = $value->taskname;
     	}
     	echo $string;
+    }
+
+    public function getProjectName($task_id){
+        $taskname = Task::where('id',$task_id)->get();
+        $project = Project::all();
+        $string = "";
+        $projectname = "";
+        foreach ($taskname as $value) {
+            $string = $value->project_id;
+        }
+        // echo $string;
+        foreach ($project as $value) {
+            if($value->id == $string){
+                $projectname = $value->name;
+            }
+        }
+        echo $projectname;
     }
 }
