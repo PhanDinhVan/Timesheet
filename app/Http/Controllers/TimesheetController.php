@@ -31,8 +31,8 @@ class TimesheetController extends Controller
         $task = Task::all();
 
         echo($time_entries);
-        echo($project);
-        echo($task);
+        // echo($project);
+        // echo($task);
         
     }
 

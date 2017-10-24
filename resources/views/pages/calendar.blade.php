@@ -70,8 +70,6 @@
                         </table>
                         @include('pages.test')
 
-                        
-
                     </div>
                 </div>
             </div>
@@ -131,20 +129,17 @@
             var n = weekday[d.getDay()];
             document.getElementById("dayofweek_change").innerHTML = n;  
 
-            var x = document.getElementById('datepicker').value;
+            // var x = document.getElementById('datepicker').value;
 
-
+ 
             // document.getElementById("demo").innerHTML = x;
             // get data khi thay doi date
            $.ajax({
-               type:'GET',
-               url:'timesheet/'+create_date,
-               
-
+                type:'GET',
+                url:'timesheet/'+create_date,
                 success:function(data){
 
                     var temp = jQuery.parseJSON(data);
-
 
                     temp.forEach(function(element) {
 
@@ -163,13 +158,10 @@
                 }
             });
 
-
-
            // an table 1 hien thi table 2
            document.getElementById("tab1").style.display = "none";
            document.getElementById("tab2").style.display = "";
         }
-
        
     </script>
 @endsection
