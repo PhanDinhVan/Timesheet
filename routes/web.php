@@ -94,3 +94,6 @@ Route::get('fullcalendar','TimesheetController@getFullCalendar');
 Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
+
+Route::get('task/{project_id}','AjaxController@getTask');  
+Route::get('taskname/{task_id}','AjaxController@getTaskName');

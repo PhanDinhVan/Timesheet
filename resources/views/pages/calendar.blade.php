@@ -57,8 +57,8 @@
                                 <tr>
                                 	 @foreach($time_entries as $value)
 	                                	<td class="agenda-date" class="active" rowspan="1">
-	                                		<div class="shortdate text-muted">Project name: {{$value->create_date}}</div>
-	                                        <div class="shortdate text-muted">Task name: {{$value->task_id}}</div>
+	                                		<div class="shortdate text-muted" id="projectname">Project name: {{$value->create_date}}</div>
+	                                        <div class="shortdate text-muted">Task name: <span class="taskname">{{$value->task_id}}</span></div>
 	                                        <div class="shortdate text-muted">Working time: {{$value->working_time}}</div>
 	                                        <div class="shortdate text-muted">Over time: {{$value->overtime}}</div>
 	                                        <div class="shortdate text-muted">Start date: {{$value->start_date}}</div>
@@ -130,7 +130,6 @@
             document.getElementById("dayofweek_change").innerHTML = n;  
 
             // var x = document.getElementById('datepicker').value;
-
  
             // document.getElementById("demo").innerHTML = x;
             // get data khi thay doi date
@@ -145,7 +144,7 @@
 
                         innerHtml = '<td class="agenda-date" class="active" rowspan="1">' 
                         + '<div class="shortdate text-muted">' + 'Project name:' + element.create_date + '</div>' 
-                        + '<div class="shortdate text-muted">' + 'Task name:' + element.task_id + '</div>'
+                        + '<div class="shortdate text-muted">' + 'Task name:' + '<span class="taskname">' + element.task_id + '</span>' + '</div>'
                         + '<div class="shortdate text-muted">' + 'Working time:' + element.working_time + '</div>'
                         + '<div class="shortdate text-muted">' + 'Over time:' + element.overtime + '</div>'
                         + '<div class="shortdate text-muted">' + 'Start date:' + element.start_date + '</div>'
@@ -161,7 +160,69 @@
            // an table 1 hien thi table 2
            document.getElementById("tab1").style.display = "none";
            document.getElementById("tab2").style.display = "";
+
+           // cho nay chua duoc
+           $(document).ready(function(){
+            
+            function getTaskname(){
+
+                // jQuery get taskname
+                var temp = $('.agenda-date > div .taskname');
+                temp.each(function() {
+                    var a = $(this);
+                    var task_id = a.text();
+                    // alert(task_id);
+                    $.get("taskname/"+task_id, function(data){
+                        // alert(data);
+                        a.text(data);
+                    });
+
+                    });
+                 }
+                getTaskname();
+            });
         }
-       
+
+        // hien thi taskname dung voi tung projectname trong modal
+        $(document).ready(function(){
+            $("#project").change(function(){
+                var project_id = $(this).val();
+                $.get("task/"+project_id, function(data){
+                    $("#task").html(data);
+                    // alert(data);
+                });
+            });
+        });
+
+
+        $(document).ready(function(){
+            
+            function getTaskname(){
+
+                // jQuery get taskname
+                var temp = $('.agenda-date > div .taskname');
+                temp.each(function() {
+                    var a = $(this);
+                    var task_id = a.text();
+                    // alert(task_id);
+                    $.get("taskname/"+task_id, function(data){
+                        // alert(data);
+                        a.text(data);
+                    });
+
+                // var temp = document.getElementByClass('taskname').innerHTML;
+                // var task_id = temp.match(/\d+/g).map(Number);
+                // // alert(task_id);
+                // $.get("taskname/"+task_id, function(data){
+                //     // alert(data);
+                //     $(".taskname").html(data);
+                // });
+
+                });
+             }
+            getTaskname();
+        });
+
     </script>
 @endsection
+

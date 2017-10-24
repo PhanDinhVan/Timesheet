@@ -45,7 +45,7 @@
               
               <div class="form-group">
                   <label>Project Name</label>
-                  <select class="form-control" name="project_id">
+                  <select class="form-control" name="project_id" id="project">
                       <!-- @foreach($task as $value)
                       <option value="{{$value->project_id}}">{{$value->project->name}}</option>
                       @endforeach -->
@@ -56,7 +56,7 @@
               </div>
               <div class="form-group">
                   <label>Task Name</label>
-                  <select class="form-control" name="task_id">
+                  <select class="form-control" name="task_id" id="task">
                       <!-- @foreach($task as $value)
                       <option value="{{$value->id}}">{{$value->taskname}}</option>
                       @endforeach -->
@@ -105,4 +105,6 @@
     </div>
   </div>
 </div>
+
+
 
