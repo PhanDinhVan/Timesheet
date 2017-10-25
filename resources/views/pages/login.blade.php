@@ -35,7 +35,7 @@
 						<br>	
 						<div>
 			    			<label>Password</label>
-						  	<input type="password" class="form-control" name="password">
+						  	<input type="password" class="form-control" placeholder="Password" name="password">
 						</div>
 						<br>
 						<button type="submit" class="btn btn-default">Login

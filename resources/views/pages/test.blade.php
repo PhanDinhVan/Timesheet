@@ -29,10 +29,17 @@
         <tr>
             <th id="dayofweek_change"></th>
         </tr>
-    </thead>
-    <tbody>
-        <tr id="ajax_data">
-            
+        <tr style="text-align: center; font-size: 14px;">
+            <td>Project name</td>
+            <td>Task name</td>
+            <td>Working time</td>
+            <td>Over time</td>
+            <td>Date</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
+    </thead>
+    <tbody id="ajax_data">
+        
     </tbody>
 </table>

@@ -7,6 +7,7 @@ use App\Project;
 use App\Task;
 use App\Timesheet;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class TimesheetController extends Controller
@@ -15,7 +16,7 @@ class TimesheetController extends Controller
     public function getTimesheet(){
     	$create_date = date('Y-m-d');
     	// $time_entries = Timesheet::find($create_date);
-    	$time_entries = Timesheet::where('create_date',$create_date)->get();
+    	$time_entries = Timesheet::where('date_time_entries',$create_date)->where('user_id',Auth::user()->id)->get();
     	// $time_entries = Timesheet::all();
     	// die($q);
     	$project = Project::all();
@@ -25,7 +26,7 @@ class TimesheetController extends Controller
 
     public function getTimesheet2(Request $request){
         $data = $request->create_date;
-        $time_entries = Timesheet::where('create_date',$data)->get();
+        $time_entries = Timesheet::where('date_time_entries',$data)->where('user_id',Auth::user()->id)->get();
         
         $project = Project::all();
         $task = Task::all();
@@ -63,14 +64,14 @@ class TimesheetController extends Controller
     	$time_entries->task_id = $request->task_id;
     	$time_entries->user_id = $request->user_id;
     	$time_entries->working_time = $request->working_time;
-    	$time_entries->start_date = $request->start_date;
+    	$time_entries->date_time_entries = $request->start_date;
     	$time_entries->note = $request->note;
     	$time_entries->overtime = 0;
     	$time_entries->create_date = date('Y-m-d');
 
     	$time_entries->save();
 
-    	return redirect('timesheet')->with('thongbao','Add timesheet success');
+    	return redirect('users/timesheet')->with('thongbao','Add timesheet success');
     	
     }
 

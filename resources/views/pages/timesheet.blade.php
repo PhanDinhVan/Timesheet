@@ -2,6 +2,12 @@
 
 @include('layout.header')
 
+
+
+
+
+
+
 @section('content')
 <!-- Page Content --> 
 
@@ -28,6 +34,11 @@
   	</div>
                
 </div>
+
+
+
+
+
 
 
 <!-- Modal trong laravel -->

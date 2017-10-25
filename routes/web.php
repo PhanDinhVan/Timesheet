@@ -85,11 +85,13 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	});
 });
 
+Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
+	Route::get('timesheet','TimesheetController@getTimesheet');
+	Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
+	Route::post('timesheet','TimesheetController@postAddTimesheet');
+	Route::get('fullcalendar','TimesheetController@getFullCalendar');
+});
 
-Route::get('timesheet','TimesheetController@getTimesheet');
-Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
-Route::post('timesheet','TimesheetController@postAddTimesheet');
-Route::get('fullcalendar','TimesheetController@getFullCalendar');
 
 
 Route::get('login','LoginController@getLoginUser');

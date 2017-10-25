@@ -52,9 +52,18 @@
                                 <tr>
                                     <th id="dayofweek"></th>
                                 </tr>
+                                <tr style="text-align: center; font-size: 14px;">
+                                    <td>Project name</td>
+                                    <td>Task name</td>
+                                    <td>Working time</td>
+                                    <td>Over time</td>
+                                    <td>Date</td>
+                                    <td>Edit</td>
+                                    <td>Delete</td>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                 	 @foreach($time_entries as $value)
 	                                	<td class="agenda-date" class="active" rowspan="1">
 	                                		<div class="shortdate text-muted" id="projectname">Project name: <span class="projectname">{{$value->task_id}}</span></div>
@@ -65,7 +74,33 @@
 	                                        <button class="shortdate text-muted" >Detail</button>
 	                                	</td>
                                 	 @endforeach
-                                </tr>
+                                </tr> -->
+                                
+                                @foreach($time_entries as $value)
+                                    <tr>
+                                        <td class="agenda-date">
+                                            <div class="shortdate text-muted"><span class="projectname">{{$value->task_id}}</span></div>
+                                        </td>
+                                        <td class="agenda-date">
+                                            <div class="shortdate text-muted"><span class="taskname">{{$value->task_id}}</span></div>
+                                        </td>
+                                        <td class="agenda-date">
+                                             <div class="shortdate text-muted"><span>{{$value->working_time}}</span></div>
+                                        </td class="agenda-date">
+                                        <td class="agenda-date">
+                                            <div class="shortdate text-muted"><span>{{$value->overtime}}</span></div>
+                                        </td>
+                                        <td class="agenda-date">
+                                            <div class="shortdate text-muted"><span>{{$value->date_time_entries}}</span></div>
+                                        </td>
+                                        <td class="agenda-date">
+                                            <button class="shortdate text-muted" >Edit</button>
+                                        </td>
+                                        <td class="agenda-date">
+                                            <button class="shortdate text-muted" >Delete</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         @include('pages.test')
@@ -121,30 +156,52 @@
             var n = weekday[d.getDay()];
             document.getElementById("dayofweek_change").innerHTML = n;  
 
-            // var x = document.getElementById('datepicker').value;
- 
-            // document.getElementById("demo").innerHTML = x;
             // get data khi thay doi date
            $.ajax({
                 type:'GET',
-                url:'timesheet/'+create_date,
+                url:'users/timesheet/'+create_date,
                 success:function(data){
 
                     var temp = jQuery.parseJSON(data);
 
                     temp.forEach(function(element) {
 
-                        innerHtml = '<td class="agenda-date" class="active" rowspan="1">' 
-                        + '<div class="shortdate text-muted">' + 'Project name: ' + '<span class="projectname_1">' + element.task_id +'</span>' + '</div>' 
-                        + '<div class="shortdate text-muted">' + 'Task name: ' + '<span class="taskname_1">' + element.task_id + '</span>' + '</div>'
-                        + '<div class="shortdate text-muted">' + 'Working time:' + element.working_time + '</div>'
-                        + '<div class="shortdate text-muted">' + 'Over time:' + element.overtime + '</div>'
-                        + '<div class="shortdate text-muted">' + 'Start date:' + element.start_date + '</div>'
-                        + '<button class="shortdate text-muted">' + 'Detail' + '</button>'
-                        + '</td>'
-                        // add one column in ajax
-                        $('#ajax_data').append(innerHtml);
+                        // innerHtml = '<td class="agenda-date" class="active" rowspan="1">' 
+                        // + '<div class="shortdate text-muted">' + 'Project name: ' + '<span class="projectname_1">' + element.task_id +'</span>' + '</div>' 
+                        // + '<div class="shortdate text-muted">' + 'Task name: ' + '<span class="taskname_1">' + element.task_id + '</span>' + '</div>'
+                        // + '<div class="shortdate text-muted">' + 'Working time:' + element.working_time + '</div>'
+                        // + '<div class="shortdate text-muted">' + 'Over time:' + element.overtime + '</div>'
+                        // + '<div class="shortdate text-muted">' + 'Start date:' + element.start_date + '</div>'
+                        // + '<button class="shortdate text-muted">' + 'Detail' + '</button>'
+                        // + '</td>'
+                        // // add one column in ajax
+                        // $('#ajax_data').append(innerHtml);
 
+
+                        innerHtml = '<tr>' + 
+                            '<td class="agenda-date">' + 
+                                '<div class="shortdate text-muted">' + '<span class="projectname_1">' + element.task_id + '</span>' + '</div>' +
+                            '</td>' +
+                            '<td class="agenda-date">' + 
+                                '<div class="shortdate text-muted"><span class="taskname_1">' + element.task_id + '</span>' + '</div>' +
+                            '</td>' +
+                            '<td class="agenda-date">' +
+                                 '<div class="shortdate text-muted">' + '<span>' + element.working_time + '</span>' + '</div>' +
+                            '</td class="agenda-date">' +
+                            '<td class="agenda-date">' +
+                                '<div class="shortdate text-muted">' + '<span>' + element.overtime + '</span>' + '</div>' +
+                            '</td>' +
+                            '<td class="agenda-date">' +
+                                '<div class="shortdate text-muted">' + '<span>' + element.date_time_entries + '</span>' + '</div>' +
+                            '</td>' +
+                            '<td class="agenda-date">' +
+                                '<button class="shortdate text-muted" >' + 'Edit' + '</button>' +
+                            '</td>' + 
+                            '<td class="agenda-date">' + 
+                                '<button class="shortdate text-muted" >' + 'Delete' + '</button>' +
+                            '</td>' +
+                        '</tr>'
+                        $('#ajax_data').append(innerHtml);
                     });
 
                     //show task name when change date
@@ -235,6 +292,19 @@
              }
             getProjectName();
         });
+
+        var startTime = document.getElementById('startTime').value;
+        var endTime = document.getElementById('endTime').value;
+
+        function parseTime(s) {
+           var c = s.split(':');
+           return parseInt(c[0]) * 60 + parseInt(c[1]);
+        }
+
+        var minutes = parseTime(endTime) - parseTime(startTime);
+        console.log(startTime);
+        console.log(endTime);
+        console.log(minutes);
 
     </script>
 @endsection
