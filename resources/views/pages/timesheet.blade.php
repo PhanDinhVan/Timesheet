@@ -5,9 +5,6 @@
 
 
 
-
-
-
 @section('content')
 <!-- Page Content --> 
 
@@ -45,6 +42,7 @@
 
 @include('pages.modal')
 @include('pages.calendar')
+
 
 
 <!-- /#page-wrapper -->	

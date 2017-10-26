@@ -24,35 +24,27 @@ class TimesheetController extends Controller
     	return view('pages.timesheet',['project'=>$project,'task'=>$task,'time_entries'=>$time_entries]);
     }
 
+    // get timesheet khi edit datetime
     public function getTimesheet2(Request $request){
         $data = $request->create_date;
         $time_entries = Timesheet::where('date_time_entries',$data)->where('user_id',Auth::user()->id)->get();
         
-        $project = Project::all();
-        $task = Task::all();
-
         echo($time_entries);
-        // echo($project);
-        // echo($task);
-        
     }
 
 
     public function postAddTimesheet(Request $request){
+        // die($request->working_time);
     	$this->validate($request,
     		[
     			'project_id'=>'required',
     			'task_id'=>'required',
-    			'user_id'=>'required',
-    			'working_time'=>'required',
     			'start_date'=>'required',
     			'note'=>'required|min:5|max:500'
     		],
     		[
     			'project_id.required'=>'Please select project name',
     			'task_id.required'=>'Please select task name',
-    			'user_id.required'=>'Please select user name',
-    			'working_time.required'=>'Please enter working time',
     			'start_date.required'=>'Please select start date',
     			'note.required'=>'Please enter note',
     			'note.min'=>'Enter at least 3 characters',
@@ -62,7 +54,7 @@ class TimesheetController extends Controller
     	$time_entries = new Timesheet;
 
     	$time_entries->task_id = $request->task_id;
-    	$time_entries->user_id = $request->user_id;
+    	$time_entries->user_id = Auth::user()->id;
     	$time_entries->working_time = $request->working_time;
     	$time_entries->date_time_entries = $request->start_date;
     	$time_entries->note = $request->note;
@@ -72,7 +64,12 @@ class TimesheetController extends Controller
     	$time_entries->save();
 
     	return redirect('users/timesheet')->with('thongbao','Add timesheet success');
-    	
+    }
+
+    public function getEditTimesheet($id){
+        $time_entries = Timesheet::find($id);
+        // die($time_entries);
+        // return view('timesheet',['time_entries'=>$time_entries]);
     }
 
     public function getFullCalendar(){

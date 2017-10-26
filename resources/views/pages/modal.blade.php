@@ -44,7 +44,7 @@
                   {{session('thongbao')}}
               </div>
           @endif
-          <form action="timesheet" method="POST">
+          <form action="users/timesheet" method="POST">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               
               <div class="form-group" style="width: 40%; float: left;">
@@ -86,39 +86,64 @@
 
               <div class="form-group" style="width: 15%; float: left; margin-left: 15%;">
                   <label>From</label>
-                    <input class="timepicker form-control" type="text" id="startTime"> 
+                    <input class="timepicker form-control" type="text" id="startTime" style="text-align: center;"> 
               </div>
                <div class="form-group" style="width: 15%; float: left; margin-left: 8%;">
                   <label>To</label>
-                     <input class="timepicker2 form-control" type="text" id="endTime">
+                     <input class="timepicker2 form-control" type="text" id="endTime" style="text-align: center;">
               </div>
              
               <script type="text/javascript">
                   $('.timepicker').datetimepicker({
-                      format: 'LT'
+                      format: 'HH:mm'
                   }); 
                   $('.timepicker2').datetimepicker({
-                      format: 'LT'
-                  }); 
+                      format: 'HH:mm'
+                  });
+
+                  // show working_time
+                  $('.timepicker2').on("dp.change",function(e){
+                    
+                      var startTime = document.getElementById('startTime').value;
+                      var endTime = document.getElementById('endTime').value;
+                      // alert(startTime);
+                      // alert(endTime);
+                      function parseTime(s) {
+                         var c = s.split(':');
+                         return parseInt(c[0]) * 60 + parseInt(c[1]);
+                      }
+                      var minutes = parseTime(endTime) - parseTime(startTime);
+                      var hours = Math.floor(minutes/60);
+                      var minutes = minutes%60;
+
+                      // var a = moment(startTime, 'HH:mm');
+                      // var b = moment(endTime, 'HH:mm');
+                      // var minutes2 = b.diff(a, 'hours', true);
+
+                      temp = hours + ':' + minutes
+
+                      document.getElementById("working_time").value = temp;
+
+                  });
               </script>  
+
               <div class="form-group" style="width: 20%; float: left; margin-left: 5%;">
                   <label>Working Time</label>
-                  <input class="working_date form-control" type="text">
+                  <input class="working_date form-control" type="text" readonly="" name = "working_time" id="working_time" style="text-align: center;">
               </div>
 
               <div class="form-group">
                   <label>Note</label>
-			              <textarea class="form-control" name="note" cols="50" rows="4"></textarea>
+		              <textarea class="form-control" name="note" cols="50" rows="4"></textarea>
               </div>
           <form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+        <button type="submit" class="btn btn-success" ><span class="glyphicon"></span>Save</button>
       </div>
     </div>
   </div>
 </div>
-
 
 

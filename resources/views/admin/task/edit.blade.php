@@ -32,22 +32,36 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
-                                <label>Task Name</label>
-                                <input class="form-control" name="taskname" value="{{$task->taskname}}" placeholder="Please enter employee type" />
-                            </div>
-                            <div class="form-group">
                                 <label>Project Name</label>
                                 <select class="form-control" name="project_id">
                                     @foreach($project as $value)
                                     <option 
-	                                    @if($task->project_id == $value->id) {{"selected"}} @endif 
-	                                    value="{{$value->id}}">{{$value->name}}</option>
+                                        @if($task->project_id == $value->id) {{"selected"}} @endif 
+                                        value="{{$value->id}}">{{$value->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Task Name</label>
+                                <input class="form-control" name="taskname" value="{{$task->taskname}}" placeholder="Please enter employee type" />
+                            </div>
+                            
+                            <div class="form-group">
                                 <label>Comments</label>
                                 <input class="form-control" name="comments" value="{{$task->comments}}" placeholder="Please enter employee type" />
+                            </div>
+                            <div class="form-group">
+                                <label>Availability</label>
+                                <select class="form-control" name="availability">
+                                    <option value=0
+                                        @if($task->availability == 0) {{"selected"}} @endif 
+                                        >No
+                                    </option>
+                                    <option value=1
+                                        @if($task->availability == 1) {{"selected"}} @endif 
+                                        >Yes
+                                    </option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-default">Save</button>
                             <button type="reset" class="btn btn-default">Reset</button>

@@ -10,7 +10,15 @@ class AjaxController extends Controller
 {
     // Dung de hien thi cac task dung voi cac project
     public function getTask($project_id){
-        $task = Task::where('project_id',$project_id)->get();
+        $task = Task::where('project_id',$project_id)->where('availability',1)->get();
+        foreach ($task as $value) {
+            echo "<option value='".$value->id."'>".$value->taskname."</option>";
+        }
+    }
+
+    // Dung de hien thi cac task dung voi cac project khi Edit timesheet
+    public function getTaskEdit($project_id){
+        $task = Task::where('project_id',$project_id)->where('availability',1)->get();
         foreach ($task as $value) {
             echo "<option value='".$value->id."'>".$value->taskname."</option>";
         }

@@ -35,6 +35,7 @@ class TaskController extends Controller
     	$taskname->taskname = $request->taskname;
     	$taskname->project_id = $request->project_id;
     	$taskname->comments = $request->comments;
+        $taskname->availability = 1;
     	$taskname->save();
 
     	return redirect('admin/task/add')->with('thongbao','You add success');
@@ -61,6 +62,7 @@ class TaskController extends Controller
         $task->taskname = $request->taskname;
         $task->project_id = $request->project_id;
         $task->comments = $request->comments;
+        $task->availability = $request->availability;
         $task->save();
 
         return redirect('admin/task/edit/'.$id)->with('thongbao','You edit success');

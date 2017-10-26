@@ -3,6 +3,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 
+
+
  <style>
     .agenda {}
     /* Dates */
@@ -26,7 +28,7 @@
 
 </style>
 
-<p id="demo"></p>
+
 <div class="container">
         <h1 class="thick-heading" style="text-align: center;">Timesheet</h1>
         <!-- First Featurette -->
@@ -63,19 +65,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr>
-                                	 @foreach($time_entries as $value)
-	                                	<td class="agenda-date" class="active" rowspan="1">
-	                                		<div class="shortdate text-muted" id="projectname">Project name: <span class="projectname">{{$value->task_id}}</span></div>
-	                                        <div class="shortdate text-muted">Task name: <span class="taskname">{{$value->task_id}}</span></div>
-	                                        <div class="shortdate text-muted">Working time: {{$value->working_time}}</div>
-	                                        <div class="shortdate text-muted">Over time: {{$value->overtime}}</div>
-	                                        <div class="shortdate text-muted">Start date: {{$value->start_date}}</div>
-	                                        <button class="shortdate text-muted" >Detail</button>
-	                                	</td>
-                                	 @endforeach
-                                </tr> -->
-                                
                                 @foreach($time_entries as $value)
                                     <tr>
                                         <td class="agenda-date">
@@ -94,22 +83,25 @@
                                             <div class="shortdate text-muted"><span>{{$value->date_time_entries}}</span></div>
                                         </td>
                                         <td class="agenda-date">
-                                            <button class="shortdate text-muted" >Edit</button>
+                                            <button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#edit">
+                                                Edit
+                                            </button>
                                         </td>
                                         <td class="agenda-date">
-                                            <button class="shortdate text-muted" >Delete</button>
+                                            <button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#delete">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         @include('pages.test')
+                        @include('pages.edit_timesheet')
 
                     </div>
                 </div>
             </div>
         <!-- /.container -->
-    </div>
+</div>
 
 @section('script')
     <script>
@@ -166,18 +158,6 @@
 
                     temp.forEach(function(element) {
 
-                        // innerHtml = '<td class="agenda-date" class="active" rowspan="1">' 
-                        // + '<div class="shortdate text-muted">' + 'Project name: ' + '<span class="projectname_1">' + element.task_id +'</span>' + '</div>' 
-                        // + '<div class="shortdate text-muted">' + 'Task name: ' + '<span class="taskname_1">' + element.task_id + '</span>' + '</div>'
-                        // + '<div class="shortdate text-muted">' + 'Working time:' + element.working_time + '</div>'
-                        // + '<div class="shortdate text-muted">' + 'Over time:' + element.overtime + '</div>'
-                        // + '<div class="shortdate text-muted">' + 'Start date:' + element.start_date + '</div>'
-                        // + '<button class="shortdate text-muted">' + 'Detail' + '</button>'
-                        // + '</td>'
-                        // // add one column in ajax
-                        // $('#ajax_data').append(innerHtml);
-
-
                         innerHtml = '<tr>' + 
                             '<td class="agenda-date">' + 
                                 '<div class="shortdate text-muted">' + '<span class="projectname_1">' + element.task_id + '</span>' + '</div>' +
@@ -195,10 +175,10 @@
                                 '<div class="shortdate text-muted">' + '<span>' + element.date_time_entries + '</span>' + '</div>' +
                             '</td>' +
                             '<td class="agenda-date">' +
-                                '<button class="shortdate text-muted" >' + 'Edit' + '</button>' +
+                                '<button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#edit">Edit</button>' +
                             '</td>' + 
                             '<td class="agenda-date">' + 
-                                '<button class="shortdate text-muted" >' + 'Delete' + '</button>' +
+                                '<button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#delete">Delete</button>' +
                             '</td>' +
                         '</tr>'
                         $('#ajax_data').append(innerHtml);
@@ -242,6 +222,17 @@
                 var project_id = $(this).val();
                 $.get("task/"+project_id, function(data){
                     $("#task").html(data);
+                    // alert(data);
+                });
+            });
+        });
+
+        // show taskname dung voi tung projectname khi edit timesheet
+        $(document).ready(function(){
+            $("#project_edit").change(function(){
+                var project_id = $(this).val();
+                $.get("task_edit/"+project_id, function(data){
+                    $("#task_edit").html(data);
                     // alert(data);
                 });
             });
@@ -292,19 +283,6 @@
              }
             getProjectName();
         });
-
-        var startTime = document.getElementById('startTime').value;
-        var endTime = document.getElementById('endTime').value;
-
-        function parseTime(s) {
-           var c = s.split(':');
-           return parseInt(c[0]) * 60 + parseInt(c[1]);
-        }
-
-        var minutes = parseTime(endTime) - parseTime(startTime);
-        console.log(startTime);
-        console.log(endTime);
-        console.log(minutes);
 
     </script>
 @endsection

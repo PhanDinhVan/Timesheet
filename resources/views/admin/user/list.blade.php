@@ -1,5 +1,5 @@
 @extends('admin.layout.index')
- @section('content')
+@section('content')
 
 <!-- Page Content --> 
 	

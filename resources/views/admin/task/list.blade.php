@@ -28,6 +28,7 @@
                           <th>Project Name</th>
                           <th>Taks Name</th>
                           <th>Comments</th>
+                          <th>Availability </th>
                           <th>Delete</th>
                           <th>Edit</th>
                         </tr>
@@ -39,6 +40,13 @@
                           <td>{{$value->project->name}}</td>
                           <td>{{$value->taskname}}</td>
                           <td>{{$value->comments}}</td>
+                          <td>
+                            @if($value->availability == 1)
+                              {{"Yes"}}
+                            @else
+                              {{"No"}}
+                            @endif
+                          </td>
                           <td><i class="fa fa-trash-o"></i><a href="admin/task/delete/{{$value->id}}"> Delete</a></td>
                           <td><i class="fa fa-pencil-square-o"></i> <a href="admin/task/edit/{{$value->id}}">Edit</a></td>
                         </tr>
