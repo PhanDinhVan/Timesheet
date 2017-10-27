@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Project;
+use App\Timesheet;
 
 class AjaxController extends Controller
 {
@@ -49,4 +50,30 @@ class AjaxController extends Controller
         }
         echo $projectname;
     }
+
+    // public function getTimesheet_Edit($id){
+    //     $timesheet = Timesheet::find($id);
+    //     $project_edit = Project::all();
+    //     $task_edit = Task::all();
+    //     $string = "";
+    //     $project_id = "";
+    //     $projectname_edit = "";
+
+    //     foreach ($timesheet as $value) {
+    //         $string = $value->task_id;
+    //     }
+
+    //     // foreach ($task_edit as $value) {
+    //     //     if($value->id == $string){
+    //     //         $project_id = $value->project_id;
+    //     //     }
+    //     // }
+
+    //     // foreach ($project_edit as $value) {
+    //     //     if($value->id == $project_id){
+    //     //         $projectname_edit = $value->name;
+    //     //     }
+    //     // }
+    //     echo $string;
+    // }
 }
