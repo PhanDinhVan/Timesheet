@@ -68,7 +68,7 @@ class TimesheetController extends Controller
 
     public function getEditTimesheet($id){
         $time_entries = Timesheet::find($id);
-        // die($time_entries);
+        die($time_entries);
         // return view('timesheet',['time_entries'=>$time_entries]);
     }
 
