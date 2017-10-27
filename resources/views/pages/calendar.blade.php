@@ -83,8 +83,9 @@
                                             <div class="shortdate text-muted"><span>{{$value->date_time_entries}}</span></div>
                                         </td>
                                         <td class="agenda-date">
-                                            <button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#edit">
-                                                Edit
+                                            <input class="term" type="hidden" value="{{$value->id}}" />
+                                            <button class="shortdate text-muted edit" type="button" data-toggle="modal" data-target="#edit">
+                                               Edit
                                             </button>
                                         </td>
                                         <td class="agenda-date">
@@ -175,7 +176,8 @@
                                 '<div class="shortdate text-muted">' + '<span>' + element.date_time_entries + '</span>' + '</div>' +
                             '</td>' +
                             '<td class="agenda-date">' +
-                                '<button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#edit">Edit</button>' +
+                                '<input class="term" type="hidden" value="' + element.id + '" />' +
+                                '<button class="shortdate text-muted edit" type="button" data-toggle="modal" data-target="#edit">Edit</button>' +
                             '</td>' + 
                             '<td class="agenda-date">' + 
                                 '<button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#delete">Delete</button>' +
@@ -208,12 +210,20 @@
                             a.text(data);
                         });
                     });
+
+                    // get project name when click edit timesheet
+                    // $('.edit').click(function() {
+                    //     var id = $(this).prev().attr("value");
+                    //     // .attr("value");
+                    //     alert(id);
+                    // });
                 }
             });
 
            // an table 1 hien thi table 2
            document.getElementById("tab1").style.display = "none";
            document.getElementById("tab2").style.display = "";
+
         }
 
         // show taskname dung voi tung projectname trong modal
@@ -253,15 +263,6 @@
                         // alert(data);
                         a.text(data);
                     });
-
-                // var temp = document.getElementByClass('taskname').innerHTML;
-                // var task_id = temp.match(/\d+/g).map(Number);
-                // // alert(task_id);
-                // $.get("taskname/"+task_id, function(data){
-                //     // alert(data);
-                //     $(".taskname").html(data);
-                // });
-
                 });
              }
             getTaskname();
@@ -283,6 +284,19 @@
              }
             getProjectName();
         });
+
+        // $(document).ready(function() {
+        //     $('.edit').click(function() {
+            
+        //         var id = $(this).prev().attr("value");
+        //         alert(id);
+        //         // $.get("timesheet_edit/"+id, function(data){
+        //         //     alert(data);
+        //         //     // a.text(data);
+        //         // });
+
+        //     });
+        // });
 
     </script>
 @endsection
