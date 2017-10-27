@@ -12,6 +12,17 @@ use App\Http\Controllers\Controller;
 
 class TimesheetController extends Controller
 {
+    function __construct(){
+        
+
+        // $theloai = TheLoai::all();
+        // $slide = Slide::all();
+        // view()->share('theloai',$theloai);
+        // view()->share('slide',$slide);
+        
+        
+    }
+
     //
     public function getTimesheet(){
     	$create_date = date('Y-m-d');
@@ -67,9 +78,9 @@ class TimesheetController extends Controller
     }
 
     public function getEditTimesheet($id){
-        $time_entries = Timesheet::find($id);
-        die($time_entries);
-        // return view('timesheet',['time_entries'=>$time_entries]);
+        $time_entries_edit = Timesheet::find($id);
+        // die($time_entries_edit);
+        return $time_entries_edit;
     }
 
     public function getFullCalendar(){
