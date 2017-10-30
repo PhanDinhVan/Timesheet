@@ -35,9 +35,6 @@
 
 
 
-
-
-
 <!-- Modal trong laravel -->
 
 @include('pages.modal')

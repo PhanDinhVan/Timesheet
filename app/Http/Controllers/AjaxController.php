@@ -51,29 +51,27 @@ class AjaxController extends Controller
         echo $projectname;
     }
 
-    // public function getTimesheet_Edit($id){
-    //     $timesheet = Timesheet::find($id);
-    //     $project_edit = Project::all();
-    //     $task_edit = Task::all();
-    //     $string = "";
-    //     $project_id = "";
-    //     $projectname_edit = "";
+    public function getTimesheet_Edit($id){
+        $timesheet = Timesheet::find($id);
+        $project_edit = Project::all();
+        $task_edit = Task::all();
+        $string = "";
+        $project_id = "";
+        $projectname_edit = "";
 
-    //     foreach ($timesheet as $value) {
-    //         $string = $value->task_id;
-    //     }
+        $string = $timesheet->task_id;
 
-    //     // foreach ($task_edit as $value) {
-    //     //     if($value->id == $string){
-    //     //         $project_id = $value->project_id;
-    //     //     }
-    //     // }
+        foreach ($task_edit as $value) {
+            if($value->id == $string){
+                $project_id = $value->project_id;
+            }
+        }
 
-    //     // foreach ($project_edit as $value) {
-    //     //     if($value->id == $project_id){
-    //     //         $projectname_edit = $value->name;
-    //     //     }
-    //     // }
-    //     echo $string;
-    // }
+        foreach ($project_edit as $value) {
+            if($value->id == $project_id){
+                $projectname_edit = $value->name;
+            }
+        }
+        echo $projectname_edit;
+    }
 }

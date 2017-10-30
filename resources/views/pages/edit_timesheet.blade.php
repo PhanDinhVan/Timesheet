@@ -21,12 +21,11 @@
   }
 </style>
 
-
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">{{"Edit entry"}}</h4>
       </div>
       <div class="modal-body">
@@ -84,37 +83,37 @@
               </div>
              
               <script type="text/javascript">
-                  $('.timepicker_edit').datetimepicker({
+                    $('.timepicker_edit').datetimepicker({
                       format: 'HH:mm'
-                  }); 
-                  $('.timepicker2_edit').datetimepicker({
-                      format: 'HH:mm'
-                  });
+                    }); 
+                    $('.timepicker2_edit').datetimepicker({
+                        format: 'HH:mm'
+                     });
 
-                  // show working_time
-                  $('.timepicker2_edit').on("dp.change",function(e){
+                    // show working_time
+                    $('.timepicker2_edit').on("dp.change",function(e){
                     
-                      var startTime = document.getElementById('startTime_edit').value;
-                      var endTime = document.getElementById('endTime_edit').value;
-                      // alert(startTime);
-                      // alert(endTime);
-                      function parseTime(s) {
-                         var c = s.split(':');
-                         return parseInt(c[0]) * 60 + parseInt(c[1]);
-                      }
-                      var minutes = parseTime(endTime) - parseTime(startTime);
-                      var hours = Math.floor(minutes/60);
-                      var minutes = minutes%60;
+                         var startTime = document.getElementById('startTime_edit').value;
+                         var endTime = document.getElementById('endTime_edit').value;
+                         // alert(startTime);
+                         // alert(endTime);
+                        function parseTime(s) {
+                        var c = s.split(':');
+                        return parseInt(c[0]) * 60 + parseInt(c[1]);
+                        }
+                        var minutes = parseTime(endTime) - parseTime(startTime);
+                        var hours = Math.floor(minutes/60);
+                        var minutes = minutes%60;
 
-                      // var a = moment(startTime, 'HH:mm');
-                      // var b = moment(endTime, 'HH:mm');
-                      // var minutes2 = b.diff(a, 'hours', true);
+                        // var a = moment(startTime, 'HH:mm');
+                        // var b = moment(endTime, 'HH:mm');
+                        // var minutes2 = b.diff(a, 'hours', true);
 
-                      temp = hours + ':' + minutes
+                        temp = hours + ':' + minutes
 
-                      document.getElementById("working_time_edit").value = temp;
+                        document.getElementById("working_time_edit").value = temp;
 
-                  });
+                    });
               </script>  
 
               <div class="form-group" style="width: 20%; float: left; margin-left: 5%;">

@@ -90,7 +90,8 @@ Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
 	Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
 	Route::post('timesheet','TimesheetController@postAddTimesheet');
 	Route::get('fullcalendar','TimesheetController@getFullCalendar');
-	// Route::get('edit_timesheet/{id}','TimesheetController@getEditTimesheet');
+	Route::get('edit_timesheet/{id}','TimesheetController@getEditTimesheet');
+	Route::post('timesheet_edit/{id}','TimesheetController@postEditTimesheet');
 });
 
 
@@ -106,4 +107,4 @@ Route::get('projectname/{task_id}','AjaxController@getProjectName');
 // get task name ung voi project khi edit timesheet
 Route::get('task_edit/{project_id}','AjaxController@getTaskEdit'); 
 
-// Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');
+Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');

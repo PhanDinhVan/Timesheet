@@ -29,6 +29,7 @@
 </style>
 
 
+
 <div class="container">
         <h1 class="thick-heading" style="text-align: center;">Timesheet</h1>
         <!-- First Featurette -->
@@ -75,7 +76,7 @@
                                         </td>
                                         <td class="agenda-date">
                                              <div class="shortdate text-muted"><span>{{$value->working_time}}</span></div>
-                                        </td class="agenda-date">
+                                        </td>
                                         <td class="agenda-date">
                                             <div class="shortdate text-muted"><span>{{$value->overtime}}</span></div>
                                         </td>
@@ -85,7 +86,7 @@
                                         <td class="agenda-date">
                                             <input class="term" type="hidden" value="{{$value->id}}" />
                                             <button class="shortdate text-muted edit" type="button" data-toggle="modal" data-target="#edit">
-                                               Edit
+                                                 <!-- <a href="users/edit_timesheet/{{$value->id}}">Edit</a> -->Edit
                                             </button>
                                         </td>
                                         <td class="agenda-date">
@@ -285,18 +286,18 @@
             getProjectName();
         });
 
-        // $(document).ready(function() {
-        //     $('.edit').click(function() {
+        $(document).ready(function() {
+            $('.edit').click(function() {
             
-        //         var id = $(this).prev().attr("value");
-        //         alert(id);
-        //         // $.get("timesheet_edit/"+id, function(data){
-        //         //     alert(data);
-        //         //     // a.text(data);
-        //         // });
-
-        //     });
-        // });
+                var id = $(this).prev().attr("value");
+                // alert(id);
+                $.get("timesheet_edit/"+id, function(data){
+                    alert(data);
+                    // a.text(data);
+                    $("#project_edit").html(data);
+                });
+            });
+        });
 
     </script>
 @endsection

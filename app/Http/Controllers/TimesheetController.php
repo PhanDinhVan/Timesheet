@@ -80,7 +80,9 @@ class TimesheetController extends Controller
     public function getEditTimesheet($id){
         $time_entries_edit = Timesheet::find($id);
         // die($time_entries_edit);
-        return $time_entries_edit;
+        view()->share('time_entries_edit', $time_entries_edit);
+        // die($time_entries_edit);
+        
     }
 
     public function getFullCalendar(){
