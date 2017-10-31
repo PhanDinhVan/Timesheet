@@ -21,7 +21,7 @@
   }
 </style>
 
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="popup-update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -42,11 +42,13 @@
                   {{session('thongbao1')}}
               </div>
           @endif
-          <form action="users/timesheet_edit" method="POST">
+          
+          <form action="timesheet/update" method="POST" id="frm-update">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
-              
+
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
+                  <input class="form-control" type="text" name="id" id="id">
                   <select class="form-control" name="project_id_edit" id="project_edit">
                       @foreach($project as $value)
                       <option value="{{$value->id}}">{{$value->name}}</option>
@@ -64,7 +66,7 @@
 
               <div class="form-group" style="width: 18%; float: left;">
                   <label>Date</label>
-                  <input class="date2 form-control" type="text" name="start_date_edit">
+                  <input class="date2 form-control" type="text" name="start_date_edit" id="date_time_entries">
               </div>
               <!-- datepicker -->
               <script type="text/javascript">
@@ -112,8 +114,8 @@
                         temp = hours + ':' + minutes
 
                         document.getElementById("working_time_edit").value = temp;
-
                     });
+
               </script>  
 
               <div class="form-group" style="width: 20%; float: left; margin-left: 5%;">
@@ -122,13 +124,13 @@
               </div>
               <div class="form-group" style="width: 11%; float: left; margin-left: 3%;">
                   <label>Overtime</label>
-                    <input class="form-control" type="text" name="overtime" style="text-align: center;"> 
+                    <input class="form-control" type="text" name="overtime" id="overtime" style="text-align: center;"> 
               </div>
               <div class="form-group">
                   <label style="width: 100%;">Note</label>
-			      <textarea class="form-control" name="note1" cols="50" rows="4"></textarea>
+			            <textarea class="form-control" name="note_edit" cols="50" rows="4" id="note_edit"></textarea>
               </div>
-          <form>
+          </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>

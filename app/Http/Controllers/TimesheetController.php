@@ -77,15 +77,8 @@ class TimesheetController extends Controller
     	return redirect('users/timesheet')->with('thongbao','Add timesheet success');
     }
 
-    public function getEditTimesheet($id){
-        $time_entries_edit = Timesheet::find($id);
-        // die($time_entries_edit);
-        view()->share('time_entries_edit', $time_entries_edit);
-        // die($time_entries_edit);
-        
-    }
-
     public function getFullCalendar(){
     	return view('pages.fullcalendar');
     }
+
 }

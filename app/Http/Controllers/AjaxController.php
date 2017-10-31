@@ -51,27 +51,44 @@ class AjaxController extends Controller
         echo $projectname;
     }
 
-    public function getTimesheet_Edit($id){
-        $timesheet = Timesheet::find($id);
-        $project_edit = Project::all();
-        $task_edit = Task::all();
-        $string = "";
-        $project_id = "";
-        $projectname_edit = "";
+    // public function getTimesheet_Edit($id){
+    //     $timesheet = Timesheet::find($id);
+    //     $project_edit = Project::all();
+    //     $task_edit = Task::all();
+    //     $string = "";
+    //     $project_id = "";
+    //     $projectname_edit = "";
 
-        $string = $timesheet->task_id;
+    //     $string = $timesheet->task_id;
 
-        foreach ($task_edit as $value) {
-            if($value->id == $string){
-                $project_id = $value->project_id;
-            }
+    //     foreach ($task_edit as $value) {
+    //         if($value->id == $string){
+    //             $project_id = $value->project_id;
+    //         }
+    //     }
+
+    //     foreach ($project_edit as $value) {
+    //         if($value->id == $project_id){
+    //             $projectname_edit = $value->name;
+    //         }
+    //     }
+    //     echo $projectname_edit;
+    // }
+
+
+    public function getEditTimesheet(Request $request){
+        if($request->ajax()){
+            $timesheet = Timesheet::find($request->id);
+            return response($timesheet);
         }
+    }
 
-        foreach ($project_edit as $value) {
-            if($value->id == $project_id){
-                $projectname_edit = $value->name;
-            }
-        }
-        echo $projectname_edit;
+    public function updateTimesheet(Request $request){
+        // if($request->ajax()){
+        //     $timesheet = Timesheet::find($request->id);
+        //     $timesheet->update($request->all());
+        //     return response($timesheet);
+        // }
+        die("acassadsa");
     }
 }
