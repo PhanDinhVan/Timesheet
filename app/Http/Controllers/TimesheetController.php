@@ -12,16 +12,6 @@ use App\Http\Controllers\Controller;
 
 class TimesheetController extends Controller
 {
-    function __construct(){
-        
-
-        // $theloai = TheLoai::all();
-        // $slide = Slide::all();
-        // view()->share('theloai',$theloai);
-        // view()->share('slide',$slide);
-        
-        
-    }
 
     //
     public function getTimesheet(){
@@ -63,7 +53,7 @@ class TimesheetController extends Controller
     		]);
 
     	$time_entries = new Timesheet;
-
+        $time_entries->project_id = $request->project_id;
     	$time_entries->task_id = $request->task_id;
     	$time_entries->user_id = Auth::user()->id;
     	$time_entries->working_time = $request->working_time;

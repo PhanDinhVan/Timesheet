@@ -21,21 +21,14 @@
   }
 </style>
 
-<div class="modal fade" id="popup-update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="popup-update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">{{"Edit entry"}}</h4>
+        <h4 class="modal-title">{{"Edit entry"}}</h4>
       </div>
       <div class="modal-body">
-          @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $err)
-                    {{$err}} <br>
-                @endforeach
-            </div>
-          @endif
 
           @if(session('thongbao1'))
               <div class="alert alert-success">
@@ -48,7 +41,7 @@
 
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
-                  <input class="form-control" type="text" name="id" id="id">
+                  <input class="form-control" type="hidden" name="id" id="id">
                   <select class="form-control" name="project_id_edit" id="project_edit">
                       @foreach($project as $value)
                       <option value="{{$value->id}}">{{$value->name}}</option>
@@ -66,7 +59,7 @@
 
               <div class="form-group" style="width: 18%; float: left;">
                   <label>Date</label>
-                  <input class="date2 form-control" type="text" name="start_date_edit" id="date_time_entries">
+                  <input class="date2 form-control" type="text" name="date_time_entries" id="date_time_entries">
               </div>
               <!-- datepicker -->
               <script type="text/javascript">
@@ -130,12 +123,15 @@
                   <label style="width: 100%;">Note</label>
 			            <textarea class="form-control" name="note_edit" cols="50" rows="4" id="note_edit"></textarea>
               </div>
+
+              <div class="modal-footer" style="margin-top: 7%; padding: 0%; padding-top: 3%; margin-bottom: -2%;">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+              </div>
+              
           </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
-        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-      </div>
+      
     </div>
   </div>
 </div>

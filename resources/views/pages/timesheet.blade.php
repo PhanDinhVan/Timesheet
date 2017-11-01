@@ -34,9 +34,8 @@
 
 
 <!-- Modal trong laravel -->
-
-@include('pages.add_timesheet')
 @include('pages.list_timesheet')
+@include('pages.add_timesheet')
 @include('pages.edit_timesheet')
 
 
@@ -48,11 +47,10 @@
     <script>
 
         $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
         //Hien thi thu trong tuan 
         var d = new Date();
         var weekday = new Array(7);
@@ -252,24 +250,33 @@
         // ---------------- edit timeshet ----------------
         $('body').delegate('#edit','click',function(e){
 
-          
-          
           var id = $(this).data('id');
           $.get("{{ URL::to('timesheet/edit')}}",{id:id},function(data){
 
-            $('#popup-update').find('#project_edit').val(data.project_id);
-            $('#popup-update').find('#task_edit').val(data.task_id);
-            $('#popup-update').find('#working_time_edit').val(data.working_time);
-            $('#popup-update').find('#note_edit').val(data.note);
-            $('#popup-update').find('#date_time_entries').val(data.date_time_entries);
-            $('#popup-update').find('#overtime').val(data.overtime);
-            $('#popup-update').find('#id').val(data.id);
+            $('#frm-update').find('#project_edit').val(data.project_id);
+            $('#frm-update').find('#task_edit').val(data.task_id);
+            $('#frm-update').find('#working_time_edit').val(data.working_time);
+            $('#frm-update').find('#note_edit').val(data.note);
+            $('#frm-update').find('#date_time_entries').val(data.date_time_entries);
+            $('#frm-update').find('#overtime').val(data.overtime);
+            $('#frm-update').find('#id').val(data.id);
 
             // show taskname dung voi tung project in modal when edit - lan dau tien load len
             var project_id = data.project_id;
             $.get("task_edit/"+project_id, function(data){
+              // console.log(data);
                 $("#task_edit").html(data);
             });
+
+            // $.get( "task_edit2", { project_id: data.project_id, task_id: data.task_id }, function(data){
+            //     $("#task_edit").html(data);
+            // });
+              
+            // var task_id = data.task_id;
+            // $.get("tasknameEdit/"+task_id,function(data){
+            //   // alert(data);
+            //   $("#task_edit").html(data);
+            // });
             
             $('#popup-update').modal('show');
           })
@@ -290,10 +297,25 @@
           e.preventDefault();
           var data = $(this).serialize();
           var url = $(this).attr('action');
+          var post = $(this).attr('method');
           $.post(url,data,function(data){
-            console.log(data)
+            // console.log(data)
+            // alert('update success');
+
+            // window.location.href = " {{ URL::to('users/timesheet') }}";
+            init_reload();
+            function init_reload(){
+                setInterval( function() {
+                           window.location.reload();
+         
+                  },500);
+            }
+            $('#frm-update').trigger('reset');
           })
         })
+
+        
+
 
     </script>
 @endsection

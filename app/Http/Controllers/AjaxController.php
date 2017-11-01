@@ -34,6 +34,24 @@ class AjaxController extends Controller
     	echo $string;
     }
 
+     // Dung de hien thi cac task dung voi cac project khi Edit timesheet
+    // public function getTaskEdit2($project_id, $task_id){
+    //     $task = Task::where('project_id',$project_id)->where('availability',1)->get();
+    //     foreach ($task as $value) {
+    //         // echo "<option value='".if($value->id == $task_id)."' selected>".$value->taskname."</option>";
+    //         echo "<option". if($value->id == $task_id)."' selected'". " value='"$value->id."'>". $value->taskname."</option>";
+    //     }
+    // }
+
+    public function getTaskNameEdit($task_id){
+        $taskname = Task::where('id',$task_id)->get();
+        $string = "";
+        foreach ($taskname as $value) {
+            echo "<option value='".$value->id."'>".$value->taskname."</option>";
+        }
+    }
+
+
     public function getProjectName($task_id){
         $taskname = Task::where('id',$task_id)->get();
         $project = Project::all();
@@ -51,31 +69,8 @@ class AjaxController extends Controller
         echo $projectname;
     }
 
-    // public function getTimesheet_Edit($id){
-    //     $timesheet = Timesheet::find($id);
-    //     $project_edit = Project::all();
-    //     $task_edit = Task::all();
-    //     $string = "";
-    //     $project_id = "";
-    //     $projectname_edit = "";
 
-    //     $string = $timesheet->task_id;
-
-    //     foreach ($task_edit as $value) {
-    //         if($value->id == $string){
-    //             $project_id = $value->project_id;
-    //         }
-    //     }
-
-    //     foreach ($project_edit as $value) {
-    //         if($value->id == $project_id){
-    //             $projectname_edit = $value->name;
-    //         }
-    //     }
-    //     echo $projectname_edit;
-    // }
-
-
+    // get info timesheet when edit
     public function getEditTimesheet(Request $request){
         if($request->ajax()){
             $timesheet = Timesheet::find($request->id);
@@ -83,12 +78,19 @@ class AjaxController extends Controller
         }
     }
 
-    public function updateTimesheet(Request $request){
-        // if($request->ajax()){
-        //     $timesheet = Timesheet::find($request->id);
-        //     $timesheet->update($request->all());
-        //     return response($timesheet);
-        // }
-        die("acassadsa");
+    // update timesheet when edit
+    public function update(Request $request){
+        if($request->ajax()){
+            $timesheet = Timesheet::find($request->id);
+            $timesheet['project_id']=$request['project_id_edit'];
+            $timesheet['task_id']=$request['task_id_edit'];
+            $timesheet['note']=$request['note_edit'];
+            $timesheet['date_time_entries']=$request['date_time_entries'];
+            $timesheet['overtime']=$request['overtime'];
+            $timesheet['working_time']=$request['working_time_edit'];
+            $timesheet->save();
+            // $timesheet->update($request->all()); Laravel 5.5
+            return response($timesheet);
+        }
     }
 }

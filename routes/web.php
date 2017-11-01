@@ -104,8 +104,10 @@ Route::get('taskname/{task_id}','AjaxController@getTaskName');
 Route::get('projectname/{task_id}','AjaxController@getProjectName');
 // get task name ung voi project khi edit timesheet
 Route::get('task_edit/{project_id}','AjaxController@getTaskEdit'); 
+// Route::get('task_edit2/{project_id}/{task_id}','AjaxController@getTaskEdit2'); 
 
 Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');
 
 Route::get('timesheet/edit','AjaxController@getEditTimesheet');
-Route::post('timesheet/update','AjaxController@updateTimesheet');
+Route::post('timesheet/update','AjaxController@update');
+Route::get('tasknameEdit/{task_id}','AjaxController@getTaskNameEdit');

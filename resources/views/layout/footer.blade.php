@@ -3,7 +3,7 @@
 <footer>
     <div class="row">
         <div class="col-md-12">
-            <p>Copyright &copy; Your Website 2017</p>
+            <p>Amagumo Labs &copy; 2015 - All rights reserved</p>
         </div>
     </div>
 </footer>

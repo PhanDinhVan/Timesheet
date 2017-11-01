@@ -1,4 +1,3 @@
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
@@ -136,11 +135,11 @@
                   <label>Note</label>
 		              <textarea class="form-control" name="note" cols="50" rows="4"></textarea>
               </div>
-          <form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
-        <button type="submit" class="btn btn-success" ><span class="glyphicon"></span>Save</button>
+              <div class="modal-footer" style="margin-top: 7%; padding: 0%; padding-top: 3%; margin-bottom: -2%;">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-save"></span> Save</button>
+              </div>
+          </form>
       </div>
     </div>
   </div>
