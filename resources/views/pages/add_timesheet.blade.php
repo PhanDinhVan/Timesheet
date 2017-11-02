@@ -75,6 +75,7 @@
               <div class="form-group" style="width: 18%; float: left;">
                   <label>Date</label>
                   <input class="date1 form-control" type="text" name="start_date">
+                  
               </div>
               <!-- datepicker -->
               <script type="text/javascript">

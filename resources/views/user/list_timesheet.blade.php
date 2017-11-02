@@ -1,3 +1,7 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
 <style type="text/css">
 	@import url(https://fonts.googleapis.com/css?family=Lato:900);
 *, *:before, *:after{
@@ -70,6 +74,11 @@ div.foo{
     rotateZ(0deg)
     skew(0deg,22deg);
 }
+#dayofweek{
+  width: 7%; 
+  margin-left: 10%; 
+  text-align: center;
+}
 </style>
 
 <div class="foo">
@@ -84,7 +93,18 @@ div.foo{
   <span class="letter" data-letter="T">T</span>
 </div>
 
-
+<div class="form-group">
+  <label style="width: 100%;">Today</label>
+  <input class="date form-control" type="text" id="datepicker" style="width: 9%; float: left;">
+  <label class="form-control" readonly="" id="dayofweek" type="text"></label>
+</div>  
+<!-- datepicker -->
+<script type="text/javascript">
+  $("#datepicker").datepicker({format: 'yyyy-mm-dd'}).datepicker("setDate", new Date());
+  $('.date').datepicker({  
+     format: 'yyyy-mm-dd'
+   });  
+</script>
 
 <div class="table-responsive">
         

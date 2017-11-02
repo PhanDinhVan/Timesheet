@@ -7,8 +7,8 @@
 			<th>Working time</th>
 			<th>Over time</th>
 			<th>Date</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th style="text-align: center;">Edit</th>
+			<th style="text-align: center;">Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,8 +20,16 @@
 				<td>{{$value->working_time}}</td>
 				<td>{{$value->overtime}}</td>
 				<td>{{$value->date_time_entries}}</td>
-				<td><button value="{{$value->id}}" class="btn btn-primary btn-sm btn-edit"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-				<td><button value="{{$value->id}}" class="btn btn-danger btn-sm btn-dell"><span class="glyphicon glyphicon-remove-circle"></span> Delete</button></td>
+				<td style="text-align: center;">
+					<button value="{{$value->id}}" class="btn btn-primary btn-sm btn-edit">
+						<span class="glyphicon glyphicon-edit"></span> Edit
+					</button>
+				</td>
+				<td style="text-align: center;">
+					<button value="{{$value->id}}" class="btn btn-danger btn-sm btn-dell">
+						<span class="glyphicon glyphicon-remove-circle"></span> Delete
+					</button>
+				</td>
 			</tr>
 		@endforeach
 	</tbody>
