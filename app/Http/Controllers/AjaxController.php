@@ -93,4 +93,12 @@ class AjaxController extends Controller
             return response($timesheet);
         }
     }
+
+    // delete timesheet
+    public function delete(Request $request){
+        if($request->ajax()){
+            Timesheet::destroy($request->id);
+            // return response(['id'=>$request->id);
+        }
+    }
 }

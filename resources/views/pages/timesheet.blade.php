@@ -247,6 +247,11 @@
         //     });
         // });
 
+        $(document).on('click','.btn-dell',function(e){
+          var id = $(this).val();
+          alert(id);
+        });
+
         // ---------------- edit timeshet ----------------
         $('body').delegate('#edit','click',function(e){
 

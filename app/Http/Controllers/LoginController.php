@@ -60,7 +60,7 @@ class LoginController extends Controller
             ]); 
         
         if(Auth::attempt(['username'=>$request->email, 'password'=>$request->password])){
-            return redirect('users/timesheet');
+            return redirect('user/timesheet');
         }else{
             return redirect('login')->with('thongbao','Login unsuccessful...!!!');
         }

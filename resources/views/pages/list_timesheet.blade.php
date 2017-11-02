@@ -65,7 +65,7 @@
                             </thead>
                             <tbody>
                                 @foreach($time_entries as $value)
-                                    <tr>
+                                    <tr class="id{{$value->id}}">
                                         <td class="agenda-date">
                                             <div class="shortdate text-muted"><span class="projectname">{{$value->task_id}}</span></div>
                                         </td>
@@ -88,7 +88,9 @@
                                             </button>
                                         </td>
                                         <td class="agenda-date">
-                                            <button class="shortdate text-muted" type="button" data-toggle="modal" data-target="#delete">Delete</button>
+                                            <button class="btn btn-danger btn-dell" href="{{ url('delete',$value->id)}}" type="button" data-toggle="modal" data-target="#delete">
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

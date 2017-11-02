@@ -85,12 +85,14 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	});
 });
 
-Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
-	Route::get('timesheet','TimesheetController@getTimesheet');
-	Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
-	Route::post('timesheet','TimesheetController@postAddTimesheet');
-	Route::get('fullcalendar','TimesheetController@getFullCalendar');
-});
+//====================== users ============================
+
+// Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
+// 	Route::get('timesheet','TimesheetController@getTimesheet');
+// 	Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
+// 	Route::post('timesheet','TimesheetController@postAddTimesheet');
+// 	Route::get('fullcalendar','TimesheetController@getFullCalendar');
+// });
 
 
 
@@ -98,16 +100,33 @@ Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
 
+// // get task name ung voi project khi add timesheet
+// Route::get('task/{project_id}','AjaxController@getTask');  
+// Route::get('taskname/{task_id}','AjaxController@getTaskName');
+// Route::get('projectname/{task_id}','AjaxController@getProjectName');
+// // get task name ung voi project khi edit timesheet
+// Route::get('task_edit/{project_id}','AjaxController@getTaskEdit'); 
+// // Route::get('task_edit2/{project_id}/{task_id}','AjaxController@getTaskEdit2'); 
+
+// Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');
+
+// Route::get('timesheet/edit','AjaxController@getEditTimesheet');
+// Route::post('timesheet/update','AjaxController@update');
+// Route::get('tasknameEdit/{task_id}','AjaxController@getTaskNameEdit');
+// Route::post('delete','AjaxController@delete');
+
+
+// =============================== User lam lai ============================
+Route::group(['prefix'=>'user','middleware'=>'userLogin'],function(){
+	Route::get('timesheet','Timesheet_02Controller@getTimesheet');
+	Route::post('timesheet','Timesheet_02Controller@postTimesheet');
+
+});
+
+
 // get task name ung voi project khi add timesheet
-Route::get('task/{project_id}','AjaxController@getTask');  
-Route::get('taskname/{task_id}','AjaxController@getTaskName');
-Route::get('projectname/{task_id}','AjaxController@getProjectName');
-// get task name ung voi project khi edit timesheet
-Route::get('task_edit/{project_id}','AjaxController@getTaskEdit'); 
-// Route::get('task_edit2/{project_id}/{task_id}','AjaxController@getTaskEdit2'); 
-
-Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');
-
-Route::get('timesheet/edit','AjaxController@getEditTimesheet');
-Route::post('timesheet/update','AjaxController@update');
-Route::get('tasknameEdit/{task_id}','AjaxController@getTaskNameEdit');
+Route::get('task/{project_id}','Ajax_02Controller@getTask');  
+Route::get('readByAjax','Timesheet_02Controller@readByAjax');
+Route::post('deleteByAjax','Timesheet_02Controller@deleteByAjax');
+Route::get('getEditAjax','Timesheet_02Controller@getEditAjax');
+Route::post('updateByAjax','Timesheet_02Controller@updateByAjax');
