@@ -45,6 +45,7 @@
           @endif
           <form action="user/timesheet" method="POST" id="frm-add">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
               
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
@@ -74,26 +75,42 @@
 
               <div class="form-group" style="width: 17%; float: left;">
                   <label>Date</label>
-                  <input class="date form-control" type="text" name="date_time_entries">
+                  <input class="date_add form-control" type="text" name="date_time_entries">
               </div>
               <!-- datepicker -->
               <script type="text/javascript">
-                $('.date').datepicker({  
+                $('.date_add').datepicker({  
                    format: 'yyyy-mm-dd'
                  });  
               </script>
 
-              <div class="form-group" style="width: 17%; float: left; margin-left: 43%; margin-right: 18%;">
+              <div class="form-group users" style="width: 17%; float: left; margin-left: 43%; margin-right: 18%;">
                   <label>Working Time</label>
-                    <input class="timepicker form-control" type="text" name="working_time" style="text-align: center;"> 
+                    <input class="timepicker form-control" type="text" name="working_time_users" style="text-align: center;"> 
+              </div>
+
+              <div class="form-group admin" style="width: 17%; float: left; margin-left: 6%; margin-right: 20%;">
+                  <label>Working Time</label>
+                    <input class="timepicker form-control" type="text" name="working_time_admin" style="text-align: center;"> 
               </div>
              
               <script type="text/javascript">
                   $('.timepicker').datetimepicker({
                       format: 'HH:mm'
                   }); 
-                  
               </script>  
+
+              <div class="form-group admin" style="width: 40%; float: left;">
+                  <label>User Name</label>
+                  <select class="form-control" name="user_id" id="user_id">
+                      <!-- @foreach($task as $value)
+                      <option value="{{$value->project_id}}">{{$value->project->name}}</option>
+                      @endforeach -->
+                      @foreach($users as $value)
+                      <option value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
+                      @endforeach
+                  </select>
+              </div>
 
               <div class="form-group">
                   <label>Note</label>
@@ -108,5 +125,17 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+      $(".admin").hide(); 
+      var position = $("#position_add").val(); 
+      if(position == 1){
+        $(".users").hide();
+        $(".admin").show(); 
+      }
+  })
+</script>
 
 

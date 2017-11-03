@@ -34,4 +34,31 @@ class Ajax_02Controller extends Controller
 		    }	
 	  	}
 	}
+
+	// Dung de hien thi cac task dung voi cac project khi Edit timesheet
+    public function getTaskEdit($project_id){
+        $task = Task::where('project_id',$project_id)->where('availability',1)->get();
+        foreach ($task as $value) {
+            echo "<option value='".$value->id."'>".$value->taskname."</option>";
+        }
+    }
+
+    public function getTaskName($task_id){
+    	$task = Task::where('id',$task_id)->get();
+    	$taskname = "";
+    	foreach ($task as $value) {
+    		$taskname = $value->taskname;
+    	}
+    	echo $taskname;
+    }
+
+    public function getProjectName($project_id){
+        $project = Project::where('id',$project_id)->get();
+        
+        $projectname = "";
+        foreach ($project as $value) {
+                $projectname = $value->name;
+        }
+        echo $projectname;
+    }
 }

@@ -75,7 +75,7 @@ div.foo{
     skew(0deg,22deg);
 }
 #dayofweek{
-  width: 7%; 
+  width: 10%; 
   margin-left: 10%; 
   text-align: center;
 }

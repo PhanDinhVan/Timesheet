@@ -130,3 +130,7 @@ Route::get('readByAjax','Timesheet_02Controller@readByAjax');
 Route::post('deleteByAjax','Timesheet_02Controller@deleteByAjax');
 Route::get('getEditAjax','Timesheet_02Controller@getEditAjax');
 Route::post('updateByAjax','Timesheet_02Controller@updateByAjax');
+Route::get('task_edit/{project_id}','Ajax_02Controller@getTaskEdit'); 
+Route::get('taskname/{task_id}','Ajax_02Controller@getTaskName');
+Route::get('projectname/{project_id}','Ajax_02Controller@getProjectName');
+Route::get('readByAjax_ChangeDay','Timesheet_02Controller@readByAjax_ChangeDay');

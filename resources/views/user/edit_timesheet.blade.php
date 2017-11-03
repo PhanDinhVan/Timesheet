@@ -38,6 +38,7 @@
           
           <form action="updateByAjax" method="POST" id="frm-update">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="position_edit" id="position_edit" value="{{ Auth::user()->position }}">
 
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
@@ -57,7 +58,7 @@
                   </select>
               </div>
 
-              <div class="form-group" style="width: 17%; float: left;">
+              <div class="form-group" style="width: 18%; float: left;">
                   <label>Date</label>
                   <input class="date form-control" type="text" name="date_time_entries" id="date_time_entries">
               </div>
@@ -68,20 +69,39 @@
                  });  
               </script>
 
-              <div class="form-group" style="width: 17%; float: left; margin-left: 43%; margin-right: 10%;">
+              
+
+              <div class="form-group admin_edit" style="width: 17%; float: left; margin-left: 8%; margin-right: 7%;">
                   <label>Working Time</label>
-                    <input class="timepicker form-control" type="text" name="working_time" id="working_time" style="text-align: center;"> 
+                    <input class="timepicker form-control" type="text" name="working_time_admin_edit" id="working_time_admin_edit" style="text-align: center;"> 
+              </div>
+              <div class="form-group users_edit" style="width: 17%; float: left; margin-left: 43%; margin-right: 10%;">
+                  <label>Working Time</label>
+                    <input class="timepicker form-control" type="text" name="working_time_users_edit" id="working_time_users_edit" style="text-align: center;"> 
               </div>
              
               <script type="text/javascript">
                   $('.timepicker').datetimepicker({
                       format: 'HH:mm'
                   }); 
-                  
               </script>  
-              <div class="form-group" style="width: 11%; float: left;">
+
+              <div class="form-group admin_edit" style="width: 11%; float: left; margin-right: 8%">
                   <label>Overtime</label>
-                    <input class="form-control" type="text" name="overtime" id="overtime" style="text-align: center;"> 
+                    <input class="form-control" type="text" name="overtime_admin_edit" id="overtime_admin_edit" style="text-align: center;"> 
+              </div>
+              <div class="form-group users_edit" style="width: 11%; float: left;">
+                  <label>Overtime</label>
+                    <input class="form-control" type="text" name="overtime_users_edit" id="overtime_users_edit" style="text-align: center;"> 
+              </div>
+
+              <div class="form-group admin_edit" style="width: 30%; float: left;">
+                  <label>User Name</label>
+                  <select class="form-control" name="user_id_edit" id="user_id_edit">
+                      @foreach($users as $value)
+                      <option value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
+                      @endforeach
+                  </select>
               </div>
               <div class="form-group">
                   <label>Note</label>
@@ -101,61 +121,15 @@
 </div>
 
 
+<script type="text/javascript">
+  $(document).ready(function() {
 
+      $(".admin_edit").hide(); 
+      var position = $("#position_edit").val(); 
+      if(position == 1){
+        $(".users_edit").hide();
+        $(".admin_edit").show(); 
+      }
+  })
+</script>
 
-
-<div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-      </div>
-          <div class="modal-body">
-          <div class="form-group">
-        <input class="form-control " type="text" placeholder="Mohsin">
-        </div>
-        <div class="form-group">
-        
-        <input class="form-control " type="text" placeholder="Irshad">
-        </div>
-        <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-    
-        
-        </div>
-      </div>
-          <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-    </div>
-
-
-
-
-
- <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-      </div>
-          <div class="modal-body">
-       
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-       
-      </div>
-        <div class="modal-footer ">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-    </div>

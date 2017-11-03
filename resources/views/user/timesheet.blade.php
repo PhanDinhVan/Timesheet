@@ -62,13 +62,24 @@
           });
         })
 
-        // show taskname dung voi tung projectname trong modal add
+        // show taskname dung voi tung projectname in modal add
         $(document).ready(function(){
 
             $("#project").change(function(){
                 var project_id = $(this).val();
                 $.get("task/"+project_id, function(data){
                     $("#task").html(data);
+                    // alert(data);
+                });
+            });
+        });
+
+        // show taskname dung voi tung projectname in modal edit
+        $(document).ready(function(){
+            $("#project_id").change(function(){
+                var project_id = $(this).val();
+                $.get("task_edit/"+project_id, function(data){
+                    $("#task_id").html(data);
                     // alert(data);
                 });
             });
@@ -135,37 +146,39 @@
                 url : "{{url('getEditAjax')}}",
                 data : {id:id},
                 success:function(data){
-                    //load lai page timesheet
-                    // init_reload();
-                    // function init_reload(){
-                    //     setInterval( function() {
-                    //                window.location.reload();
-                 
-                    //     },500);
-                    // }
-                    // console.log(data);
+                    //hien thi gia tri cua row can edit tren modal edit
                     var frmupdate = $('#frm-update');
                     frmupdate.find('#project_id').val(data.project_id);
                     frmupdate.find('#task_id').val(data.task_id);
-                    frmupdate.find('#working_time').val(data.working_time);
-                    frmupdate.find('#overtime').val(data.overtime);
+                    frmupdate.find('#working_time_users_edit').val(data.working_time);
+                    frmupdate.find('#working_time_admin_edit').val(data.working_time);
+                    frmupdate.find('#overtime_users_edit').val(data.overtime);
+                    frmupdate.find('#overtime_admin_edit').val(data.overtime);
                     frmupdate.find('#date_time_entries').val(data.date_time_entries);
                     frmupdate.find('#note').val(data.note);
                     frmupdate.find('#id').val(data.id);
+                    frmupdate.find('#user_id_edit').val(data.user_id);
 
-                    $('#popup-update').modal('show');
+                    // show taskname dung voi tung project in modal when edit - lan dau tien load len
+                    var project_id = data.project_id;
+                    $.get("task_edit/"+project_id, function(data){
+                        $("#task_id").html(data);
+                    });
+
+                    // Cho nay dung show cua modal luon roi nha, ngay button edit file readByAjax
+                    // $('#popup-update').modal('show');
                 }
             })
         })
 
-
+        //update lai gia tri
         $('#frm-update').on('submit',function(e){
             e.preventDefault();
             var data = $(this).serialize();
             var url = $(this).attr('action');
             var post = $(this).attr('method');
             $.post(url,data,function(data){
-                console.log(data)
+                // console.log(data)
                 $('#frm-update').trigger('reset');
                 // load lai page
                 init_reload();
@@ -189,10 +202,39 @@
                 success:function(data)
                 {
                   // console.log(data);
-                  $('.table-responsive').html(data);
+                  // show table timesheet
+                    $('.table-responsive').html(data);
+                  
+                //========== show task name when first load page timesheet =========== 
+                    // var temp = $('table tbody .taskname');
+                    // temp.each(function() {
+                    //     var a = $(this);
+                    //     var task_id = a.text();
+                    //     // alert(task_id);
+                    //     $.get("taskname/"+task_id, function(data){
+                    //         // alert(data);
+                    //         a.text(data);
+                    //     });
+                    // });
+
+                 //========== show project name when first load page timesheet ===========  
+                    // var temp = $('table tbody .projectname');
+                    // temp.each(function() {
+                    //     var a = $(this);
+                    //     var project_id = a.text();
+                    //     // alert(project_id);
+                    //     $.get("projectname/"+project_id, function(data){
+                    //         // alert(data);
+                    //         a.text(data);
+                    //     });
+                    
+                    // });
+
                 }
             })
         }
+
+        //================== Day of weaek =====================
 
         var d = new Date();
         var weekday = new Array(7);
@@ -203,9 +245,52 @@
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-
         var n = weekday[d.getDay()];
         document.getElementById("dayofweek").innerHTML = n;
+
+
+        //================ When click change date ==================
+        document.getElementById("datepicker").onchange = function() {myFunction()};
+        function myFunction() {
+
+            // dung de clear cac column add truoc do
+            // $("#ajax_data").empty();
+           
+            // create_date hien thi thu trong tuan khi change date va dung trong ajax
+            var create_date = document.getElementById('datepicker').value;
+            var d = new Date(create_date);
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            var n = weekday[d.getDay()];
+            document.getElementById("dayofweek").innerHTML = n;  
+
+            // get data khi thay doi date
+           $.ajax({
+                type : 'get',
+                url : "{{url('readByAjax_ChangeDay')}}",
+                data : {create_date:create_date},
+                dataType : 'html',
+                success:function(data)
+                {
+                  // console.log(data);
+                  // show table timesheet
+                    $('.table-responsive').html(data);
+                  
+                }
+            })
+        }
+
+        $(document).ready(function() {
+            // $('#position').css("display","none");
+             $(".table-responsive .table").hide(); 
+        })
 
     </script>
 @endsection
