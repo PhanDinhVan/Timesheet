@@ -80,20 +80,20 @@
                     <input class="timepicker form-control" type="text" name="working_time_users_edit" id="working_time_users_edit" style="text-align: center;"> 
               </div>
              
+              <div class="form-group admin_edit" style="width: 11%; float: left; margin-right: 8%">
+                  <label>Overtime</label>
+                    <input class="timepicker form-control" type="text" name="overtime_admin_edit" id="overtime_admin_edit" style="text-align: center;"> 
+              </div>
+              <div class="form-group users_edit" style="width: 11%; float: left;">
+                  <label>Overtime</label>
+                    <input class="timepicker form-control" type="text" name="overtime_users_edit" id="overtime_users_edit" style="text-align: center;"> 
+              </div>
+
               <script type="text/javascript">
                   $('.timepicker').datetimepicker({
                       format: 'HH:mm'
                   }); 
-              </script>  
-
-              <div class="form-group admin_edit" style="width: 11%; float: left; margin-right: 8%">
-                  <label>Overtime</label>
-                    <input class="form-control" type="text" name="overtime_admin_edit" id="overtime_admin_edit" style="text-align: center;"> 
-              </div>
-              <div class="form-group users_edit" style="width: 11%; float: left;">
-                  <label>Overtime</label>
-                    <input class="form-control" type="text" name="overtime_users_edit" id="overtime_users_edit" style="text-align: center;"> 
-              </div>
+              </script> 
 
               <div class="form-group admin_edit" style="width: 30%; float: left;">
                   <label>User Name</label>

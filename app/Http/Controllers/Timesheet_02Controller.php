@@ -97,12 +97,41 @@ class Timesheet_02Controller extends Controller
 
 	public function updateByAjax(Request $r){
 		if($r->ajax()){
+
 			$position = Auth::user()->position;
+
+			if($position==1){
+				$h1 = strtotime($r->overtime_admin_edit);
+				$hour = date("H", $h1);
+				$minute = date("i", $h1);
+				$overtime = $hour*60 + $minute;
+				
+				$h2 = strtotime($r->working_time_admin_edit);
+				$hour = date("H", $h2);
+				$minute = date("i", $h2);
+				$working_time = $hour*60 + $minute;
+			}
+			else{
+
+				$h1 = strtotime($r->overtime_users_edit);
+				$hour = date("H", $h1);
+				$minute = date("i", $h1);
+				$overtime = $hour*60 + $minute;
+
+				$h2 = strtotime($r->working_time_users_edit);
+				$hour = date("H", $h2);
+				$minute = date("i", $h2);
+				$working_time = $hour*60 + $minute;
+			}
+			
+			
 			$timesheet = Timesheet::find($r->id);
 			$timesheet->project_id = $r->project_id;
 			$timesheet->task_id = $r->task_id;
-			$timesheet->working_time = ($position==1)? $r->working_time_admin_edit : $r->working_time_users_edit;
-			$timesheet->overtime = ($position==1)? $r->overtime_admin_edit : $r->overtime_users_edit;
+			// $timesheet->working_time = ($position==1)? $r->working_time_admin_edit : $r->working_time_users_edit;
+			$timesheet->working_time = $working_time;
+			// $timesheet->overtime = ($position==1)? $r->overtime_admin_edit : $r->overtime_users_edit;
+			$timesheet->overtime = $overtime;
 			$timesheet->date_time_entries = $r->date_time_entries;
 			$timesheet->note = $r->note;
 			$timesheet->create_date = date('Y-m-d H:m:s');

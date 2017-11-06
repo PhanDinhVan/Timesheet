@@ -20,9 +20,9 @@
 				<td class="projectname">{{$value->projectname}}</td>
 				<td class="taskname">{{$value->taskname}}</td>
 				<td class="username">{{$value->firstname}} {{$value->lastname}}</td>
-				<td style="text-align: center;">{{$value->working_time}}</td>
-				<td style="text-align: right;">{{$value->overtime}}</td>
-				<td style="text-align: center;">{{$value->date_time_entries}}</td>
+				<td class="working_time" style="text-align: center;">{{$value->working_time}}</td>
+				<td class="overtime" style="text-align: right;">{{$value->overtime}}</td>
+				<td class="date_time_entries" style="text-align: center;">{{$value->date_time_entries}}</td>
 				<td style="text-align: right;">
 					<button value="{{$value->id}}" class="btn btn-primary btn-sm btn-edit" data-toggle="modal" data-target="#popup-update">
 						<span class="glyphicon glyphicon-edit"></span> Edit
@@ -44,9 +44,73 @@
 
  		$(".username").hide(); 
         var position = $("#position").val(); 
-         if(position == 1){
+        if(position == 1){
          	$(".username").show(); 
-         }
+        }
+
+        // var working_time = $("#working_time").val();
+        // setting working time
+        var temp = $('table tbody .working_time');
+        temp.each(function() {
+            var a = $(this);
+            var total_minutes = a.text();
+            var hours = Math.floor(total_minutes/60);
+
+            //format time 00:00
+            var count = hours.toString().length;
+            if(count < 2){
+				hours = '0'+hours;
+            }
+           
+            var minutes = total_minutes%60;
+            var count2 = minutes.toString().length;
+            if(count2 < 2){
+				minutes = '0'+minutes;
+            }
+
+            working_time = hours + ':' + minutes;
+            // alert(working_time);
+            a.text(working_time);
+        });
+
+        // setting overtime
+        var temp2 = $('table tbody .overtime');
+        temp2.each(function() {
+            var a = $(this);
+            var total_minutes = a.text();
+            var hours = Math.floor(total_minutes/60);
+
+            //format time 00:00
+            var count = hours.toString().length;
+            if(count < 2){
+				hours = '0'+hours;
+            }
+           
+            var minutes = total_minutes%60;
+            var count2 = minutes.toString().length;
+            if(count2 < 2){
+				minutes = '0'+minutes;
+            }
+
+            overtime = hours + ':' + minutes;
+            // alert(working_time);
+            a.text(overtime);
+        });
+
+        // setting date_time_entries
+        var temp3 = $('table tbody .date_time_entries');
+        temp3.each(function() {
+            var a = $(this);
+            var date_time = a.text();
+            var myDate = new Date(date_time);
+
+		    var full_date = myDate.getFullYear() + "-" + myDate.getMonth() + "-" + myDate.getDate();
+		    // alert(full_date);
+		    a.text(full_date);
+
+        });
+
+    
     })
 </script>
 

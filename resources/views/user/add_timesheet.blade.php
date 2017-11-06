@@ -1,25 +1,14 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
-
-
-<style type="text/css">
-  .start_date{
-    float: left;
-    margin-top: 1%; 
-    margin-right: 3%;
-    margin-left: 20%;
-  }
-
-  .working_date{
-    float: left;
-    margin-top: 1%; 
-    margin-right: 3%;
-  }
-</style>
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet"> -->
+<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+<script src="js/jquery/jquery.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script> -->
+<script src="js/datepicker/moment.min.js"></script>
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet"> -->
+<link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 
 <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -86,20 +75,45 @@
 
               <div class="form-group users" style="width: 17%; float: left; margin-left: 43%; margin-right: 18%;">
                   <label>Working Time</label>
-                    <input class="timepicker form-control" type="text" name="working_time_users" style="text-align: center;"> 
+                    <input class="timepicker form-control" type="text" id="working_time_users" style="text-align: center;">
+                    <input class="timepicker form-control" type="hidden" id="working_time_users2" name="working_time_users"> 
               </div>
 
               <div class="form-group admin" style="width: 17%; float: left; margin-left: 6%; margin-right: 20%;">
                   <label>Working Time</label>
-                    <input class="timepicker form-control" type="text" name="working_time_admin" style="text-align: center;"> 
+                    <input class="timepicker form-control" type="text" id="working_time_admin" style="text-align: center;"> 
+                    <input class="timepicker form-control" type="hidden" id="working_time_admin2" name="working_time_admin"> 
               </div>
-             
+
               <script type="text/javascript">
                   $('.timepicker').datetimepicker({
                       format: 'HH:mm'
                   }); 
-              </script>  
 
+                  // show working_time
+                  $('.timepicker').on("dp.change",function(e){
+
+                      function parseTime(s) {
+                         var c = s.split(':');
+                         return parseInt(c[0]) * 60 + parseInt(c[1]);
+                      }
+
+                      var position = $("#position_add").val(); 
+
+                      if(position == 1){
+                        
+                        var working_time_admin = document.getElementById('working_time_admin').value;
+                        var minutes = parseTime(working_time_admin);
+                        document.getElementById("working_time_admin2").value = minutes;
+                      }
+                      else{
+                        var working_time_users = document.getElementById('working_time_users').value;
+                        var minutes = parseTime(working_time_users);
+                        document.getElementById("working_time_users2").value = minutes;
+                      }
+                  });
+              </script>
+             
               <div class="form-group admin" style="width: 40%; float: left;">
                   <label>User Name</label>
                   <select class="form-control" name="user_id" id="user_id">

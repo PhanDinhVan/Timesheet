@@ -146,14 +146,47 @@
                 url : "{{url('getEditAjax')}}",
                 data : {id:id},
                 success:function(data){
+                    //setting value working_time and overtime
+
+                    var total_minutes = (data.working_time);
+                    var hours = Math.floor(total_minutes/60);
+                    var minutes = total_minutes%60;
+
+                    var count = hours.toString().length;
+                    if(count < 2){
+                        hours = '0'+hours;
+                    }
+                    var count_1 = minutes.toString().length;
+                    if(count_1 < 2){
+                        minutes = '0'+minutes;
+                    }
+
+                    working_time = hours + ':' + minutes;
+
+                    //overtime
+                    var total_minutes2 = (data.overtime);
+                    var hours2 = Math.floor(total_minutes2/60);
+                    var minutes2 = total_minutes2%60;
+
+                    var count_2 = hours2.toString().length;
+                    if(count_2 < 2){
+                        hours2 = '0'+hours2;
+                    }
+                    var count_3 = minutes2.toString().length;
+                    if(count_3 < 2){
+                        minutes2 = '0'+minutes2;
+                    }
+
+                    overtime = hours2 + ':' + minutes2;
+                    
                     //hien thi gia tri cua row can edit tren modal edit
                     var frmupdate = $('#frm-update');
                     frmupdate.find('#project_id').val(data.project_id);
                     frmupdate.find('#task_id').val(data.task_id);
-                    frmupdate.find('#working_time_users_edit').val(data.working_time);
-                    frmupdate.find('#working_time_admin_edit').val(data.working_time);
-                    frmupdate.find('#overtime_users_edit').val(data.overtime);
-                    frmupdate.find('#overtime_admin_edit').val(data.overtime);
+                    frmupdate.find('#working_time_users_edit').val(working_time);
+                    frmupdate.find('#working_time_admin_edit').val(working_time);
+                    frmupdate.find('#overtime_users_edit').val(overtime);
+                    frmupdate.find('#overtime_admin_edit').val(overtime);
                     frmupdate.find('#date_time_entries').val(data.date_time_entries);
                     frmupdate.find('#note').val(data.note);
                     frmupdate.find('#id').val(data.id);
@@ -169,6 +202,7 @@
                     // $('#popup-update').modal('show');
                 }
             })
+
         })
 
         //update lai gia tri
