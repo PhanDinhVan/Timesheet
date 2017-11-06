@@ -101,9 +101,9 @@ div.foo{
 <!-- datepicker -->
 <script type="text/javascript">
   $("#datepicker").datepicker({format: 'yyyy-mm-dd'}).datepicker("setDate", new Date());
-  $('.date').datepicker({  
-     format: 'yyyy-mm-dd'
-   });  
+  // $('.date').datepicker({  
+  //    format: 'yyyy-mm-dd'
+  //  });  
 </script>
 
 <div class="table-responsive">

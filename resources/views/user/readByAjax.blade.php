@@ -44,9 +44,9 @@
 
  		$(".username").hide(); 
         var position = $("#position").val(); 
-         if(position == 1){
-         	$(".username").show(); 
-         }
+        if(position == 1){
+        	$(".username").show(); 
+        }
     })
 </script>
 

@@ -21,13 +21,22 @@
   }
 </style>
 
+<style type="text/css">
+
+.input-group {
+  width: 110px;
+  margin-bottom: 10px;
+}
+
+</style>
+
 
 <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">{{"Add entry"}}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{"Add time entries"}}</h4>
       </div>
       <div class="modal-body">
           @if(count($errors) > 0)
@@ -46,6 +55,13 @@
           <form action="user/timesheet" method="POST" id="frm-add">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
+
+              <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+    <input type="text" class="form-control" value="13:14">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
               
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
@@ -75,13 +91,11 @@
 
               <div class="form-group" style="width: 17%; float: left;">
                   <label>Date</label>
-                  <input class="date_add form-control" type="text" name="date_time_entries">
+                  <input class="date_add form-control" type="text" id="date_add" name="date_time_entries">
               </div>
               <!-- datepicker -->
               <script type="text/javascript">
-                $('.date_add').datepicker({  
-                   format: 'yyyy-mm-dd'
-                 });  
+                $("#date_add").datepicker({format: 'yyyy-mm-dd'}).datepicker("setDate", new Date());
               </script>
 
               <div class="form-group users" style="width: 17%; float: left; margin-left: 43%; margin-right: 18%;">
