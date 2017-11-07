@@ -83,6 +83,18 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('delete/{id}','TaskController@getDelete');
 	});
+
+	Route::group(['prefix'=>'permisson'],function(){
+		Route::get('list','PermissonController@getList');
+
+		Route::get('add','PermissonController@getAdd');
+		Route::post('add','PermissonController@postAdd');
+
+		Route::get('edit/{id}','PermissonController@getEdit');
+		Route::post('edit/{id}','PermissonController@postEdit');
+
+		Route::get('delete/{id}','PermissonController@getDelete');
+	});
 });
 
 //====================== users ============================
@@ -134,3 +146,5 @@ Route::get('task_edit/{project_id}','Ajax_02Controller@getTaskEdit');
 Route::get('taskname/{task_id}','Ajax_02Controller@getTaskName');
 Route::get('projectname/{project_id}','Ajax_02Controller@getProjectName');
 Route::get('readByAjax_ChangeDay','Timesheet_02Controller@readByAjax_ChangeDay');
+Route::get('project_user/{user_id}','Ajax_02Controller@getProject_User');
+// Route::get('task2/{user_id}','Ajax_02Controller@getTask');  

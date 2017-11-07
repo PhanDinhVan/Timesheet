@@ -21,14 +21,14 @@
 				<td class="taskname">{{$value->taskname}}</td>
 				<td class="username">{{$value->firstname}} {{$value->lastname}}</td>
 				<td class="working_time" style="text-align: center;">{{$value->working_time}}</td>
-				<td class="overtime" style="text-align: right;">{{$value->overtime}}</td>
+				<td class="overtime" style="text-align: center;">{{$value->overtime}}</td>
 				<td class="date_time_entries" style="text-align: center;">{{$value->date_time_entries}}</td>
-				<td style="text-align: right;">
+				<td style="text-align: center; padding-left: 2%;">
 					<button value="{{$value->id}}" class="btn btn-primary btn-sm btn-edit" data-toggle="modal" data-target="#popup-update">
 						<span class="glyphicon glyphicon-edit"></span> Edit
 					</button>
 				</td>
-				<td style="text-align: right;">
+				<td style="text-align: center; padding-left: 2%;">
 					<button value="{{$value->id}}" class="btn btn-danger btn-sm btn-dell">
 						<span class="glyphicon glyphicon-remove-circle"></span> Delete
 					</button>

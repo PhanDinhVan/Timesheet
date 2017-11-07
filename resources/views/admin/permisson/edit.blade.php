@@ -2,6 +2,9 @@
 @section('content')
 
 <!-- Page Content --> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 <div class="right_col" role="main">
       <!-- top tiles -->
@@ -9,7 +12,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Task
+                    <h1 class="page-header">Permisson
                         <small>Edit</small>
                     </h1>
                 </div>
@@ -28,44 +31,33 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/task/edit/{{$task->id}}" method="POST">
+                        <form action="admin/permisson/edit/{{$permisson->id}}" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
-                                <label>Project Name</label>
-                                <select class="form-control" name="project_id">
-                                    @foreach($project as $value)
+                                <label>Username</label>
+                                <select class="form-control" name="username">
+                                    @foreach($user as $value)
                                     <option 
-                                        @if($task->project_id == $value->id) {{"selected"}} @endif 
-                                        value="{{$value->id}}">{{$value->name}}</option>
+                                        @if($value->id == $permisson->user_id) {{"selected"}} @endif 
+                                        value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Task Name</label>
-                                <input class="form-control" name="taskname" value="{{$task->taskname}}" placeholder="Please enter employee type" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Comments</label>
-                                <input class="form-control" name="comments" value="{{$task->comments}}" placeholder="Please enter employee type" />
-                            </div>
-                            <div class="form-group">
-                                <label>Availability</label>
-                                <select class="form-control" name="availability">
-                                    <option value=0
-                                        @if($task->availability == 0) {{"selected"}} @endif 
-                                        >No
-                                    </option>
-                                    <option value=1
-                                        @if($task->availability == 1) {{"selected"}} @endif 
-                                        >Yes
-                                    </option>
+                                <label>Project Name </label>
+                                <select class="form-control" name="projectname">
+                                    @foreach($project as $value)
+                                    <option 
+                                        @if($value->id == $permisson->project_id) {{"selected"}} @endif 
+                                        value="{{$value->id}}">{{$value->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
+                            
                             <button type="submit" class="btn btn-default">Save</button>
                             <!-- <button type="reset" class="btn btn-default">Reset</button> -->
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/task/list') }}">Cancel</a>
+                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
                         <form>
                 </div>
             </div>

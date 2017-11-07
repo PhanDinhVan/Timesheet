@@ -97,6 +97,7 @@
                             </div>
                             <button type="submit" class="btn btn-default">Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
+                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/user/list') }}">Cancel</a>
                         <form>
                 </div>
                

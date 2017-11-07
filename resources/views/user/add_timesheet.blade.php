@@ -45,12 +45,12 @@
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
 
-              <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-    <input type="text" class="form-control" value="13:14">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
-</div>
+              <!-- <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                  <input type="text" class="form-control" value="13:14">
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </span>
+              </div> -->
               
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>
@@ -131,11 +131,10 @@
               <div class="form-group admin" style="width: 40%; float: left;">
                   <label>User Name</label>
                   <select class="form-control" name="user_id" id="user_id">
-                      <!-- @foreach($task as $value)
-                      <option value="{{$value->project_id}}">{{$value->project->name}}</option>
-                      @endforeach -->
                       @foreach($users as $value)
-                      <option value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
+                      <option 
+                          @if($value->id == Auth::user()->id) {{"selected"}} @endif 
+                          value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
                       @endforeach
                   </select>
               </div>

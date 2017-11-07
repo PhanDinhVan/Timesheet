@@ -11,7 +11,6 @@
     <div class="panel panel-body">
         <div class="row">
             <div class="col-md-6">
-                
                 <div class="x_content">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#yourModal" id="add">
                         <i class="fa fa-plus pull-left " style="margin-top: 5%;"></i>Add Time
@@ -29,6 +28,7 @@
                     <input type="radio" name="options" id="option3"> Month
                 </label>
             </div>
+            <input type="hidden" id="user_login" value="{{Auth::user()->id}}">
         </div>
         <!-- Modal trong laravel -->
         @include('user.add_timesheet')
@@ -56,10 +56,21 @@
 
          // show taskname dung voi tung project in modal add lan dau tien load len
         $('body').delegate('#add','click',function(e){
-          var project_id = $('select[name=project_id]').val();
-          $.get("task/"+project_id, function(data){
-              $("#task").html(data);
+
+          // show projectname dung voi tung username in modal add lan dau tien load len
+          var user_id = $("#user_login").val();
+          $.get("project_user/"+user_id, function(data){
+                $("#project").html(data);
+              // select task name dung voi project name in modal add lan dau tien load len
+                 if(data != '') {
+                    //var project_id = $(this).val();
+                    var project_id = $('#project option:nth-child(1)').attr("value");
+                    $.get("task/"+project_id, function(data){
+                        $("#task").html(data);
+                    });
+                }
           });
+
         })
 
         // show taskname dung voi tung projectname in modal add
@@ -70,6 +81,23 @@
                 $.get("task/"+project_id, function(data){
                     $("#task").html(data);
                     // alert(data);
+                });
+            });
+
+            // ========== show project name when username change ============
+            $("#user_id").change(function(){
+                var user_id = $(this).val();
+                $.get("project_user/"+user_id, function(data){
+                    $("#project").html(data);
+                    // alert(data);
+                    // select task name dung voi project name in modal add when username change
+                    if(data != '') {
+                        //var project_id = $(this).val();
+                        var project_id = $('#project option:nth-child(1)').attr("value");
+                        $.get("task/"+project_id, function(data){
+                            $("#task").html(data);
+                        });
+                    }
                 });
             });
         });

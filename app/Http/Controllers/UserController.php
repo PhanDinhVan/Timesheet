@@ -14,7 +14,7 @@ class UserController extends Controller
         return view('admin.user.list',['user'=>$user]);
     }
 
-   public function getAdd(){
+    public function getAdd(){
         $employee_types = Employee_Types::all();
         return view('admin.user.add',['employee_types'=>$employee_types]);
     }

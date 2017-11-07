@@ -93,7 +93,8 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-default">Save</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
+                            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
+                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/project/list') }}">Cancel</a>
                         <form>
                 </div>
             </div>

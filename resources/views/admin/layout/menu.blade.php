@@ -21,6 +21,12 @@
 	          <li><a href="admin/employee_type/list">List Employee Types</a></li>
 	        </ul>
 	      </li>
+	      <li><a><i class="fa fa-sitemap"></i> Permisson <span class="fa fa-chevron-down"></span></a>
+	        <ul class="nav child_menu">
+	          <li><a href="admin/permisson/add">Add New Permisson</a></li>
+	          <li><a href="admin/permisson/list">List Permisson</a></li>
+	        </ul>
+	      </li>
 	      <li><a><i class="fa fa-money"></i> Projects <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
 	          <li><a href="admin/project/add">Add New Projects</a></li>

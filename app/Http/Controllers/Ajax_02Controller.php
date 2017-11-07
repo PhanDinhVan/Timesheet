@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Task;
 use App\Project;
 use App\Timesheet;
+use App\Permisson;
 
 class Ajax_02Controller extends Controller
 {
@@ -16,6 +17,15 @@ class Ajax_02Controller extends Controller
             echo "<option value='".$value->id."'>".$value->taskname."</option>";
         }
     }
+
+    // show task name dung voi tung project when modal add first load
+    // public function getTask2($user_id){
+    //     $task = Task::join('permisson_users_projects','permisson_users_projects.project_id','=','tasks.project_id')->select('tasks.*','permisson_users_projects.user_id as user_id')->where('tasks.availability','=',1)->where('permisson_users_projects.user_id','=',$user_id)->get();
+    //     // $task = Task::where('project_id',$project_id)->where('availability',1)->get();
+    //     foreach ($task as $value) {
+    //         echo "<option value='".$value->id."'>".$value->taskname."</option>";
+    //     }
+    // }
 
 	public function postTimesheet(Request $r){
 		if($r->ajax()){
@@ -52,13 +62,21 @@ class Ajax_02Controller extends Controller
     	echo $taskname;
     }
 
-    public function getProjectName($project_id){
-        $project = Project::where('id',$project_id)->get();
+    // public function getProjectName($project_id){
+    //     $project = Project::where('id',$project_id)->get();
         
-        $projectname = "";
+    //     $projectname = "";
+    //     foreach ($project as $value) {
+    //             $projectname = $value->name;
+    //     }
+    //     echo $projectname;
+    // }
+
+    // get project name dung voi tung user name
+    public function getProject_User($user_id){
+        $project = Permisson::join('projects','projects.id','=','permisson_users_projects.project_id')->select('permisson_users_projects.*','projects.name as projectname','projects.id as project_ID')->where('user_id',$user_id)->get();
         foreach ($project as $value) {
-                $projectname = $value->name;
+            echo "<option value='".$value->project_ID."'>".$value->projectname."</option>";
         }
-        echo $projectname;
     }
 }

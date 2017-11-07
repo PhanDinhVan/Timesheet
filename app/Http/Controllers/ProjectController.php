@@ -63,7 +63,7 @@ class ProjectController extends Controller
 	public function postEdit(Request $request, $id){
 		$this->validate($request,
 			[
-				'name'=>'required|unique:projects,name',
+				'name'=>'required',
 				'start_date'=>'required',
                 'end_date'=>'required',
                 'department'=>'required',
@@ -72,7 +72,6 @@ class ProjectController extends Controller
 			],
 			[
 				'name.required'=>'Please enter project name',
-				'name.unique'=>'Project name is exits',
 				'start_date.required'=>'Please enter start date',
 				'end_date.required'=>'Please enter end date',
 				'department.required'=>'Please select department',
@@ -92,7 +91,7 @@ class ProjectController extends Controller
 		return redirect('admin/project/edit/'.$id)->with('thongbao','You edit success');
 	}
 
-	 public function getDelete($id){
+	public function getDelete($id){
         $user = Project::find($id);
         $user->delete();
 
