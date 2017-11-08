@@ -70,6 +70,7 @@
                        @endforeach
                     </tbody>
                 </table>
+                <div style="float: right;">{{ $user->links() }}</div>
             </div>
             <!-- /.row -->
         </div>
@@ -79,4 +80,4 @@
        
 <!-- /#page-wrapper -->	
 
- @endsection
+@endsection

@@ -9,7 +9,7 @@ class EmployeeTypeController extends Controller
 {
     //
     public function getList(){
-    	$employee_type = Employee_Types::all();
+    	$employee_type = Employee_Types::paginate(10);
     	return view('admin/employee_type/list',['employee_type'=>$employee_type]);
     }
 

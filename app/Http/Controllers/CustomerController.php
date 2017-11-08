@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     //
     public function getList(){
-    	$customer = Customer::all();
+    	$customer = Customer::paginate(10);
     	return view('admin/customer/list',['customer'=>$customer]);
     }
 

@@ -1,5 +1,5 @@
 <div class="sidebar-footer hidden-small">
-  <a data-toggle="tooltip" data-placement="top" title="Settings" href="admin/user/edit/{{Auth::user()->id}}">
+  <a data-toggle="tooltip" data-placement="top" title="Settings" href="user/setting">
     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
   </a>
   <a data-toggle="tooltip" data-placement="top" title="FullScreen">
@@ -8,7 +8,7 @@
   <a data-toggle="tooltip" data-placement="top" title="Lock">
     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
   </a>
-  <a data-toggle="tooltip" data-placement="top" title="Logout" href="admin/logout">
+  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login">
     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
   </a>
 </div>

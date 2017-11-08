@@ -11,7 +11,8 @@ class PermissonController extends Controller
 {
     //
     public function getList(){
-    	$permisson = Permisson::all();
+    	// Phan trang khi lay du lieu ra all() tren trang view de {{ $permisson->links() }}
+    	$permisson = Permisson::paginate(10);
         return view('admin.permisson.list',['permisson'=>$permisson]);
     }
 

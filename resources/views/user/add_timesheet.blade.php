@@ -10,14 +10,12 @@
 <link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-<style type="text/css">
-
-.input-group {
-  width: 110px;
-  margin-bottom: 10px;
-}
-
-</style>
+<!-- <style type="text/css">
+  .input-group {
+    width: 110px;
+    margin-bottom: 10px;
+  }
+</style> -->
 
 
 <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

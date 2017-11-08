@@ -112,6 +112,7 @@ Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
 
+
 // // get task name ung voi project khi add timesheet
 // Route::get('task/{project_id}','AjaxController@getTask');  
 // Route::get('taskname/{task_id}','AjaxController@getTaskName');
@@ -132,6 +133,8 @@ Route::get('logout','LoginController@getLogoutUser');
 Route::group(['prefix'=>'user','middleware'=>'userLogin'],function(){
 	Route::get('timesheet','Timesheet_02Controller@getTimesheet');
 	Route::post('timesheet','Timesheet_02Controller@postTimesheet');
+	Route::get('setting','LoginController@getSettingUser');
+	Route::post('setting','LoginController@postSettingUser');
 
 });
 

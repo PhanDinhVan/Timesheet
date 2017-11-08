@@ -52,7 +52,8 @@
                         </tr>
                         @endforeach
                       </tbody>
-</table>
+                </table>
+                <div style="float: right;">{{ $task->links() }}</div>
             </div>
             <!-- /.row -->
         </div>

@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     //
     public function getList(){
-        $user = Users::all();
+        $user = Users::paginate(10);
         return view('admin.user.list',['user'=>$user]);
     }
 

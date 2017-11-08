@@ -1,25 +1,10 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
+<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<script src="js/jquery/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/datepicker/moment.min.js"></script>
+<link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script> 
 
-
-<style type="text/css">
-  .start_date{
-    float: left;
-    margin-top: 1%; 
-    margin-right: 3%;
-    margin-left: 20%;
-  }
-
-  .working_date{
-    float: left;
-    margin-top: 1%; 
-    margin-right: 3%;
-  }
-</style>
 
 <div class="modal fade" id="popup-update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
   <div class="modal-dialog" role="document">

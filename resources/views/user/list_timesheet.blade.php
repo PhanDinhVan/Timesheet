@@ -78,6 +78,7 @@ div.foo{
   width: 10%; 
   margin-left: 10%; 
   text-align: center;
+  /*float: left;*/
 }
 </style>
 
@@ -97,6 +98,18 @@ div.foo{
   <label style="width: 100%;">Today</label>
   <input class="date form-control" type="text" id="datepicker" style="width: 9%; float: left;">
   <label class="form-control" readonly="" id="dayofweek" type="text"></label>
+  
+    <!-- <button type="button" class="btn btn-default" style="margin-left: 54%;"><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+    <input class="form-control" type="text" name="search" placeholder="Search" style="margin-left: 84%; width: 16%;">
+  <!-- <div>
+    <form action="search" method="POST" class="navbar-form navbar-left" role="search">
+        <input type="hidden" name="_token" value="{{csrf_token()}}"; /> 
+        <div class="form-group">
+          <input type="text" name = "tukhoa" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+  </div> -->
 </div>  
 <!-- datepicker -->
 <script type="text/javascript">

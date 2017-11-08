@@ -21,6 +21,11 @@
                     </div>
                   @endif
                 </div>
+                <!-- Search -->
+                <!-- <div style="float: right;"> 
+                  <button>Search</button>
+                  <input type="text" name="search">
+                </div> -->
                 
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
@@ -46,7 +51,7 @@
                        @endforeach
                     </tbody>
                 </table>
-                
+                <div style="float: right;">{{ $permisson->links() }}</div>
             </div>
             <!-- /.row -->
         </div>

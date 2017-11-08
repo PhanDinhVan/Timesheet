@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     //
     public function getList(){
-    	$task = Task::all();
+    	$task = Task::paginate(10);
     	return view('admin/task/list',['task'=>$task]);
     }
 

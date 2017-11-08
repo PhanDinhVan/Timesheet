@@ -48,6 +48,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div style="float: right;">{{ $customer->links() }}</div>
             </div>
             <!-- /.row -->
         </div>

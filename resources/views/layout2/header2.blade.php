@@ -1,11 +1,5 @@
-<head>
-    <base href="{{asset('')}}">
-    <link href="admin_asset/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">
-</head>
-
-<div class="top_nav" style="margin-top: -5.5%;">
+<!-- Navigation -->
+<div class="top_nav">
   <div class="nav_menu">
     <nav>
       <div class="nav toggle">
@@ -15,7 +9,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt="">@if(Auth::check()) {{Auth::user()->lastname}} @endif
+            <img src="images/img.jpg" alt="">{{Auth::user()->lastname}}
             <span class=" fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -23,7 +17,7 @@
             <li><a href="user/setting"><i class="fa fa-cog pull-right"></i> Settings </a></li>
             <li><a href="logout"><i class="fa fa-sign-out pull-right"></i> Log Out </a></li>
             @else
-                return redirect('login'); 
+                return redirect('admin/login'); 
             @endif
           </ul>
         </li>

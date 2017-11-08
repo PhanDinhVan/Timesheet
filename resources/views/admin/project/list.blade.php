@@ -58,6 +58,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div style="float: right;">{{ $project->links() }}</div>
             </div>
             <!-- /.row -->
         </div>

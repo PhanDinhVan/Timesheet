@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     //
 	public function getList(){
-		$project = Project::all();
+		$project = Project::paginate(10);
 		return view('admin/project/list',['project'=>$project]);
 	}
 

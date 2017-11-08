@@ -73,9 +73,10 @@
 
         })
 
-        // show taskname dung voi tung projectname in modal add
+        // ================ Modal Add =================
         $(document).ready(function(){
 
+            // show taskname dung voi tung projectname in modal add
             $("#project").change(function(){
                 var project_id = $(this).val();
                 $.get("task/"+project_id, function(data){
@@ -84,7 +85,7 @@
                 });
             });
 
-            // ========== show project name when username change ============
+            // ========== show project name when username in modal add change ============
             $("#user_id").change(function(){
                 var user_id = $(this).val();
                 $.get("project_user/"+user_id, function(data){
@@ -102,13 +103,32 @@
             });
         });
 
-        // show taskname dung voi tung projectname in modal edit
+        // ================ Modal Edit =================
         $(document).ready(function(){
+
+            // show taskname dung voi tung projectname in modal edit
             $("#project_id").change(function(){
                 var project_id = $(this).val();
                 $.get("task_edit/"+project_id, function(data){
                     $("#task_id").html(data);
                     // alert(data);
+                });
+            });
+
+            // ========== show project name when username in modal edit change ============
+            $("#user_id_edit").change(function(){
+                var user_id = $(this).val();
+                $.get("project_user/"+user_id, function(data){
+                    $("#project_id").html(data);
+                    // alert(data);
+                    // select task name dung voi project name in modal edit when username change
+                    if(data != '') {
+                        //var project_id = $(this).val();
+                        var project_id = $('#project_id option:nth-child(1)').attr("value");
+                        $.get("task/"+project_id, function(data){
+                            $("#task_id").html(data);
+                        });
+                    }
                 });
             });
         });
@@ -220,17 +240,40 @@
                     frmupdate.find('#id').val(data.id);
                     frmupdate.find('#user_id_edit').val(data.user_id);
 
-                    // show taskname dung voi tung project in modal when edit - lan dau tien load len
-                    var project_id = data.project_id;
-                    $.get("task_edit/"+project_id, function(data){
-                        $("#task_id").html(data);
+                    // ======show taskname dung voi tung project in modal edit when - lan dau tien load len ========
+                    // var project_id = data.project_id;
+                    // $.get("task_edit/"+project_id, function(data){
+                    //     $("#task_id").html(data);
+                    // });
+                    // var user_id = $("#user_id_edit").val();
+                    var project_id_edit = data.project_id;
+                    var task_id_edit = data.task_id;
+                    var user_id = data.user_id;
+                    $.get("project_user/"+user_id, function(data){
+                        // ========== show cac project tuong ung voi username ============
+                        $("#project_id").html(data);
+                        // ========== select dung project dang edit =============
+                        var frmupdate = $('#frm-update');
+                        frmupdate.find('#project_id').val(project_id_edit);
+                        
+                        // select task name dung voi project name in modal edit lan dau tien load len
+                        if(data != '') {
+                            // var project_id = $('#project_id option:nth-child(1)').attr("value");
+                            var project_id = project_id_edit;
+                            $.get("task/"+project_id, function(data){
+                                // ========== show cac task tuong ung voi project ============
+                                $("#task_id").html(data);
+                                // ========== select dung task dang edit =============
+                                var frmupdate = $('#frm-update');
+                                frmupdate.find('#task_id').val(task_id_edit);
+                            });
+                        }
                     });
 
                     // Cho nay dung show cua modal luon roi nha, ngay button edit file readByAjax
                     // $('#popup-update').modal('show');
                 }
             })
-
         })
 
         //update lai gia tri

@@ -57,17 +57,17 @@
             <br />
 
             <!-- sidebar menu -->
-            @include('admin.layout.menu')
+            @include('layout2.menu2')
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            @include('admin.layout.menufooter')
+            @include('layout2.menufooter2')
             <!-- /menu footer buttons -->
           </div>
         </div>
 
         <!-- top navigation -->
-            @include('admin.layout.header')
+            @include('layout2.header2')
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -77,7 +77,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <a href="http://www.amagumolabs.com/">Amagumo Labs</a> &copy; 2015 - All rights reserved 
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
           <div class="clearfix"></div>
         </footer>
