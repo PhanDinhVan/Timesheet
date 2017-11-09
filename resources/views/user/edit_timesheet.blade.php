@@ -54,8 +54,6 @@
                  });  
               </script>
 
-              
-
               <div class="form-group admin_edit" style="width: 17%; float: left; margin-left: 8%; margin-right: 7%;">
                   <label>Working Time</label>
                     <input class="timepicker form-control" type="text" name="working_time_admin_edit" id="working_time_admin_edit" style="text-align: center;"> 

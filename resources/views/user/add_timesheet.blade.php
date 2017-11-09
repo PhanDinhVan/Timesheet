@@ -10,13 +10,6 @@
 <link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-<!-- <style type="text/css">
-  .input-group {
-    width: 110px;
-    margin-bottom: 10px;
-  }
-</style> -->
-
 
 <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -42,13 +35,6 @@
           <form action="user/timesheet" method="POST" id="frm-add">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
-
-              <!-- <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-                  <input type="text" class="form-control" value="13:14">
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-time"></span>
-                  </span>
-              </div> -->
               
               <div class="form-group" style="width: 40%; float: left;">
                   <label>Project Name</label>

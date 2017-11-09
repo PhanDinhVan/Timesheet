@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
 <!-- thieu thang nay khong delete timesheet duoc  -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @extends('layout.index')
@@ -44,6 +46,7 @@
 @endsection
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
         // thieu thang nay khong delete timesheet duoc
         $(document).ready(function(){
@@ -392,10 +395,11 @@
             })
         }
 
-        $(document).ready(function() {
-            // $('#position').css("display","none");
-             $(".table-responsive .table").hide(); 
-        })
-
+        $( function() {
+            
+            $( "#searchItem" ).autocomplete({
+              source: 'http://localhost/Timesheet/public/search'
+            });
+          });
     </script>
 @endsection

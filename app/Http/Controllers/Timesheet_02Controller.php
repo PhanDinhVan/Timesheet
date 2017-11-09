@@ -15,12 +15,11 @@ class Timesheet_02Controller extends Controller
 {
 
     //
-    public function getTimesheet(){
+    public function getTimesheet(Request $request){
+
+
     	$create_date = date('Y-m-d');
-    	// $time_entries = Timesheet::find($create_date);
     	$time_entries = Timesheet::where('date_time_entries',$create_date)->where('user_id',Auth::user()->id)->get();
-    	// $time_entries = Timesheet::all();
-    	// die($q);
     	$project = Project::all();
     	$task = Task::all();
     	$users = Users::all();
@@ -28,12 +27,12 @@ class Timesheet_02Controller extends Controller
     }
 
     // get timesheet khi edit datetime
-    public function getTimesheet2(Request $request){
-        $data = $request->create_date;
-        $time_entries = Timesheet::where('date_time_entries',$data)->where('user_id',Auth::user()->id)->get();
+    // public function getTimesheet2(Request $request){
+    //     $data = $request->create_date;
+    //     $time_entries = Timesheet::where('date_time_entries',$data)->where('user_id',Auth::user()->id)->get();
         
-        echo($time_entries);
-    }
+    //     echo($time_entries);
+    // }
 
     public function postTimesheet(Request $r){
 		if($r->ajax()){
@@ -65,8 +64,7 @@ class Timesheet_02Controller extends Controller
                     ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname','users.firstname as firstname','users.lastname as lastname','users.position as position')
                     ->where('time_entries.date_time_entries','=',date('Y-m-d'))
                     ->orderBy('time_entries.id','DESC')
-                    ->limit(10)
-                    ->get();
+                    ->paginate(5);
 		}
 		else{
 
@@ -75,8 +73,7 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname')
 	                    ->where('time_entries.user_id','=',$id)->where('time_entries.date_time_entries','=',date('Y-m-d'))
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->limit(10)
-	                    ->get();
+	                    ->paginate(5);
         }
 
   		return view('user.readByAjax',compact('timesheet'));
@@ -153,8 +150,7 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname','users.firstname as firstname','users.lastname as lastname','users.position as position')
 	                    ->where('time_entries.date_time_entries','=',$r->create_date)
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->limit(10)
-	                    ->get();
+	                    ->paginate(5);
         }
         else{
 
@@ -163,10 +159,34 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname')
 	                    ->where('time_entries.user_id','=',Auth::user()->id)->where('time_entries.date_time_entries','=',$r->create_date)
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->limit(10)
-	                    ->get();
+	                    ->paginate(5);
         }
 
   		return view('user.readByAjax',compact('timesheet'));
 	}
+
+	public function search(Request $r){
+		$term = $r->term;
+		$id = Auth::user()->id;
+		$users = Users::find($id);
+		$timesheet = Timesheet::join('tasks','tasks.id','=','time_entries.task_id')
+  					->join('projects','projects.id','=','tasks.project_id')
+  					->join('users','users.id','=','time_entries.user_id')
+                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname','users.firstname as firstname','users.lastname as lastname','users.position as position')
+                    ->where('name','LIKE','%'.$term.'%')->Orwhere('taskname','LIKE','%'.$term.'%')->Orwhere('firstname','LIKE','%'.$term.'%')->Orwhere('lastname','LIKE','%'.$term.'%')->Orwhere('date_time_entries','LIKE','%'.$term.'%')
+                    ->orderBy('time_entries.id','DESC')
+                    ->paginate(5);
+
+		if(count($timesheet) == 0){
+			$searchResult[] = 'No item found';
+		}else{
+			foreach ($timesheet as $key => $value) {
+				$searchResult[] = $value->taskname;
+			}
+		}
+
+		return $searchResult;
+        // return view('user.search',['timesheet'=>$timesheet]);
+	}
+
 }

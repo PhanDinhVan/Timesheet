@@ -2,6 +2,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
+
+
 <style type="text/css">
 	@import url(https://fonts.googleapis.com/css?family=Lato:900);
 *, *:before, *:after{
@@ -98,18 +100,6 @@ div.foo{
   <label style="width: 100%;">Today</label>
   <input class="date form-control" type="text" id="datepicker" style="width: 9%; float: left;">
   <label class="form-control" readonly="" id="dayofweek" type="text"></label>
-  
-    <!-- <button type="button" class="btn btn-default" style="margin-left: 54%;"><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
-    <input class="form-control" type="text" name="search" placeholder="Search" style="margin-left: 84%; width: 16%;">
-  <!-- <div>
-    <form action="search" method="POST" class="navbar-form navbar-left" role="search">
-        <input type="hidden" name="_token" value="{{csrf_token()}}"; /> 
-        <div class="form-group">
-          <input type="text" name = "tukhoa" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Search</button>
-    </form>
-  </div> -->
 </div>  
 <!-- datepicker -->
 <script type="text/javascript">
@@ -119,6 +109,22 @@ div.foo{
   //  });  
 </script>
 
-<div class="table-responsive">
+<div class="panel panel-default">
+  <div class="panel-body" style="padding-bottom: 0px;">
+    <form action="user/search" method="POST" style="float: right;">
+      <table>
+        <tr>
+          <td>
+            <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="panel-body" style="padding-top: 0px;">
+    <div class="table-responsive">
         
+    </div>
+  </div>
+  
 </div>

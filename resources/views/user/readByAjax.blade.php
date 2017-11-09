@@ -1,3 +1,8 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+<!-- <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search"> -->
 <table class="table">
 	<thead>
 		<tr>
@@ -37,6 +42,7 @@
 		@endforeach
 	</tbody>
 </table>
+ <!-- <div style="float: right;">{{ $timesheet->links() }}</div> -->
 
 
 <script type="text/javascript">
@@ -103,14 +109,13 @@
             var a = $(this);
             var date_time = a.text();
             var myDate = new Date(date_time);
+            var month =  myDate.getMonth() + 1;
 
-		    var full_date = myDate.getFullYear() + "-" + myDate.getMonth() + "-" + myDate.getDate();
+		    var full_date = myDate.getFullYear() + "-" + month + "-" + myDate.getDate();
 		    // alert(full_date);
 		    a.text(full_date);
 
         });
-
-    
     })
 </script>
 

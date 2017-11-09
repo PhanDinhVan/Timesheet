@@ -135,7 +135,6 @@ Route::group(['prefix'=>'user','middleware'=>'userLogin'],function(){
 	Route::post('timesheet','Timesheet_02Controller@postTimesheet');
 	Route::get('setting','LoginController@getSettingUser');
 	Route::post('setting','LoginController@postSettingUser');
-
 });
 
 
@@ -150,4 +149,4 @@ Route::get('taskname/{task_id}','Ajax_02Controller@getTaskName');
 Route::get('projectname/{project_id}','Ajax_02Controller@getProjectName');
 Route::get('readByAjax_ChangeDay','Timesheet_02Controller@readByAjax_ChangeDay');
 Route::get('project_user/{user_id}','Ajax_02Controller@getProject_User');
-// Route::get('task2/{user_id}','Ajax_02Controller@getTask');  
+Route::get('search','Timesheet_02Controller@search');  
