@@ -400,6 +400,41 @@
             $( "#searchItem" ).autocomplete({
               source: 'http://localhost/Timesheet/public/search'
             });
-          });
+        });
+
+
+        //==========================================
+        // search();
+        //============================ Load page timesheet ====================
+        // function search(){
+        //     var searchItem = document.getElementById('searchItem').value;
+        //     alert(searchItem);
+        //     // $.ajax({
+        //     //     type : 'get',
+        //     //     url : "{{url('search')}}",
+        //     //     dataType : 'html',
+        //     //     success:function(data)
+        //     //     {
+        //     //       // console.log(data);
+        //     //       // show table timesheet
+        //     //         $('.table-responsive').html(data);
+        //     //     }
+        //     // })
+        // }
+
+        // $(document).ready(function(){
+        //     $('#searchItem').on('change',function(){
+        //         var searchItem = document.getElementById('searchItem').value;
+        //         alert(searchItem);
+        //     });
+        // });
+
+        // document.getElementById("searchItem").onchange = function() {search()};
+        // function search() {
+
+        //     var searchItem = document.getElementById('searchItem').value;
+        //     alert(searchItem);
+        // }
+
     </script>
 @endsection

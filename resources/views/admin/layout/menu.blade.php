@@ -33,6 +33,11 @@
 	          <li><a href="admin/project/list">List Projects</a></li>
 	        </ul>
 	      </li>
+	      <li><a><i class="fa fa-calendar"></i> Reports <span class="fa fa-chevron-down"></span></a>
+	        <ul class="nav child_menu">
+	          <li><a href="admin/report/report">Reports</a></li>
+	        </ul>
+	      </li>
 	      <li><a><i class="fa fa-tasks"></i> Tasks <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
 	          <li><a href="admin/task/add">Add New Tasks</a></li>

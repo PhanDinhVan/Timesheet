@@ -95,6 +95,11 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('delete/{id}','PermissonController@getDelete');
 	});
+
+	Route::group(['prefix'=>'report'],function(){
+		Route::get('report','ReportController@getReport');
+		Route::get('showReport','ReportController@showReport');
+	});
 });
 
 //====================== users ============================

@@ -26,13 +26,6 @@ class Timesheet_02Controller extends Controller
     	return view('user.timesheet',['project'=>$project,'task'=>$task,'time_entries'=>$time_entries,'users'=>$users]);
     }
 
-    // get timesheet khi edit datetime
-    // public function getTimesheet2(Request $request){
-    //     $data = $request->create_date;
-    //     $time_entries = Timesheet::where('date_time_entries',$data)->where('user_id',Auth::user()->id)->get();
-        
-    //     echo($time_entries);
-    // }
 
     public function postTimesheet(Request $r){
 		if($r->ajax()){
@@ -64,7 +57,7 @@ class Timesheet_02Controller extends Controller
                     ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname','users.firstname as firstname','users.lastname as lastname','users.position as position')
                     ->where('time_entries.date_time_entries','=',date('Y-m-d'))
                     ->orderBy('time_entries.id','DESC')
-                    ->paginate(5);
+                    ->paginate(50);
 		}
 		else{
 
@@ -150,7 +143,7 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname','users.firstname as firstname','users.lastname as lastname','users.position as position')
 	                    ->where('time_entries.date_time_entries','=',$r->create_date)
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->paginate(5);
+	                    ->paginate(50);
         }
         else{
 

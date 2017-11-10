@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 <!-- <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search"> -->
-<table class="table">
+<table class="table" id="list_timesheet">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -117,5 +117,17 @@
 
         });
     })
+
+    // $(document).ready(function(){
+    //     $('#list_timesheet').DataTable({
+    //         dom: 'Bfrtip',
+    //         buttons: [
+    //             'copyHtml5',
+    //             'excelHtml5',
+    //             'csvHtml5',
+    //             'pdfHtml5'
+    //         ]
+    //     })
+    // })
 </script>
 
