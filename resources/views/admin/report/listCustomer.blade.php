@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>No</th>
+			<th>Customer Name</th>
 			<th>Project Name</th>
 			<th>Task Name</th>
 			<th>Username</th>
@@ -13,7 +14,8 @@
 		@foreach($report as $key => $value)
 			<tr>
 				<td>{{ ++$key }}</td>
-				<td>{{ $value->name }}</td>
+				<td>{{ $value->customer_name }}</td>
+				<td>{{ $value->project_name }}</td>
 				<td>{{ $value->taskname }}</td>
 				<td>{{ $value->firstname }} {{ $value->lastname }}</td>
 				<td class="working_time" style="text-align: center;"> {{ $value->working_time + $value->overtime}} </td>
@@ -42,28 +44,28 @@
    //      	]
 		});
 
-    	var temp2 = $('.working_time');
-        temp2.each(function() {
-            var a = $(this);
-            var total_minutes = a.text();
-            var hours = Math.floor(total_minutes/60);
+    // 	var temp2 = $('.working_time');
+    //     temp2.each(function() {
+    //         var a = $(this);
+    //         var total_minutes = a.text();
+    //         var hours = Math.floor(total_minutes/60);
 
-            //format time 00:00
-            var count = hours.toString().length;
-            if(count < 2){
-				hours = '0'+hours;
-            }
+    //         //format time 00:00
+    //         var count = hours.toString().length;
+    //         if(count < 2){
+				// hours = '0'+hours;
+    //         }
            
-            var minutes = total_minutes%60;
-            var count2 = minutes.toString().length;
-            if(count2 < 2){
-				minutes = '0'+minutes;
-            }
+    //         var minutes = total_minutes%60;
+    //         var count2 = minutes.toString().length;
+    //         if(count2 < 2){
+				// minutes = '0'+minutes;
+    //         }
 
-            working_time = hours + ':' + minutes;
-            // alert(working_time);
-            a.text(working_time);
-        });
+    //         working_time = hours + ':' + minutes;
+    //         // alert(working_time);
+    //         a.text(working_time);
+    //     });
 	})
 
 	

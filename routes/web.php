@@ -97,8 +97,11 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	});
 
 	Route::group(['prefix'=>'report'],function(){
-		Route::get('report','ReportController@getReport');
+		Route::get('user_report','ReportController@getReport');
 		Route::get('showReport','ReportController@showReport');
+		Route::get('customer_report','ReportController@getCustomerReport');
+		Route::get('showReportCustomer','ReportController@showReportCustomer');
+		
 	});
 });
 

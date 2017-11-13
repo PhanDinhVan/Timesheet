@@ -35,7 +35,8 @@
 	      </li>
 	      <li><a><i class="fa fa-calendar"></i> Reports <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
-	          <li><a href="admin/report/report">Reports</a></li>
+	          <li><a href="admin/report/user_report">User Reports</a></li>
+	          <li><a href="admin/report/customer_report">Customer Reports</a></li>
 	        </ul>
 	      </li>
 	      <li><a><i class="fa fa-tasks"></i> Tasks <span class="fa fa-chevron-down"></span></a>
