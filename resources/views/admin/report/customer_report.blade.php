@@ -53,7 +53,7 @@
             		<p style="text-align: center;font-size: 20px;font-weight: bold;">Users Report</p>
             		
             		<form action="admin/report/showReport" method="post" id="framework_form">
-					    <div class="form-group">
+					    <div class="form-group" style="width: 36%; float: left;">
 					     	<label>Select </label>
 					     	
 					    	<select id="framework" name="framework[]" multiple class="form-control" >
@@ -71,7 +71,7 @@
 					    </div>
 					</form>
             	</div>
-            	<div class="show-report-info">
+            	<div class="show-report-info" style="margin-top: 2%;">
             		
             	</div>
             	
@@ -133,55 +133,19 @@
 
 		function search_Customer(from,to,customer_id){
 			var from = $('#from').val();
-    		var to = $('#to').val();
-    		var customer_id = $('#framework').val();
-    		// alert(customer_id);
-    		$.get("admin/report/showReportCustomer",{from:from,to:to,customer_id:customer_id}, function(data){
-                
+  		var to = $('#to').val();
+      var customer_id = $('#framework').val();
+      // alert(customer_id);
+      if(customer_id){
+
+        $.get("admin/report/showReportCustomer",{from:from,to:to,customer_id:customer_id}, function(data){
             // console.log(data)
             $('.show-report-info').html(data)
         });
-   //  		$('#framework > option').each(function() {
-			//     alert($(this).text() + ' ' + $(this).val());
-			// });
+      }else{
+        alert("Please select customer name!");
+      }
 		}
 
-	 	// $("#framework").change(function(){
-   //          $('#framework > option').each(function() {
-		 //    	alert($(this).text() + ' ' + $(this).val());
-			// });
-   //      });
-
 	</script>
-
-	<!-- <script>
-$(document).ready(function(){
- $('#framework').multiselect({
-  nonSelectedText: 'Select Framework',
-  enableFiltering: true,
-  enableCaseInsensitiveFiltering: true,
-  buttonWidth:'400px'
- });
- 
- // $('#framework_form').on('submit', function(event){
- //  event.preventDefault();
- //  var form_data = $(this).serialize();
- //  $.ajax({
- //   url:"insert.php",
- //   method:"POST",
- //   data:form_data,
- //   success:function(data)
- //   {
- //    $('#framework option:selected').each(function(){
- //     $(this).prop('selected', false);
- //    });
- //    $('#framework').multiselect('refresh');
- //    alert(data);
- //   }
- //  });
- // });
- 
- 
-});
-</script> -->
 @endsection

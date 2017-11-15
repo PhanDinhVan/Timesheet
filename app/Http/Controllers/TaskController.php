@@ -31,14 +31,23 @@ class TaskController extends Controller
     			'project_id.required'=>'Please select project name'
     		]);
 
-    	$taskname = new Task;
-    	$taskname->taskname = $request->taskname;
-    	$taskname->project_id = $request->project_id;
-    	$taskname->comments = $request->comments;
-        $taskname->availability = 1;
-    	$taskname->save();
+        // Check taskname and project name have exits?
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->get();
+        if($temp->isEmpty()){
 
-    	return redirect('admin/task/add')->with('thongbao','You add success');
+            $taskname = new Task;
+            $taskname->taskname = $request->taskname;
+            $taskname->project_id = $request->project_id;
+            $taskname->comments = $request->comments;
+            $taskname->availability = 1;
+            $taskname->save();
+
+            return redirect('admin/task/add')->with('thongbao','You add success');
+            
+        }else{
+            return redirect('admin/task/add')->with('error','Taskname and project name is exits');
+        }
+    	
     }
 
     public function getEdit($id){
@@ -58,14 +67,24 @@ class TaskController extends Controller
                 'taskname.min'=>'Task name has at least 3 characters',
                 'project_id.required'=>'Please select project name'
             ]);
-        $task = Task::find($id);
-        $task->taskname = $request->taskname;
-        $task->project_id = $request->project_id;
-        $task->comments = $request->comments;
-        $task->availability = $request->availability;
-        $task->save();
 
-        return redirect('admin/task/edit/'.$id)->with('thongbao','You edit success');
+        // Check taskname and project name have exits?
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->get();
+        if($temp->isEmpty()){
+
+            $task = Task::find($id);
+            $task->taskname = $request->taskname;
+            $task->project_id = $request->project_id;
+            $task->comments = $request->comments;
+            $task->availability = $request->availability;
+            $task->save();
+
+            return redirect('admin/task/edit/'.$id)->with('thongbao','You edit success');
+            
+        }else{
+            return redirect('admin/task/edit/'.$id)->with('error','Taskname and project name is exits');
+        }
+        
     }
 
 
