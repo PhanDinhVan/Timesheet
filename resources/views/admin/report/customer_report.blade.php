@@ -127,7 +127,9 @@
 		  		nonSelectedText: 'Customer name',
 		  		enableFiltering: true,
 		  		enableCaseInsensitiveFiltering: true,
-		 	 	buttonWidth:'300px'
+		 	 	  buttonWidth:'300px',
+          // select all customers
+          includeSelectAllOption: true
 		 	});
 		});
 

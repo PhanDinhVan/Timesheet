@@ -55,10 +55,10 @@
             		<form action="admin/report/showReport" method="post" id="framework_form">
 					    <div class="form-group" style="width: 36%; float: left;">
 					     	<label>Select </label>
-					     	
-					    	<select id="framework" name="framework[]" multiple class="form-control" >
+					    	<select id="framework" name="framework[]" multiple class="form-control">
+					    		<!-- <input type="checkbox" name="changePassword" id="all2"> -->
 					    		@foreach($username as $value)
-					      		<option value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
+					      		<option value="{{$value->id}}" name="check">{{$value->firstname}} {{$value->lastname}}</option>
 					      		@endforeach
 					     	</select>
 					     	
@@ -70,6 +70,7 @@
 						    </button>
 					    </div>
 					</form>
+
             	</div>
             	<div class="show-report-info" style="margin-top: 2%;">
             		
@@ -127,9 +128,12 @@
 		  		nonSelectedText: 'Username',
 		  		enableFiltering: true,
 		  		enableCaseInsensitiveFiltering: true,
-		 	 	buttonWidth:'300px'
+		 	 	buttonWidth:'300px',
+		 	 	// select all users
+		 	 	includeSelectAllOption: true
 		 	});
 		});
+
 
 		function search_Username(from,to,user_id){
 			var from = $('#from').val();
@@ -144,8 +148,6 @@
     		}else{
     			alert("Please select username!");
     		}
-    		
-    		
 		}
 
 	</script>

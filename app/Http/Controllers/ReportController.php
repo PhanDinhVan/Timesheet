@@ -48,7 +48,20 @@ class ReportController extends Controller
     	->groupBy('users.id')->groupBy('projects.name')
     	->get();
 
-    	return view('admin/report/listReport',compact('report'));
+    	$report2 = $this->reportInfo()
+    	->select(DB::raw("projects.name, 
+    					tasks.taskname,
+    					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
+    						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_time,
+    					users.firstname,
+    					users.lastname"))
+    	->whereIn('users.id', $request->user_id)
+    	->whereDate("time_entries.date_time_entries",">=",$request->from)
+    	->whereDate("time_entries.date_time_entries","<=",$request->to)
+    	->groupBy('users.id')
+    	->get();
+
+    	return view('admin/report/listReport',compact('report'),compact('report2'));
     }
 
     public function reportInfo(){
