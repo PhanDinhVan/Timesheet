@@ -53,7 +53,7 @@
             		<p style="text-align: center;font-size: 20px;font-weight: bold;">Users Report</p>
             		
             		<form action="admin/report/showReport" method="post" id="framework_form">
-					    <div class="form-group" style="width: 36%; float: left;">
+					    <div class="form-group" style="width: auto; float: left; margin-right:1%;">
 					     	<label>Select </label>
 					    	<select id="framework" name="framework[]" multiple class="form-control">
 					    		<!-- <input type="checkbox" name="changePassword" id="all2"> -->
@@ -128,7 +128,7 @@
 		  		nonSelectedText: 'Username',
 		  		enableFiltering: true,
 		  		enableCaseInsensitiveFiltering: true,
-		 	 	buttonWidth:'300px',
+		 	 	buttonWidth:'auto',
 		 	 	// select all users
 		 	 	includeSelectAllOption: true
 		 	});

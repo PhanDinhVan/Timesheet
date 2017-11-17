@@ -69,7 +69,7 @@ class TaskController extends Controller
             ]);
 
         // Check taskname and project name have exits?
-        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->get();
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('comments',$request->comments)->get();
         if($temp->isEmpty()){
 
             $task = Task::find($id);
@@ -86,7 +86,6 @@ class TaskController extends Controller
         }
         
     }
-
 
     public function getDelete($id){
         $task = Task::find($id);

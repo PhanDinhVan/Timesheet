@@ -53,20 +53,20 @@ class CustomerController extends Controller
     }
 
     public function postEdit(Request $request, $id){
-    		$this->validate($request,
-    		[
-    			'name'=>'required|min:2',
-    			'city'=>'required|min:2',
-    			'country'=>'required|min:2'
-    		],
-    		[
-    			'name.required'=>'Please enter customer name',
-    			'name.min'=>'Customer name minimum 2 characters',
-    			'city.required'=>'Please enter customer city',
-    			'city.min'=>'Customer city minimum 2 characters',
-    			'country.required'=>'Please enter customer country',
-    			'country.min'=>'Country city minimum 2 characters'
-    		]);
+		$this->validate($request,
+		[
+			'name'=>'required|min:2',
+			'city'=>'required|min:2',
+			'country'=>'required|min:2'
+		],
+		[
+			'name.required'=>'Please enter customer name',
+			'name.min'=>'Customer name minimum 2 characters',
+			'city.required'=>'Please enter customer city',
+			'city.min'=>'Customer city minimum 2 characters',
+			'country.required'=>'Please enter customer country',
+			'country.min'=>'Country city minimum 2 characters'
+		]);
 
 		$customer = Customer::find($id);
 		$customer->name = $request->name;

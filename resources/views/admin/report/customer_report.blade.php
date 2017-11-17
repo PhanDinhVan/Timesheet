@@ -50,10 +50,10 @@
             		</table>
             	</div>
             	<div class="panel-body" style="padding-bottom: 4px;">
-            		<p style="text-align: center;font-size: 20px;font-weight: bold;">Users Report</p>
+            		<p style="text-align: center;font-size: 20px;font-weight: bold;">Customers Report</p>
             		
             		<form action="admin/report/showReport" method="post" id="framework_form">
-					    <div class="form-group" style="width: 36%; float: left;">
+					    <div class="form-group" style="width: auto; float: left; margin-right: 1%;">
 					     	<label>Select </label>
 					     	
 					    	<select id="framework" name="framework[]" multiple class="form-control" >
@@ -127,7 +127,7 @@
 		  		nonSelectedText: 'Customer name',
 		  		enableFiltering: true,
 		  		enableCaseInsensitiveFiltering: true,
-		 	 	  buttonWidth:'300px',
+		 	 	  buttonWidth:'auto',
           // select all customers
           includeSelectAllOption: true
 		 	});

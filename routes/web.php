@@ -103,6 +103,11 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('showReportCustomer','ReportController@showReportCustomer');
 		
 	});
+
+	Route::group(['prefix'=>'report_chart'],function(){
+		Route::get('chart_customer','ReportController@getChartCustomer');
+		Route::get('chart_user','ReportController@getChartUser');
+	});
 });
 
 //====================== users ============================

@@ -9,6 +9,12 @@
 	          <li><a href="index2.html">Contact</a></li>
 	        </ul>
 	      </li>
+	      <li><a><i class="fa fa-bar-chart"></i> Chart Report <span class="fa fa-chevron-down"></span></a>
+	        <ul class="nav child_menu">
+	          <li><a href="admin/report_chart/chart_customer">Customers Report</a></li>
+	          <li><a href="admin/report_chart/chart_user">Users Report</a></li>
+	        </ul>
+	      </li>
 	      <li><a><i class="fa fa-male"></i> Customers <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
 	          <li><a href="admin/customer/add">Add New Customers</a></li>
@@ -35,8 +41,8 @@
 	      </li>
 	      <li><a><i class="fa fa-calendar"></i> Reports <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
-	          <li><a href="admin/report/user_report">User Reports</a></li>
-	          <li><a href="admin/report/customer_report">Customer Reports</a></li>
+	        	<li><a href="admin/report/customer_report">Customers Report</a></li>
+	          	<li><a href="admin/report/user_report">Users Report</a></li>
 	        </ul>
 	      </li>
 	      <li><a><i class="fa fa-tasks"></i> Tasks <span class="fa fa-chevron-down"></span></a>

@@ -38,6 +38,7 @@ class ReportController extends Controller
     	$report = $this->reportInfo()
     	->select(DB::raw("projects.name, 
     					tasks.taskname,
+    					users.id as ID,
     					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
     						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_working_time,
     					users.firstname,
@@ -51,6 +52,7 @@ class ReportController extends Controller
     	$report2 = $this->reportInfo()
     	->select(DB::raw("projects.name, 
     					tasks.taskname,
+    					users.id as user_ID,
     					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
     						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_time,
     					users.firstname,
@@ -93,6 +95,8 @@ class ReportController extends Controller
 
     	$report = $this->reportInfoCustomer()
     	->select(DB::raw("users.firstname,
+    					projects.name as projects_name,
+    					customers.id as ID,
     					customers.name as customer_name, 
     					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
     						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_working_time,
@@ -100,10 +104,23 @@ class ReportController extends Controller
     	->whereIn("customers.id",$request->customer_id)
     	->whereDate("time_entries.date_time_entries",">=",$request->from)
     	->whereDate("time_entries.date_time_entries","<=",$request->to)
-    	->groupBy('customers.id')->groupBy('users.id')
+    	->groupBy('customers.id')->groupBy('projects.id')->groupBy('users.id')
     	->get();
 
-    	return view('admin/report/listCustomer',compact('report'));
+    	$report2 = $this->reportInfoCustomer()
+    	->select(DB::raw("users.firstname,
+    					customers.id as customers_ID,
+    					customers.name as customer_name, 
+    					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
+    						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_time,
+    					users.lastname"))
+    	->whereIn("customers.id",$request->customer_id)
+    	->whereDate("time_entries.date_time_entries",">=",$request->from)
+    	->whereDate("time_entries.date_time_entries","<=",$request->to)
+    	->groupBy('customers.id')
+    	->get();
+
+    	return view('admin/report/listCustomer',compact('report'),compact('report2'));
     }
 
     public function reportInfoCustomer(){
@@ -111,5 +128,13 @@ class ReportController extends Controller
   					->join('projects','projects.id','=','tasks.project_id')
   					->join('users','users.id','=','time_entries.user_id')
   					->join('customers','customers.id','=','projects.customer_id');
+    }
+
+    public function getChartCustomer(){
+        return view('admin.report_chart.chart_customer');
+    }
+
+    public function getChartUser(){
+        return view('admin.report_chart.chart_user');
     }
 }
