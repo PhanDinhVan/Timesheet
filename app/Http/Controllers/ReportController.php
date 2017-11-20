@@ -131,7 +131,8 @@ class ReportController extends Controller
     }
 
     public function getChartCustomer(){
-        return view('admin.report_chart.chart_customer');
+        $customer = Customer::all();
+        return view('admin.report_chart.chart_customer',['customer'=>$customer]);
     }
 
     public function getChartUser(){
