@@ -107,10 +107,11 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	Route::group(['prefix'=>'report_chart'],function(){
 		Route::get('chart_customer','ReportController@getChartCustomer');
 		Route::get('chart_user','ReportController@getChartUser');
+		Route::get('getchart','ReportController@getDrawChart');
 	});
 });
 
-//====================== users ============================
+//====================== users ============================ 
 
 // Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
 // 	Route::get('timesheet','TimesheetController@getTimesheet');

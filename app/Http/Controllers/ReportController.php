@@ -138,4 +138,23 @@ class ReportController extends Controller
     public function getChartUser(){
         return view('admin.report_chart.chart_user');
     }
+
+    public function getDrawChart(Request $request){
+        $data = Customer::join('projects','projects.customer_id','=','customers.id')
+                        ->join('time_entries','time_entries.project_id','=','projects.id')
+                        ->join('users','users.id','=','time_entries.user_id')
+                        ->select(DB::raw(
+                            "customers.name as customer_name,
+                            projects.name as project_name,
+                            projects.id as project_id,
+                            users.firstname as firstname,
+                            users.lastname as lastname,
+                            time_entries.working_time + time_entries.overtime as time"))
+                        ->where('customers.id','=',$request->id)
+                        ->whereDate("time_entries.date_time_entries",">=",$request->from)
+                        ->whereDate("time_entries.date_time_entries","<=",$request->to)
+                        ->groupBy('customers.id')->groupBy('projects.id')->groupBy('users.id')
+                        ->get();
+        return $data;
+    }
 }
