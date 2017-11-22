@@ -66,7 +66,7 @@ svg text.percent{
             		</table>
             	</div>
             	<div class="panel-body" style="padding-bottom: 4px;">
-            		<!-- <button onClick="changeData()">Change Data</button> -->
+            		<button onClick="changeData()">Change Data</button>
                 	<label for="sel1">Select customer (select one)</label>
 			      	<select class="form-control" id="sel1" style="width: 20%;">
 			      		<option></option>
@@ -119,30 +119,38 @@ svg text.percent{
         });
     });
 
-	// var salesData=[
-	// 	{label:"Basic", color:"#3366CC"},
-	// 	{label:"Plus", color:"#DC3912"},
-	// 	{label:"Lite", color:"#FF9900"},
-	// 	{label:"Elite", color:"#109618"},
-	// 	{label:"Delux", color:"#990099"}
-	// ];
 
 	var y = 150;
-	var svg = d3.select(".chart").append("svg").attr("width",700).attr("height",800);
+	var z = 150;
+	var svg = d3.select(".chart").append("svg").attr("width",700).attr("height",1500);
 
-	svg.append("g").attr("id","salesDonut");
+	svg.append("g").attr("id","salesDonut1");
+	svg.append("g").attr("id","salesDonut2");
 	svg.append("g").attr("id","quotesDonut");
-	svg.append("g").attr("id","a");
+	// svg.append("g").attr("id","a");
 
-    $("#sel1").change(function(){
-    	var data2 = [];
-    	var temp = [];
+	function changeData(){
+		$('#chart svg').remove();
+    	var svg = d3.select(".chart").append("svg").attr("width",700).attr("height",850);
+
+		svg.append("g").attr("id","salesDonut1");
+		svg.append("g").attr("id","salesDonut2");
+		svg.append("g").attr("id","quotesDonut");
+
+		var data2 = [];
+    	var data3 = [];
     	var datatest = [];
         var e = document.getElementById("sel1");
 		var id = e.options[e.selectedIndex].value;
 		var name = e.options[e.selectedIndex].text;
 		var from = $('#from').val();
   		var to = $('#to').val();
+  		var project_temp = 0;
+  		var will = [];
+  		var a;
+  		var c = [];
+  		var count = 0;
+  		var value_count;
 		// alert(from + "    " + to)
 
 		$.ajax({
@@ -155,48 +163,260 @@ svg text.percent{
 				data.forEach(function(element) {
 					var project_id = element.project_id;
 				    console.log(element.project_id + '  ' + element.lastname + '  ' + element.time);
-				    temp.push(element.time);
+
+				    if(project_id == project_temp){
+				    	// alert(project_id+'hay lam'+project_temp)
+				    	will.push(element.time);
+				    }
+				    else{
+				    	if(will.length == 0){
+				    		// alert('lan dau')
+				    		project_temp = project_id;
+				    		will.push(element.time);
+				    	}
+				    	else{
+				    		count++;
+				    		// console.log(will)
+				    		a = will;
+				    		c.push(will);
+				    		will = [];
+					    	// alert('lan sau'+project_id+'khac'+project_temp)
+					    	project_temp = project_id;  
+					    	will.push(element.time);
+
+				    	}
+				    }
 				});
 
-				var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
-				var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"]
-				
-				for(var i=0; i<temp.length; i++)  {
-				    data2.push({label: label[i], value: temp[i], color: color[i]});
-				}
-				console.log(data2)
+				// chart of customer have many project
+				for(var k = 0; k < c.length; k++){
+					var b = c[k];
+					// console.log(b)
 
-				Donut3D.draw("salesDonut", randomData(), 150, y, 130, 100, 30, 0.4);
-				// Donut3D.draw("quotesDonut", randomData(), 150, y+250, 130, 100, 30, 0);
-				// Donut3D.draw("a", randomData(), 150, y+500, 130, 100, 30, 0);
+					var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
+					var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
+					if(b){
+						for(var i=0; i<b.length; i++)  {
+						    data2.push({label: label[i], value: b[i], color: color[i]});
+						}
 
-				function randomData(){
-				
-					return data2.map(function(d){ 
-						return {label:d.label, value:d.value, color:d.color};});
-						// return {label:d.label, value:getData(), color:d.color};});
-				}
-				
+					}
+					else{
+						for(var i=0; i<will.length; i++)  {
+						    data2.push({label: label[i], value: will[i], color: color[i]});
+						}
+					}
 
-				var x = document.getElementById("chart");
+					Donut3D.draw("salesDonut1", randomData(), 150, y, 130, 100, 30, 0.4);
+					Donut3D.draw("salesDonut2", randomData(), 150, y, 130, 100, 30, 0.4);
+					y = y + 250;
+					value_count = y;
 
-				if(id){
-					if(data2.length > 0){
-						x.style.display = "block";
-						Donut3D.transition("salesDonut", randomData(), 130, 100, 30, 0.4);
-						// Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0);
-						// Donut3D.transition("a", randomData(), 130, 100, 30, 0);
+					var x = document.getElementById("chart");
+
+					if(id){
+						if(data2.length > 0){
+							var i = 1;
+							x.style.display = "block";
+							Donut3D.transition("salesDonut"+i, randomData(), 130, 100, 30, 0.4);
+							data2 = [];
+							i++;
+						}
+						else{
+							x.style.display = "none";
+						}
 					}
 					else{
 						x.style.display = "none";
 					}
 				}
-				else{
-					x.style.display = "none";
+				y = 150;
+				// xet lai toa do y cua chart
+				if(count > 0){
+					z = value_count;
+				}else{
+					z = 150;
 				}
+				
+				// chart of customer have 1 project or project last of customer have many project
+				var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
+				var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
+				console.log(will)
+				if(will){
+					for(var i=0; i<will.length; i++)  {
+					    data2.push({label: label[i], value: will[i], color: color[i]});
+					}
+					Donut3D.draw("quotesDonut", randomData(), 150, z, 130, 100, 30, 0.4);
+				}
+
+				var x = document.getElementById("chart");
+
+					if(id){
+						if(data2.length > 0){
+							x.style.display = "block";
+							Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0.4);
+							// Donut3D.transition("a", randomData(), 130, 100, 30, 0);
+						}
+						else{
+							x.style.display = "none";
+						}
+					}
+					else{
+						x.style.display = "none";
+					}
+
+				function randomData(){
+					return data2.map(function(d){ 
+						return {label:d.label, value:d.value, color:d.color};});
+						// return {label:d.label, value:getData(), color:d.color};});
+				}
+
 			}
 		})
-    });
+	}
+  //   $("#sel1").change(function(){
+  //   	$('#chart svg').remove();
+  //   	var svg = d3.select(".chart").append("svg").attr("width",700).attr("height",850);
+
+		// svg.append("g").attr("id","salesDonut1");
+		// svg.append("g").attr("id","salesDonut2");
+		// svg.append("g").attr("id","quotesDonut");
+  //   	var data2 = [];
+  //   	var data3 = [];
+  //   	var datatest = [];
+  //       var e = document.getElementById("sel1");
+		// var id = e.options[e.selectedIndex].value;
+		// var name = e.options[e.selectedIndex].text;
+		// var from = $('#from').val();
+  // 		var to = $('#to').val();
+  // 		var project_temp = 0;
+  // 		var will = [];
+  // 		var a;
+  // 		var c = [];
+  // 		var count = 0;
+  // 		var value_count;
+		// // alert(from + "    " + to)
+
+		// $.ajax({
+		// 	type : 'get',
+		// 	url : 'admin/report_chart/getchart',
+		// 	data : {'id':id,'from':from,'to':to},
+		// 	success:function(data){
+		// 		// console.log(data)
+
+		// 		data.forEach(function(element) {
+		// 			var project_id = element.project_id;
+		// 		    // console.log(element.project_id + '  ' + element.lastname + '  ' + element.time);
+
+		// 		    if(project_id == project_temp){
+		// 		    	// alert(project_id+'hay lam'+project_temp)
+		// 		    	will.push(element.time);
+		// 		    }
+		// 		    else{
+		// 		    	if(will.length == 0){
+		// 		    		// alert('lan dau')
+		// 		    		project_temp = project_id;
+		// 		    		will.push(element.time);
+		// 		    	}
+		// 		    	else{
+		// 		    		count++;
+		// 		    		// console.log(will)
+		// 		    		a = will;
+		// 		    		c.push(will);
+		// 		    		will = [];
+		// 			    	// alert('lan sau'+project_id+'khac'+project_temp)
+		// 			    	project_temp = project_id;  
+		// 			    	will.push(element.time);
+
+		// 		    	}
+		// 		    }
+		// 		});
+
+		// 		// chart of customer have many project
+		// 		for(var k = 0; k < c.length; k++){
+		// 			var b = c[k];
+		// 			// console.log(b)
+
+		// 			var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
+		// 			var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
+		// 			if(b){
+		// 				for(var i=0; i<b.length; i++)  {
+		// 				    data2.push({label: label[i], value: b[i], color: color[i]});
+		// 				}
+
+		// 			}
+		// 			else{
+		// 				for(var i=0; i<will.length; i++)  {
+		// 				    data2.push({label: label[i], value: will[i], color: color[i]});
+		// 				}
+		// 			}
+
+		// 			Donut3D.draw("salesDonut1", randomData(), 150, y, 130, 100, 30, 0.4);
+		// 			Donut3D.draw("salesDonut2", randomData(), 150, y, 130, 100, 30, 0.4);
+		// 			y = y + 250;
+		// 			value_count = y;
+
+		// 			var x = document.getElementById("chart");
+
+		// 			if(id){
+		// 				if(data2.length > 0){
+		// 					var i = 1;
+		// 					x.style.display = "block";
+		// 					Donut3D.transition("salesDonut"+i, randomData(), 130, 100, 30, 0.4);
+		// 					data2 = [];
+		// 					i++;
+		// 				}
+		// 				else{
+		// 					x.style.display = "none";
+		// 				}
+		// 			}
+		// 			else{
+		// 				x.style.display = "none";
+		// 			}
+		// 		}
+		// 		y = 150;
+		// 		// xet lai toa do y cua chart
+		// 		if(count > 0){
+		// 			z = value_count;
+		// 		}else{
+		// 			z = 150;
+		// 		}
+				
+		// 		// chart of customer have 1 project or project last of customer have many project
+		// 		var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
+		// 		var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
+		// 		if(will){
+		// 			for(var i=0; i<will.length; i++)  {
+		// 			    data2.push({label: label[i], value: will[i], color: color[i]});
+		// 			}
+		// 			Donut3D.draw("quotesDonut", randomData(), 150, z, 130, 100, 30, 0.4);
+		// 		}
+
+		// 		var x = document.getElementById("chart");
+
+		// 			if(id){
+		// 				if(data2.length > 0){
+		// 					x.style.display = "block";
+		// 					Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0.4);
+		// 					// Donut3D.transition("a", randomData(), 130, 100, 30, 0);
+		// 				}
+		// 				else{
+		// 					x.style.display = "none";
+		// 				}
+		// 			}
+		// 			else{
+		// 				x.style.display = "none";
+		// 			}
+
+		// 		function randomData(){
+		// 			return data2.map(function(d){ 
+		// 				return {label:d.label, value:d.value, color:d.color};});
+		// 				// return {label:d.label, value:getData(), color:d.color};});
+		// 		}
+
+		// 	}
+		// })
+  //   });
 
 </script>
 	

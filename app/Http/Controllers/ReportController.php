@@ -149,7 +149,7 @@ class ReportController extends Controller
                             projects.id as project_id,
                             users.firstname as firstname,
                             users.lastname as lastname,
-                            time_entries.working_time + time_entries.overtime as time"))
+                            (SUM(time_entries.working_time) + SUM(time_entries.overtime)) as time"))
                         ->where('customers.id','=',$request->id)
                         ->whereDate("time_entries.date_time_entries",">=",$request->from)
                         ->whereDate("time_entries.date_time_entries","<=",$request->to)

@@ -1,11 +1,11 @@
 <table class="table table-hover table-striped table-condensed" id="report_info">
-	<thead style="background: #ccefff; font-size: 15px;">
+	<thead>
 		<tr>
-			<th style="width: 35%;">Customer Name</th>
+			<th class="th_name">Customer Name</th>
 			<th>Project</th>
 			<th>Username</th>
-			<th style="text-align: center; width: 10%;">Time</th>
-			<th style="text-align: center; width: 10%;">Total Time</th>
+			<th class="th_center">Time</th>
+			<th class="th_center">Total Time</th>
 		</tr>
 	</thead>
 
@@ -15,10 +15,10 @@
 				<td>{{ $value->customer_name }}</td>
 				<td class="projects_name">{{ $value->projects_name }}</td>
 				<td>{{ $value->firstname }} {{ $value->lastname }}</td>
-				<td style="text-align: center;"> {{ $value->total_working_time}} </td>
+				<td class="total_working_time"> {{ $value->total_working_time}} </td>
 				@foreach($report2 as $key2 => $value2)
 					@if($value->ID == $value2->customers_ID)
-						<td style="text-align: center; color:#3333ff; font-weight: bold;">{{ $value2->total_time }}</td>
+						<td class="total_time">{{ $value2->total_time }}</td>
 					@endif
 				@endforeach
 			</tr>
@@ -26,7 +26,27 @@
 	</tbody>
 </table>
 
-
+<style type="text/css">
+	.total_time{
+		text-align: center; 
+		color:#3333ff; 
+		font-weight: bold;
+	}
+	.total_working_time{
+		text-align: center;
+	}
+	.th_center{
+		text-align: center; 
+		width: 10%;
+	}
+	.th_name{
+		width: 35%;
+	}
+	thead{
+		background: #ccefff; 
+		font-size: 15px;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
