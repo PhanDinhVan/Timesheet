@@ -1,7 +1,33 @@
 @extends('admin.layout.index')
 @section('content')
 
-
+<style type="text/css">
+    .page-header{
+        margin: 0px;
+    }
+    .from{
+        width: 50%;
+    }
+    .to{
+        width: 50%; margin-left: 5%;
+    }
+    .panel-body{
+        padding-bottom: 4px;
+    }
+    .user{
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .div_select{
+        width: auto; 
+        float: left; 
+        margin-right:1%;
+    }
+    .show-report-info{
+        margin-top: 2%;
+    }
+</style>
 
 <!-- Page Content --> 
     
@@ -11,7 +37,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 style="margin: 0px;" class="page-header">Report
+                    <h1 class="page-header">Report
                         <small>User</small>
                     </h1>
                 </div>
@@ -39,21 +65,21 @@
             			<tr>
             				<td><b>From </b></td>
             				<td>
-            					<input type="text" name="from" id="from" class="form-control" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" style="width: 50%;">
+            					<input type="text" name="from" id="from" class="form-control from" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" >
             				</td>
             				<!-- <td style="width: 5%;"></td> -->
             				<td><b>To </b></td>
             				<td>
-            					<input type="text" name="to" id="to" class="form-control" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" style="width: 50%; margin-left: 5%;">
+            					<input type="text" name="to" id="to" class="form-control to" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" >
             				</td>
             			</tr>
             		</table>
             	</div>
-            	<div class="panel-body" style="padding-bottom: 4px;">
-            		<p style="text-align: center;font-size: 20px;font-weight: bold;">Users Report</p>
+            	<div class="panel-body">
+            		<p class="user">Users Report</p>
             		
             		<form action="admin/report/showReport" method="post" id="framework_form">
-					    <div class="form-group" style="width: auto; float: left; margin-right:1%;">
+					    <div class="form-group div_select">
 					     	<label>Select </label>
 					    	<select id="framework" name="framework[]" multiple class="form-control">
 					    		<!-- <input type="checkbox" name="changePassword" id="all2"> -->
@@ -72,7 +98,7 @@
 					</form>
 
             	</div>
-            	<div class="show-report-info" style="margin-top: 2%;">
+            	<div class="show-report-info">
             		
             	</div>
             	

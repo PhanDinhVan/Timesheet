@@ -107,7 +107,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	Route::group(['prefix'=>'report_chart'],function(){
 		Route::get('chart_customer','ReportController@getChartCustomer');
 		Route::get('chart_user','ReportController@getChartUser');
-		Route::get('getchart','ReportController@getDrawChart');
+		Route::get('getchart','ReportController@getDrawChartCustomer');
 	});
 });
 

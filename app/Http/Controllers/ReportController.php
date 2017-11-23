@@ -38,6 +38,7 @@ class ReportController extends Controller
     	$report = $this->reportInfo()
     	->select(DB::raw("projects.name, 
     					tasks.taskname,
+                        customers.name as customer_name,
     					users.id as ID,
     					(CONCAT(CASE WHEN FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60) < 10 THEN '0' ELSE '' END,
     						FLOOR((SUM(time_entries.working_time)+SUM(time_entries.overtime))/60),':',CASE WHEN MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60) < 10 THEN '0' ELSE '' END,MOD((SUM(time_entries.working_time)+SUM(time_entries.overtime)),60))) as total_working_time,
@@ -46,7 +47,7 @@ class ReportController extends Controller
     	->whereIn('users.id', $request->user_id)
     	->whereDate("time_entries.date_time_entries",">=",$request->from)
     	->whereDate("time_entries.date_time_entries","<=",$request->to)
-    	->groupBy('users.id')->groupBy('projects.name')
+    	->groupBy('users.id')->groupBy('customers.id')->groupBy('projects.name')
     	->get();
 
     	$report2 = $this->reportInfo()
@@ -69,7 +70,8 @@ class ReportController extends Controller
     public function reportInfo(){
     	return Timesheet::join('tasks','tasks.id','=','time_entries.task_id')
   					->join('projects','projects.id','=','tasks.project_id')
-  					->join('users','users.id','=','time_entries.user_id');
+  					->join('users','users.id','=','time_entries.user_id')
+                    ->join('customers','customers.id','=','projects.customer_id');
     }
 
     public function getCustomerReport(){
@@ -139,10 +141,8 @@ class ReportController extends Controller
         return view('admin.report_chart.chart_user');
     }
 
-    public function getDrawChart(Request $request){
-        $data = Customer::join('projects','projects.customer_id','=','customers.id')
-                        ->join('time_entries','time_entries.project_id','=','projects.id')
-                        ->join('users','users.id','=','time_entries.user_id')
+    public function getDrawChartCustomer(Request $request){
+        $data = $this->reportInfoCustomer()
                         ->select(DB::raw(
                             "customers.name as customer_name,
                             projects.name as project_name,
