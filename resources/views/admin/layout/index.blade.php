@@ -125,15 +125,15 @@
 
     <!-- Custom Theme Scripts -->
     <script src="admin_asset/build/js/custom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+    <script src="js/datetimepicker/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="css/datetimepicker/bootstrap-datepicker.css" />
     <!-- jQuery hien thi next-, pre khi tra ve compact or reponse -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <!-- multiselect -->
+    <script src="js/multiselect/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/multiselect/bootstrap-multiselect.css" />
 
     @yield('script')
     

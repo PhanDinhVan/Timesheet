@@ -2,45 +2,36 @@
 @section('content')
 
 <style>
-	.chart {
-	  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	  width: 30%;
-	  height: auto;
-	  position: relative;
-	  display: none;
-	}
-	path.slice{
-		stroke-width:2px;
-	}
-	polyline{
-		opacity: .3;
-		stroke: black;
-		stroke-width: 2px;
-		fill: none;
-	} 
-	svg text.percent{
-		fill:white;
-		text-anchor:middle;
-		font-size:12px;
-	}
-	label{
-	    float: left;
-	    margin-right: 1%;
-	    margin-top: 0.5%;
-	}
-	#sel1{
-		width: 20%;
-		float: left;
-	}
-	button{
-		margin-left: 5%;
-	}
-	.date{
-		width: 50%; 
-		margin-left: 5%;
-	}
+    .chart {
+        height: 300px;
+        margin: 0 auto;                            
+        position: relative;
+        width: 300px;
+    }
+    label{
+        float: left;
+        margin-right: 1%;
+        margin-top: 0.5%;
+    }
+    #sel1{
+        width: 20%;
+        float: left;
+    }
+    .btn-info{
+        margin-left: 5%;
+    }
+    .date{
+        width: 50%; 
+        margin-left: 5%;
+    }
+    .show-report-info{
+        text-align: center;
+        "margin-top: 2%;
+    }
+    .panel-body{
+        padding-bottom: 4px;
+    }
 </style>
-
 
 <div class="right_col" role="main">
       <!-- top tiles -->
@@ -78,7 +69,7 @@
             			</tr>
             		</table>
             	</div>
-            	<div class="panel-body" style="padding-bottom: 4px;">
+            	<div class="panel-body">
             		
                 	<label>Select customer</label>
 			      	<select class="form-control" id="sel1">
@@ -88,14 +79,12 @@
 			        	@endforeach
 			      	</select>
 			      	<button onClick="changeData()" class="btn btn-info">Go <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                	<div class="chart" id="chart">
-                		
-                	</div>
-                	
             	</div>
-            	<div class="show-report-info" style="margin-top: 2%;">
-            		
+                
+            	<div class="show-report-info">
+            		 <div class ="chart" id="chart"></div>
             	</div>
+
             	
             </div>
         </div>
@@ -109,24 +98,24 @@
 
 @section('script')
 
+<script src="js/d3js/d3.js"></script>
+<script src="js/d3js/d3plus.js"></script>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="js/donut3D/Donut3D.js"></script>
 <script>
 
-	$('#from').datepicker({
-		changeMonth:true,
-		changeYear:true,
-		format:'yyyy-mm-dd'
-	});
+    $('#from').datepicker({
+        changeMonth:true,
+        changeYear:true,
+        format:'yyyy-mm-dd'
+    });
 
-	$('#to').datepicker({
-		changeMonth:true,
-		changeYear:true,
-		format:'yyyy-mm-dd'
-	});
+    $('#to').datepicker({
+        changeMonth:true,
+        changeYear:true,
+        format:'yyyy-mm-dd'
+    });
 
-	$(document).ready(function(){
+    $(document).ready(function(){
         $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,182 +123,202 @@
         });
     });
 
-
-	var y = 150;
-	var z = 150;
-	var width = 400;
-	var height = 850;
-
-	function changeData(){
-		$('#chart svg').remove();
-    	var svg = d3.select(".chart").append("svg").attr("width",width).attr("height",height);
-
-		svg.append("g").attr("id","salesDonut1");
-		svg.append("g").attr("id","salesDonut2");
-		svg.append("g").attr("id","salesDonut3");
-		svg.append("g").attr("id","salesDonut4");
-		svg.append("g").attr("id","salesDonut5");
-		svg.append("g").attr("id","salesDonut6");
-		svg.append("g").attr("id","quotesDonut");
-
-		var data2 = [];
-    	var datatest = [];
+    function changeData(){
+        document.getElementById("chart").innerHTML = "";
         var e = document.getElementById("sel1");
-		var id = e.options[e.selectedIndex].value;
-		var name = e.options[e.selectedIndex].text;
-		var from = $('#from').val();
-  		var to = $('#to').val();
-  		var project_temp = 0;
-  		// use get list time (a,c,will)
-  		var a;
-  		var c = [];
-  		var will = [];
-  		// use get list last name (a1,c1,will1)
-  		var a1;
-  		var c1 = [];
-  		var will1 = [];
-  		var count = 0;
-  		var value_count;
-		// alert(from + "    " + to)
+        var id = e.options[e.selectedIndex].value;
+        var name = e.options[e.selectedIndex].text;
+        var from = $('#from').val();
+        var to = $('#to').val();
 
-		if(id){
-			$.ajax({
-				type : 'get',
-				url : 'admin/report_chart/getchart',
-				data : {'id':id,'from':from,'to':to},
-				success:function(data){
-					// console.log(data)
-
-					data.forEach(function(element) {
-						var project_id = element.project_id;
-					    // console.log(element.project_id + '  ' + element.lastname + '  ' + element.time);
-
-					    if(project_id == project_temp){
-					    	// alert(project_id+'hay lam'+project_temp)
-					    	will.push(element.time);
-					    	will1.push(element.lastname);
-					    }
-					    else{
-					    	if(will.length == 0){
-					    		// alert('lan dau')
-					    		project_temp = project_id;
-					    		will.push(element.time);
-					    		will1.push(element.lastname);
-					    	}
-					    	else{
-					    		count++;
-					    		// console.log(will)
-					    		a = will;
-					    		a1 = will1;
-					    		c.push(will);
-					    		c1.push(will1);
-					    		will = [];
-					    		will1 = [];
-						    	// alert('lan sau'+project_id+'khac'+project_temp)
-						    	project_temp = project_id;  
-						    	will.push(element.time);
-						    	will1.push(element.lastname);
-					    	}
-					    }
-					});
-
-					// chart of customer have many project
-					for(var k = 0; k < c.length; k++){
-						var b = c[k];
-						var label = c1[k];
-						// console.log(b)
-
-						// var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
-						var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
-						if(b){
-							for(var i=0; i<b.length; i++)  {
-							    data2.push({label: label[i], value: b[i], color: color[i]});
-							}
-						}
-						else{
-							for(var i=0; i<will.length; i++)  {
-							    data2.push({label: label[i], value: will[i], color: color[i]});
-							}
-						}
-
-						Donut3D.draw("salesDonut1", randomData(), 150, y, 130, 100, 30, 0);
-						Donut3D.draw("salesDonut2", randomData(), 150, y, 130, 100, 30, 0);
-						Donut3D.draw("salesDonut3", randomData(), 150, y, 130, 100, 30, 0);
-						Donut3D.draw("salesDonut4", randomData(), 150, y, 130, 100, 30, 0);
-						Donut3D.draw("salesDonut5", randomData(), 150, y, 130, 100, 30, 0);
-						Donut3D.draw("salesDonut6", randomData(), 150, y, 130, 100, 30, 0);
-						y = y + 250;
-						value_count = y;
-
-						var x = document.getElementById("chart");
-
-						if(id){
-							if(data2.length > 0){
-								var i = 1;
-								x.style.display = "block";
-								Donut3D.transition("salesDonut"+i, randomData(), 130, 100, 30, 0);
-								data2 = [];
-								i++;
-							}
-							else{
-								x.style.display = "none";
-							}
-						}
-						else{
-							x.style.display = "none";
-						}
-					}
+        var project_temp = 0;
+        // use get list time (a,c,will)
+        var a;
+        var c = [];
+        var will = [];
+        var a1;
+        var c1 = [];
+        var will1 = [];
+        var count = 0;
+        var data2 = [];
 
 
-					y = 150;
-					// xet lai toa do y cua chart
-					if(count > 0){
-						z = value_count;
-					}else{
-						z = 150;
-					}
-					
-					// chart of customer have 1 project or project last of customer have many project
-					// var label = ["Basic","Plus","Lite","Elite","Delux","Will","Philippe"];
-					var color = ["#3366CC","#DC3912","#FF9900","#109618","#990099","#66b3ff","#ff1a75"];
-					// console.log(will)
-					if(will){
-						for(var i=0; i<will.length; i++)  {
-						    data2.push({label: will1[i], value: will[i], color: color[i]});
-						}
-						
-						Donut3D.draw("quotesDonut", randomData(), 150, z, 130, 100, 30, 0);
-					}
+        if(id){
+            $.ajax({
+                type : 'get',
+                url : 'admin/report_chart/getchart',
+                data : {'id':id,'from':from,'to':to},
+                success:function(data){
+                    // console.log(data)
+                    data.forEach(function(element) {
+                        var project_id = element.project_id;
+                        // console.log(element.project_id + '  ' + element.lastname + '  ' + element.time);
+                        var time = parseInt(element.time);
+                        if(project_id == project_temp){
+                            // alert(project_id+'hay lam'+project_temp)
+                            will.push(time);
+                            will1.push(element.lastname);
+                        }
+                        else{
+                            if(will.length == 0){
+                                // alert('lan dau')
+                                project_temp = project_id;
+                                will.push(time);
+                                will1.push(element.lastname);
+                            }
+                            else{
+                                count++;
+                                // console.log(will)
+                                a = will;
+                                c.push(will);
+                                will = [];
 
-					var x = document.getElementById("chart");
+                                a1 = will1;
+                                c1.push(will1);
+                                will1 = [];
+                                // alert('lan sau'+project_id+'khac'+project_temp)
+                                project_temp = project_id;  
+                                will.push(time);
+                                will1.push(element.lastname);
+                            }
+                        }
+                    });
 
-						if(id){
-							if(data2.length > 0){
-								x.style.display = "block";
-								Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0);
-								// Donut3D.transition("a", randomData(), 130, 100, 30, 0);
-							}
-							else{
-								x.style.display = "none";
-							}
-						}
-						else{
-							x.style.display = "none";
-						}
+                    //------------- Begin for -------------------
+                    for(var k = 0; k < c.length; k++){
+                        var b = c[k];
+                        var label = c1[k];
+                        // console.log(b)
 
-					function randomData(){
-						return data2.map(function(d){ 
-							return {label:d.label, value:d.value, color:d.color};});
-							// return {label:d.label, value:getData(), color:d.color};});
-					}
-				}
-			})
-		}
-		else{
-			alert("Please select customer name!");
-		}
-	}
+                        if(b){
+                            for(var i=0; i<b.length; i++)  {
+                                data2.push({minutes: b[i], lastname: label[i]});
+                            }
+                        }
 
+                        if(id){
+                            if(data2.length > 0){
+                                var i = 1;
+                                d3plus.viz()
+                                    .container(".chart")
+                                    .data(data2)
+                                    .type("pie")
+                                    .id("lastname")
+                                    .size("minutes")
+                                    .format({
+                                        "text": function(text, params) {
+                                            
+                                            if (text === "minutes") {
+                                                return "Time Working";
+                                            }
+                                            else {
+                                                return d3plus.string.title(text, params);
+                                            }
+                                            
+                                        },
+                                            "number": function(number, params) {
+                                            
+                                            var formatted = d3plus.number.format(number, params);
+                                            var time = params.data.minutes;
+                                            // console.log(time)
+                                            var day = Math.floor(time/480);
+                                            var time_surplus = time%480;
+                                            var hours = Math.floor(time_surplus/60);
+                                            var minutes = time_surplus%60;
+
+                                            if(minutes < 10){
+                                                minutes = '0'+minutes;
+                                            }
+
+                                            time_working = day + ' days' + ' - ' + '0'+hours + ' : ' + minutes;
+
+                                            if (params.key === "minutes") {
+                                                return time_working;
+                                            }
+                                            else {
+                                                return formatted;
+                                            }
+                                            
+                                        }
+                                    })
+                                    .draw()
+
+                                data2 = [];
+
+                            }
+                            else{
+                                x.style.display = "none";
+                            }
+                        }
+                        else{
+                            x.style.display = "none";
+                        }
+                    }
+                    //------------- Finish for -------------------
+
+                    if(will){
+                        for(var i=0; i<will.length; i++)  {
+                            data2.push({minutes: will[i], lastname: will1[i], name:'name'});
+                        }
+
+                        // format rat quan trong, no dung de thay doi lai dinh dang cua value
+                        d3plus.viz()
+                            .container(".chart")
+                            .data(data2)
+                            .type("pie")
+                            .id("lastname")
+                            // .color("lastname")
+                            // .legend({"size": 40})
+                            .size("minutes")
+                            .format({
+                                "text": function(text, params) {
+                                    
+                                    if (text === "minutes") {
+                                        return "Time Working";
+                                    }
+                                    else {
+                                        return d3plus.string.title(text, params);
+                                    }
+                                    
+                                },
+                                    "number": function(number, params) {
+                                    
+                                    var formatted = d3plus.number.format(number, params);
+                                    var time = params.data.minutes;
+                                    // console.log(time)
+                                    var day = Math.floor(time/480);
+                                    var time_surplus = time%480;
+                                    var hours = Math.floor(time_surplus/60);
+                                    var minutes = time_surplus%60;
+
+                                    if(minutes < 10){
+                                        minutes = '0'+minutes;
+                                    }
+
+                                    time_working = day + ' days' + ' - ' + '0'+hours + ' : ' + minutes;
+
+                                    if (params.key === "minutes") {
+                                        // return "$" + formatted + " USD";
+                                        return time_working;
+                                    }
+                                    else {
+                                        return formatted;
+                                    }
+                                    
+                                }
+                            })
+                            .draw()
+                    }
+
+
+                }
+            })
+        }
+        else{
+            alert("Please select customer name!");
+        }
+        
+    }
 </script>
 	
 @endsection
