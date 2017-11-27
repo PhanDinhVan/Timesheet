@@ -1,6 +1,38 @@
 @extends('admin.layout.index')
 @section('content')
 
+<style>
+    .chart {
+        height: 300px;
+        margin: 0 auto;                            
+        position: relative;
+        width: 300px;
+    }
+    label{
+        float: left;
+        margin-right: 1%;
+        margin-top: 0.5%;
+    }
+    #sel1{
+        width: 20%;
+        float: left;
+    }
+    .btn-info{
+        margin-left: 5%;
+    }
+    .date{
+        width: 50%; 
+        margin-left: 5%;
+    }
+    .show-report-info{
+        text-align: center;
+        margin-top: 2%;
+    }
+    .panel-body{
+        padding-bottom: 4px;
+    }
+</style>
+
 <div class="right_col" role="main">
       <!-- top tiles -->
      <div id="page-wrapper">
@@ -12,12 +44,45 @@
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
+                <div class="col-lg-7">
                         
                 </div>
-               <div id="chart"></div>
             </div>
             <!-- /.row -->
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <table>
+                  <tr>
+                    <td><b>From </b></td>
+                    <td>
+                      <input type="text" name="from" id="from" class="form-control date" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}">
+                    </td>
+                    <td><b>To </b></td>
+                    <td>
+                      <input type="text" name="to" id="to" class="form-control date" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="panel-body">
+                <label>Select users</label>
+                <select class="form-control" id="sel1">
+                  <option></option>
+                  @foreach($user as $value)
+                    <option value="{{ $value->id }}">{{ $value->firstname }} {{ $value->lastname }}</option>
+                  @endforeach
+                </select>
+                <button onClick="changeData()" class="btn btn-info">Go <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+              </div>
+                
+              <div class="show-report-info">
+                 <div class ="chart" id="chart"></div>
+              </div>
+
+              
+            </div>
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -28,162 +93,121 @@
 @endsection
 
 @section('script')
-	
-    
-    <meta charset="utf-8" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" rel="stylesheet" data-semver="3.0.1" data-require="normalize@*" />
   
-  
- 
-  
-<style>
-  .legend {
-    font-size: 13px;
-  }
-  h1 {
-  font-size: 15px;
-  text-align: center;
+<script src="js/d3js/d3.js"></script>
+<script src="js/d3js/d3plus.js"></script>
+
+<script type="text/javascript">
+  $('#from').datepicker({
+        changeMonth:true,
+        changeYear:true,
+        format:'yyyy-mm-dd'
+    });
+
+    $('#to').datepicker({
+        changeMonth:true,
+        changeYear:true,
+        format:'yyyy-mm-dd'
+    });
+
+    $(document).ready(function(){
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+    });
+
+    function changeData(){
+        document.getElementById("chart").innerHTML = "";
+        var e = document.getElementById("sel1");
+        var id = e.options[e.selectedIndex].value;
+        var name = e.options[e.selectedIndex].text;
+        var from = $('#from').val();
+        var to = $('#to').val();
+        var project_Name = [];
+        var time_Working = [];
+        var data2 = [];
+
+
+        if(id){
+            $.ajax({
+                type : 'get',
+                url : 'admin/report_chart/getchartUsers',
+                data : {'id':id,'from':from,'to':to},
+                success:function(data){
+                    // console.log(data)
+                    data.forEach(function(element) {
+                        // var project_id = element.project_id;
+                        var time = parseInt(element.time);
+                        var user_id = element.user_id;
+                        // console.log(element.project_name + '  ' + element.time);
+                        if(user_id){
+                          time_Working.push(time);
+                          project_Name.push(element.project_name);
+                        }
+                    });
+                    console.log(time_Working)
+
+                    if(project_Name){
+                        for(var i=0; i<project_Name.length; i++)  {
+                            data2.push({minutes: time_Working[i], project_name: project_Name[i]});
+                        }
+
+                        d3plus.viz()
+                                    .container(".chart")
+                                    .data(data2)
+                                    .type("pie")
+                                    .id("project_name")
+                                    .size("minutes")
+                                    .format({
+                                        "text": function(text, params) {
+                                            
+                                            if (text === "minutes") {
+                                                return "Time Working";
+                                            }
+                                            else {
+                                                return d3plus.string.title(text, params);
+                                            }
+                                            
+                                        },
+                                            "number": function(number, params) {
+                                            
+                                            var formatted = d3plus.number.format(number, params);
+                                            var time = params.data.minutes;
+                                            // console.log(time)
+                                            var day = Math.floor(time/480);
+                                            var time_surplus = time%480;
+                                            var hours = Math.floor(time_surplus/60);
+                                            var minutes = time_surplus%60;
+
+                                            if(minutes < 10){
+                                                minutes = '0'+minutes;
+                                            }
+
+                                            time_working = day + ' days' + ' - ' + '0'+hours + ' : ' + minutes;
+
+                                            if (params.key === "minutes") {
+                                                return time_working;
+                                            }
+                                            else {
+                                                return formatted;
+                                            }
+                                            
+                                        }
+                                    })
+                                    .draw()
+                    }
+
+                }
+            })
+        }
+        else{
+            alert("Please select customer name!");
+        }
+        
     }
-  rect {
-    stroke-width: 2;
-  }
-  #chart {
-  height: 360px;
-  margin: 0 auto;                            
-  position: relative;
-  width: 360px;
-    }
-  .tooltip {
-  box-shadow: 0 0 5px #999999;
-  display: none;
-  font-size: 12px;
-  left: 130px;
-  padding: 10px;
-  position: absolute;
-  text-align: center;
-  top: 95px;
-  width: 80px;
-  z-index: 10;
-  line-height: 140%; /*Interlineado*/
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
-    }
-  
-  .label {
-   font-weight: 600;
-  }
-</style>:
-  
-  
-    
-    <script data-require="d3@*" data-semver="4.0.0" src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
-      (function(d3) {
-        'use strict';
-        
-var tooltip = d3.select('#chart')            
-  .append('div')                             
-  .attr('class', 'tooltip');                 
-
-tooltip.append('div')                        
-  .attr('class', 'label');                   
-
-tooltip.append('div')                        
-  .attr('class', 'count');                   
-
-tooltip.append('div')                        
-  .attr('class', 'percent');                 
-
-        var dataset = [
-          {sala: "Lactantes", value: 74},
-            {sala: "Deambuladores", value: 85},
-            {sala: "2 años", value: 840},
-              {sala: "Primera sección", value: 4579},   
-              {sala: "Segunda sección", value: 5472},
-              {sala: "Tercera sección", value: 7321},
-        ];
-
-        var width = 360;
-        var height = 360;
-        var radius = Math.min(width, height) / 2;
-
-        var color = d3.scaleOrdinal(d3.schemeCategory20c);
-
-        var svg = d3.select('#chart')
-          .append('svg')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) + 
-            ',' + (height / 2) + ')');
-        
-        var donutWidth = 75;
-
-        var arc = d3.arc()
-          .innerRadius(radius - donutWidth)
-          .outerRadius(radius);
-
-        var pie = d3.pie()
-          .value(function(d) { return d.value; })
-          .sort(null);
-
-        var legendRectSize = 18;
-                var legendSpacing = 4;
-        
-        var path = svg.selectAll('path')
-          .data(pie(dataset))
-          .enter()
-          .append('path')
-          .attr('d', arc)
-          .attr('fill', function(d, i) { 
-            return color(d.data.sala);
-          
-          });
-        
-        path.on('mouseover', function(d) {
-  var total = d3.sum(dataset.map(function(d) {
-    return d.value;
-  }));
-  var percent = Math.round(1000 * d.data.value / total) / 10;
-  tooltip.select('.label').html(d.data.sala);
-  tooltip.select('.count').html(d.data.value);
-  tooltip.select('.percent').html(percent + '%');
-  tooltip.style('display', 'block');
-});
-        
-        path.on('mouseout', function() {
-  tooltip.style('display', 'none');
-});
-          
-        var legend = svg.selectAll('.legend')
-  .data(color.domain())
-  .enter()
-  .append('g')
-  .attr('class', 'legend')
-  .attr('transform', function(d, i) {
-    var height = legendRectSize + legendSpacing;
-    var offset =  height * color.domain().length / 2;
-    var horz = -2 * legendRectSize;
-    var vert = i * height - offset;
-    return 'translate(' + horz + ',' + vert + ')';
-  });
-        
-        legend.append('rect')
-  .attr('width', legendRectSize)
-  .attr('height', legendRectSize)
-  .style('fill', color)
-  .style('stroke', color);
-        
-        legend.append('text')
-  .attr('x', legendRectSize + legendSpacing)
-  .attr('y', legendRectSize - legendSpacing)
-  .text(function(d) { return d; });
-
-      })(window.d3);
-    </script>
+</script>
 
 
 @endsection

@@ -47,7 +47,7 @@ class ReportController extends Controller
     	->whereIn('users.id', $request->user_id)
     	->whereDate("time_entries.date_time_entries",">=",$request->from)
     	->whereDate("time_entries.date_time_entries","<=",$request->to)
-    	->groupBy('users.id')->groupBy('customers.id')->groupBy('projects.name')
+    	->groupBy('users.id')->groupBy('customers.id')->groupBy('projects.id')
     	->get();
 
     	$report2 = $this->reportInfo()
@@ -138,7 +138,8 @@ class ReportController extends Controller
     }
 
     public function getChartUser(){
-        return view('admin.report_chart.chart_user');
+        $user = Users::all();
+        return view('admin.report_chart.chart_user',['user'=>$user]);
     }
 
     public function getDrawChartCustomer(Request $request){
@@ -154,6 +155,19 @@ class ReportController extends Controller
                         ->whereDate("time_entries.date_time_entries",">=",$request->from)
                         ->whereDate("time_entries.date_time_entries","<=",$request->to)
                         ->groupBy('customers.id')->groupBy('projects.id')->groupBy('users.id')
+                        ->get();
+        return $data;
+    }
+
+    public function getDrawChartUser(Request $request){
+        $data = $this->reportInfo()
+                        ->select(DB::raw("projects.name as project_name,
+                                        users.id as user_id,
+                                        (SUM(time_entries.working_time) + SUM(time_entries.overtime)) as time"))
+                        ->where('users.id','=',$request->id)
+                        ->whereDate("time_entries.date_time_entries",">=",$request->from)
+                        ->whereDate("time_entries.date_time_entries","<=",$request->to)
+                        ->groupBy('users.id')->groupBy('customers.id')->groupBy('projects.id')
                         ->get();
         return $data;
     }

@@ -77,7 +77,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <a href="http://www.amagumolabs.com/">Amagumo Labs</a> &copy; 2015 - All rights reserved 
+            <a href="http://www.amagumolabs.com/">Amagumo Labs</a> &copy; 2017 - All rights reserved 
           </div>
           <div class="clearfix"></div>
         </footer>

@@ -2,6 +2,17 @@
 
 @section('content')
 
+<style type="text/css">
+	.btn-default{
+		margin-bottom: 2%;
+	}
+	.forgot{
+		font-style: oblique;
+		text-decoration: underline;
+		color: blue;
+	}
+</style>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -38,8 +49,10 @@
 						  	<input type="password" class="form-control" placeholder="Password" name="password">
 						</div>
 						<br>
-						<button type="submit" class="btn btn-default">Login
+						<button type="submit" class="btn btn-default">Login <i class="fa fa-sign-in" aria-hidden="true"></i>
 						</button>
+						<br>
+						<a href="reset" class="forgot">Forgot Your Password?</a>
 			    	</form>
 			  	</div>
 			</div>

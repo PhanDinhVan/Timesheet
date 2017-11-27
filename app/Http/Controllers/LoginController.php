@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Users;
 use App\Employee_Types;
+use Mail;
+use App\Mail\UserEmail;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class LoginController extends Controller
@@ -118,5 +122,30 @@ class LoginController extends Controller
 
         return redirect('user/setting')->with('thongbao','You edit success');
     }
+
+    public function getResetPassword(){
+        return view('pages.forgot_password');
+    }
+
+    public function postResetPassword(){
+        // $id = 1; // điền 1 mã id bất kỳ của user trong bảng users 
+        $user = 'pdvan.it@gmail.com';
+
+        Mail::to($user)->send(new UserEmail());
+        // Mail::send(['text'=>'emails/sendemail'],['name','Admin'],function($message){
+        //     $message->to('pdvan.it@gmail.com','To Dinh Van')->subject('Test Email');
+        //     $message->from('pdvan.it@gmail.com','Phan Van');
+        // });
+        return redirect('login');
+    }
+
+    // public function sendEmailReminder(Request $request)
+    // {
+    //     $id = 1; // điền 1 mã id bất kỳ của user trong bảng users 
+    //     $user = 'pdvan.it@gmail.com';
+
+    //     Mail::to($user)->send(new UserEmail());
+    //     return redirect('login');
+    // }
 }
 

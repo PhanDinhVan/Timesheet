@@ -108,6 +108,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('chart_customer','ReportController@getChartCustomer');
 		Route::get('chart_user','ReportController@getChartUser');
 		Route::get('getchart','ReportController@getDrawChartCustomer');
+		Route::get('getchartUsers','ReportController@getDrawChartUser');
 	});
 });
 
@@ -125,6 +126,12 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
+Route::get('reset','LoginController@getResetPassword');
+Route::post('reset','LoginController@postResetPassword');
+
+
+Route::get('send','mailController@send');
+// Route::get('/send_email', array('uses' => 'LoginController@sendEmailReminder'));
 
 
 // // get task name ung voi project khi add timesheet

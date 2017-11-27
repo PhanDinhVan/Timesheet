@@ -17,6 +17,7 @@ return [
     */
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
+    // 'driver' => env('MAIL_DRIVER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -59,6 +60,10 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+    // 'from' => [
+    //     'address' => env('MAIL_FROM_ADDRESS', 'administrator@gmail.com'),// điền email gửi
+    //     'name' => env('MAIL_FROM_NAME', 'Admin'),// Điền tên người gửi
+    // ],
 
     /*
     |--------------------------------------------------------------------------

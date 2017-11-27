@@ -26,7 +26,7 @@
     }
     .show-report-info{
         text-align: center;
-        "margin-top: 2%;
+        margin-top: 2%;
     }
     .panel-body{
         padding-bottom: 4px;
@@ -39,7 +39,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 style="margin: 0px;" class="page-header">Report
+                    <h1 class="page-header">Chart report
                         <small>Customer</small>
                     </h1>
                 </div>
