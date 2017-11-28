@@ -12,7 +12,6 @@ use App\Mail\UserEmail;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-
 class LoginController extends Controller
 {
     //
@@ -132,10 +131,19 @@ class LoginController extends Controller
         $user = 'pdvan.it@gmail.com';
 
         Mail::to($user)->send(new UserEmail());
-        // Mail::send(['text'=>'emails/sendemail'],['name','Admin'],function($message){
+        // Mail::send(['text'=>'emails/sendemail'],['name','Phan Dinh Van'],function($message){
         //     $message->to('pdvan.it@gmail.com','To Dinh Van')->subject('Test Email');
         //     $message->from('pdvan.it@gmail.com','Phan Van');
         // });
+
+       /* $data = array('name'=>"Phan Dinh Van");
+   
+        Mail::send(['text'=>'emails/sendemail'], $data, function($message) {
+            $message->to('pdvan.it@gmail.com', 'To Dinh Van')->subject
+                ('Laravel Basic Testing Mail');
+            $message->from('pdvan.it@gmail.com','Phan Van');
+        });*/
+          echo "Basic Email Sent. Check your inbox.";
         return redirect('login');
     }
 
