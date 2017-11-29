@@ -128,9 +128,13 @@ Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
 Route::get('reset','LoginController@getResetPassword');
 Route::post('reset','LoginController@postResetPassword');
+Route::get('changepass','LoginController@getChangePass');
+Route::post('changepass','LoginController@postChangePass');
 
 
 Route::get('send','mailController@send');
+
+
 // Route::get('/send_email', array('uses' => 'LoginController@sendEmailReminder'));
 
 
@@ -171,3 +175,6 @@ Route::get('projectname/{project_id}','Ajax_02Controller@getProjectName');
 Route::get('readByAjax_ChangeDay','Timesheet_02Controller@readByAjax_ChangeDay');
 Route::get('project_user/{user_id}','Ajax_02Controller@getProject_User');
 Route::get('search','Timesheet_02Controller@search');  
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

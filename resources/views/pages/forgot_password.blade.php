@@ -12,6 +12,19 @@
             <div class="panel panel-default">
             	<div class="panel-heading">Forgot password</div>
             	<div class="panel-body">
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                                {{$err}} <br>
+                            @endforeach
+                        </div>
+                    @endif
+                    
+            		@if(session('thongbao'))
+                        <div class="alert alert-danger">
+                            {{session('thongbao')}}
+                        </div>
+                    @endif
             		<form action="reset" method="POST">
 			    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 						<div>

@@ -58,8 +58,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'pdvan.it@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Phan Dinh Van'),
+        'address' => env('MAIL_FROM_ADDRESS', 'timesheet.amagumo@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Philippe Nguyen'),
     ],
     // 'from' => [
     //     'address' => env('MAIL_FROM_ADDRESS', 'administrator@gmail.com'),// điền email gửi
@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', tls),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -119,19 +119,19 @@ return [
     |
     */
 
-    'stream' => [
-        'ssl' => [
-            'allow_self_signed' => true,
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
-    ],
-
     'markdown' => [
         'theme' => 'default',
 
         'paths' => [
             resource_path('views/vendor/mail'),
+        ],
+    ],
+
+    'stream' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
         ],
     ],
 

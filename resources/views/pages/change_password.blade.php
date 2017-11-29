@@ -3,13 +3,11 @@
 @section('content')
 
 <style type="text/css">
-	.btn-default{
-		margin-bottom: 2%;
+	.btn-primary{
+		float: right;
 	}
-	.forgot{
-		font-style: oblique;
-		text-decoration: underline;
-		color: blue;
+	a{
+		color: white;
 	}
 </style>
 
@@ -21,7 +19,7 @@
 		<div class="col-md-4"></div>
         <div class="col-md-4">
             <div class="panel panel-default">
-			  	<div class="panel-heading">Login</div>
+			  	<div class="panel-heading">Reset Password</div>
 			  	<div class="panel-body">
 			  		@if(count($errors) > 0)
                         <div class="alert alert-danger">
@@ -42,23 +40,23 @@
                             {{session('send')}}
                         </div>
                     @endif
-			    	<form action="login" method="POST">
+			    	<form action="changepass" method="POST">
 			    		<input type="hidden" name="_token" value="{{csrf_token()}}">
-						<div>
-			    			<label>Username</label>
-						  	<input type="email" class="form-control" placeholder="Username" name="email" 
-						  	>
-						</div>
-						<br>	
-						<div>
-			    			<label>Password</label>
-						  	<input type="password" class="form-control" placeholder="Password" name="password">
-						</div>
-						<br>
-						<button type="submit" class="btn btn-default">Login <i class="fa fa-sign-in" aria-hidden="true"></i>
-						</button>
-						<br>
-						<a href="reset" class="forgot">Forgot Your Password?</a>
+			    		<div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" type="text" name="username" readonly="" />
+                        </div>
+						<div class="form-group">
+                            <label>New password</label>
+                            <input class="form-control password" type="password" name="password" placeholder="Please enter new password" />
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <input class="form-control password" type="password" name="passwordAgain" placeholder="Please confirm your password" />
+                        </div>
+                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> <a href="login">Cancel </a></button>
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+                        
 			    	</form>
 			  	</div>
 			</div>
