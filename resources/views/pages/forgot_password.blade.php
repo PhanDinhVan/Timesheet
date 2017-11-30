@@ -25,7 +25,7 @@
                             {{session('thongbao')}}
                         </div>
                     @endif
-            		<form action="reset" method="POST">
+            		<form action="sendMail" method="POST">
 			    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 						<div>
 			    			<label>E-Mail Address</label>

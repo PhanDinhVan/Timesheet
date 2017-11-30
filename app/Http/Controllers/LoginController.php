@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Users;
 use App\Employee_Types;
-use Mail;
-use App\Mail\UserEmail;
 
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Support\Facades\Password;
 
 class LoginController extends Controller
 {
@@ -119,78 +115,7 @@ class LoginController extends Controller
         }
 
         $user->save();
-
         return redirect('user/setting')->with('thongbao','You edit success');
     }
-
-    // get form send mail when forgot password
-    public function getResetPassword(){
-        return view('pages.forgot_password');
-    }
-
-    // post form send mail when forgot password
-    public function postResetPassword(Request $request){
-
-        $this->validate($request,
-            [
-                'email'=>'required'
-            ],
-            [
-                'email.required'=>'Email is not empty'
-            ]); 
-
-        $username = $request->email;
-        $temp = Users::where('username',$username)->get();
-        
-        if(empty(count($temp))){
-
-            return redirect('reset')->with('thongbao','Username not exits!');
-        }
-        else{
-            $aaa = new UserEmail();
-
-            $aaa->y = $username;
-
-            Mail::to($username)->send($aaa);
-            // $token = $temp->id;
-            // die($temp);
-            // foreach ($temp as $value) {
-            //     $token = $value->remember_token ;
-            // }
-        
-            return redirect('login')->with('send','We have send email to you. Please check your inbox.');
-        }
-    }
-
-
-    // public function getChangePass()
-    // {
-    //     return view('pages.change_password')->with(['token' => $token, 'email' => $request->email]);
-    // }
-
-    // get change pass when send mail (forgot password)
-    public function getChangePass(){
-        return view('pages.change_password');
-    }
-
-    // // post change pass when send mail (forgot password)
-    // public function postChangePass(Request $request){
-
-    //     $this->validate($request,
-    //         [
-    //             'password'=>'required|min:3|max:32',
-    //             // same-> kiem tra passwordAgain co giong voi password
-    //             'passwordAgain'=>'required|same:password'
-    //         ],
-    //         [
-    //             'password.required'=>'Please enter your password',
-    //             'password.min'=>'Password must be at least 3 characters',
-    //             'password.max'=>'Passwords of up to 32 characters',
-    //             'passwordAgain.required'=>'Please enter your password again',
-    //             'passwordAgain.same'=>'Passwords again not like password'
-    //         ]);
-
-    // }
-
 }
 

@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('admin/login','LoginController@getLoginAdmin');
 Route::post('admin/login','LoginController@postLoginAdmin');
 Route::get('admin/logout','LoginController@getLogoutAdmin');
@@ -114,44 +115,19 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 //====================== users ============================ 
 
-// Route::group(['prefix'=>'users','middleware'=>'userLogin'],function(){
-// 	Route::get('timesheet','TimesheetController@getTimesheet');
-// 	Route::get('timesheet/{create_date}','TimesheetController@getTimesheet2');
-// 	Route::post('timesheet','TimesheetController@postAddTimesheet');
-// 	Route::get('fullcalendar','TimesheetController@getFullCalendar');
-// });
-
-
-
 Route::get('login','LoginController@getLoginUser');
 Route::post('login','LoginController@postLoginUser');
 Route::get('logout','LoginController@getLogoutUser');
-Route::get('reset','LoginController@getResetPassword');
-Route::post('reset','LoginController@postResetPassword');
-Route::get('changepass','LoginController@getChangePass');
-Route::post('changepass','LoginController@postChangePass');
+Route::get('sendMail','ForgotPasswordController@getSendMail');
+Route::post('sendMail','ForgotPasswordController@postSendMail');
+Route::get('resetPass/{token}','ResetPasswordController@getResetPass');
+Route::post('resetPass','ResetPasswordController@postResetPass');
 
 
 Route::get('send','mailController@send');
 
 
-// Route::get('/send_email', array('uses' => 'LoginController@sendEmailReminder'));
-
-
-// // get task name ung voi project khi add timesheet
-// Route::get('task/{project_id}','AjaxController@getTask');  
-// Route::get('taskname/{task_id}','AjaxController@getTaskName');
-// Route::get('projectname/{task_id}','AjaxController@getProjectName');
-// // get task name ung voi project khi edit timesheet
-// Route::get('task_edit/{project_id}','AjaxController@getTaskEdit'); 
-// // Route::get('task_edit2/{project_id}/{task_id}','AjaxController@getTaskEdit2'); 
-
-// Route::get('timesheet_edit/{id}','AjaxController@getTimesheet_Edit');
-
-// Route::get('timesheet/edit','AjaxController@getEditTimesheet');
-// Route::post('timesheet/update','AjaxController@update');
-// Route::get('tasknameEdit/{task_id}','AjaxController@getTaskNameEdit');
-// Route::post('delete','AjaxController@delete');
+// Route::get('/send_email', array('uses' => 'LoginController@sendEmailReminder')); getResetPassword
 
 
 // =============================== User lam lai ============================
@@ -175,6 +151,4 @@ Route::get('projectname/{project_id}','Ajax_02Controller@getProjectName');
 Route::get('readByAjax_ChangeDay','Timesheet_02Controller@readByAjax_ChangeDay');
 Route::get('project_user/{user_id}','Ajax_02Controller@getProject_User');
 Route::get('search','Timesheet_02Controller@search');  
-// Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');

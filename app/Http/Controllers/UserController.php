@@ -107,7 +107,7 @@ class UserController extends Controller
                 'password.min'=>'Password must be at least 3 characters',
                 'password.max'=>'Passwords of up to 32 characters',
                 'passwordAgain.required'=>'Please enter your password again',
-                'passwordAgain.same'=>'Passwords again not like password'
+                'passwordAgain.same'=>'The password confirmation does not match.'
             ]);
 
             $user->password = bcrypt($request->password);

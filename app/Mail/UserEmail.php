@@ -16,11 +16,11 @@ class UserEmail extends Mailable
      *
      * @return void
      */
-    public $y;
-    public function __construct( )
+    public $token;
+    public function __construct($token)
     {
         //
-        $this->y = $y;
+        $this->token= $token;
     }
 
     /**
@@ -30,6 +30,6 @@ class UserEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.sendemail',['y'=>$y]);
+        return $this->view('emails.sendemail');
     }
 }

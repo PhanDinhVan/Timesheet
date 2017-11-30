@@ -2,14 +2,6 @@
 
 @section('content')
 
-<style type="text/css">
-	.btn-primary{
-		float: right;
-	}
-	a{
-		color: white;
-	}
-</style>
 
 <!-- Page Content -->
 <div class="container">
@@ -40,12 +32,16 @@
                             {{session('send')}}
                         </div>
                     @endif
-			    	<form action="changepass" method="POST">
+			    	<form action="resetPass" method="POST">
 			    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 			    		<div class="form-group">
                             <label>Username</label>
-                            <input class="form-control" type="text" name="username" readonly="" />
+                            <input class="form-control" type="text" name="username" placeholder="Please enter username"/>
                         </div>
+                        @foreach($username as $value)
+                        <input class="form-control" value="{{ $value->email }}" type="hidden" name="email"/>
+                        @endforeach
+                        <input value="{{ $token }}" type="hidden" name="token"/>
 						<div class="form-group">
                             <label>New password</label>
                             <input class="form-control password" type="password" name="password" placeholder="Please enter new password" />
@@ -54,7 +50,6 @@
                             <label>Confirm password</label>
                             <input class="form-control password" type="password" name="passwordAgain" placeholder="Please confirm your password" />
                         </div>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> <a href="login">Cancel </a></button>
                         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
                         
 			    	</form>

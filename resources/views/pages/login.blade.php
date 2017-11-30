@@ -58,7 +58,7 @@
 						<button type="submit" class="btn btn-default">Login <i class="fa fa-sign-in" aria-hidden="true"></i>
 						</button>
 						<br>
-						<a href="reset" class="forgot">Forgot Your Password?</a>
+						<a href="sendMail" class="forgot">Forgot Your Password?</a>
 			    	</form>
 			  	</div>
 			</div>
