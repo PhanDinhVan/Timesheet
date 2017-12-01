@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
         
         if(empty(count($temp))){
 
-            return redirect('reset')->with('thongbao','Username not exits!');
+            return redirect('sendMail')->with('thongbao',"We can't find a user with that e-mail address.");
         }
         else{
 

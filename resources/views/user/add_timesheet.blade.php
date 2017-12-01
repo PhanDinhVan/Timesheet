@@ -1,15 +1,22 @@
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet"> -->
 <link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
 <script src="js/jquery/jquery.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
 <script src="js/datepicker/bootstrap-datepicker.js"></script>
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script> -->
 <script src="js/datepicker/moment.min.js"></script>
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet"> -->
 <link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
+
+<style type="text/css">
+  .projectname{
+    width: 40%; 
+    float: left;
+  }
+  .taskname{
+    width: 40%; 
+    float: left; 
+    margin-left: 20%;
+  }
+</style>
 
 <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -36,7 +43,7 @@
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
               
-              <div class="form-group" style="width: 40%; float: left;">
+              <div class="form-group projectname">
                   <label>Project Name</label>
                   <select class="form-control" name="project_id" id="project">
                       <!-- @foreach($task as $value)
@@ -47,7 +54,7 @@
                       @endforeach
                   </select>
               </div>
-              <div class="form-group" style="width: 40%; float: left; margin-left: 20%;">
+              <div class="form-group taskname">
                   <label>Task Name</label>
                   <select class="form-control" name="task_id" id="task">
                       <!-- @foreach($task as $value)

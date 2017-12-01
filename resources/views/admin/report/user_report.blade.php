@@ -107,6 +107,8 @@
         <!-- /.container-fluid -->
     </div>
 </div>
+
+@include('error.messages')
        
 <!-- /#page-wrapper --> 
 
@@ -172,7 +174,8 @@
 	                $('.show-report-info').html(data)
 	            });
     		}else{
-    			alert("Please select username!");
+    			// alert("Please select username!");
+                $('#select_username').modal('show');
     		}
 		}
 

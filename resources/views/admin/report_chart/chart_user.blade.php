@@ -87,6 +87,7 @@
         <!-- /.container-fluid -->
     </div>
 </div>
+@include('error.messages')
 
 
 
@@ -203,7 +204,9 @@
             })
         }
         else{
-            alert("Please select customer name!");
+
+            // alert("Please select username!");
+            $('#select_username').modal('show');
         }
         
     }

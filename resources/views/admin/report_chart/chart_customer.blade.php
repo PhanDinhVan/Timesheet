@@ -91,7 +91,7 @@
         <!-- /.container-fluid -->
     </div>
 </div>
-
+@include('error.messages')
 
 
 @endsection
@@ -100,6 +100,7 @@
 
 <script src="js/d3js/d3.js"></script>
 <script src="js/d3js/d3plus.js"></script>
+<!-- <script src="js/report/chart_customer"></script> -->
 
 <script>
 
@@ -310,12 +311,12 @@
                             .draw()
                     }
 
-
                 }
             })
         }
         else{
-            alert("Please select customer name!");
+            // alert("Please select customer name!");
+            $('#select_customer_name').modal('show');
         }
         
     }

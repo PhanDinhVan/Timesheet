@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Password_Resets;
 
 class UserEmail extends Mailable
 {
@@ -17,10 +18,15 @@ class UserEmail extends Mailable
      * @return void
      */
     public $token;
+    public $lastname;
     public function __construct($token)
     {
         //
         $this->token= $token;
+        $user = Password_Resets::join('users','users.username','=','password_resets.email')
+                                    ->select('users.lastname')
+                                    ->where('token',$token)->first();
+        $this->lastname = $user->lastname;
     }
 
     /**
@@ -30,6 +36,6 @@ class UserEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.sendemail');
+        return $this->subject('Reset Password')->view('emails.sendemail');
     }
 }

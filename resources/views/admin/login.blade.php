@@ -23,6 +23,14 @@
 
     <!-- Custom Fonts -->
     <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        #error{
+            display: none;
+        }
+        #thongbao{
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -37,15 +45,16 @@
                     </div>
                     <div class="panel-body">
                         @if(count($errors) > 0)
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error">
                                 @foreach($errors->all() as $err)
                                     {{$err}} <br>
+                                    @break
                                 @endforeach
                             </div>
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="thongbao">
                                 {{session('thongbao')}}
                             </div>
                         @endif
@@ -53,12 +62,12 @@
                             <fieldset>
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="Username" name="email" type="email" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block" >Login</button>
                             </fieldset>
                         </form>
                     </div>
@@ -66,7 +75,7 @@
             </div>
         </div>
     </div>
-
+    @include('error.messages')
     <!-- jQuery -->
     <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -78,6 +87,34 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="admin_asset/dist/js/sb-admin-2.js"></script>
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'email') {
+                $('#enter_username').modal('show');
+            }
+            else{
+                $('#enter_password').modal('show');
+            }
+        }
+
+        var thongbao = document.getElementById('thongbao');
+        if(thongbao != null) {
+            //err = document.getElementById('error').innerText;
+            var tb = $('#thongbao').text();
+            //cut space
+            tb = tb.replace(/\s+/g, '');
+            if(tb == 'incorrect') {
+                $('#incorrect').modal('show');
+            }
+        }
+        
+    </script>
 
 </body>
 

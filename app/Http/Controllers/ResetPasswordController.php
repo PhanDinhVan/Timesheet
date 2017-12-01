@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Users;
 use App\Password_Resets;
+use Carbon\Carbon; 
 
 class ResetPasswordController extends Controller
 {
@@ -36,7 +37,7 @@ class ResetPasswordController extends Controller
             ]);
 
         $temp = Users::join('password_resets','password_resets.email','=','users.username')
-                    ->select('users.username','users.password')
+                    ->select('users.username','users.password','password_resets.created_at')
                     ->where('password_resets.token',$request->token)
                     ->where('password_resets.email',$request->username)->first();
 
@@ -55,13 +56,28 @@ class ResetPasswordController extends Controller
         }
         else{
 
-            $user = Users::where('username',$request->username)->first();
-            $user->password = bcrypt($request->password);
-            $user->save();
+            $date_now = Carbon::now();
+            $date_old = new Carbon();
+            $date_old = Carbon::parse($temp->created_at);
+            $date_old->addMinutes(30);
+            
+            // check token qua 30 minutes
+            if($date_old > $date_now){
+                // die('Now: '.$date_now.'  Old: '.$date_old.' Ok! Change pass.');
+                $user = Users::where('username',$request->username)->first();
+                $user->password = bcrypt($request->password);
+                $user->save();
 
-            $this->deleteToken($request->username);
+                $this->deleteToken($request->username);
 
-            return redirect('login')->with('send','Change password success.');
+                return redirect('login')->with('send','Change password success.');
+
+            }
+            else{
+                // die('Qua 30 phut roi, khong change duoc');
+                return redirect('sendMail')
+                            ->with('thongbao',"It has been 30 minutes since you received the email, please kindly resend it.");
+            }
         }
     }
 
