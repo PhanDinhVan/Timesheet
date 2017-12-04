@@ -66,7 +66,7 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname')
 	                    ->where('time_entries.user_id','=',$id)->where('time_entries.date_time_entries','=',date('Y-m-d'))
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->paginate(5);
+	                    ->paginate(50);
         }
 
   		return view('user.readByAjax',compact('timesheet'));
@@ -152,7 +152,7 @@ class Timesheet_02Controller extends Controller
 	                    ->select('time_entries.*','tasks.taskname as taskname','projects.name as projectname')
 	                    ->where('time_entries.user_id','=',Auth::user()->id)->where('time_entries.date_time_entries','=',$r->create_date)
 	                    ->orderBy('time_entries.id','DESC')
-	                    ->paginate(5);
+	                    ->paginate(50);
         }
 
   		return view('user.readByAjax',compact('timesheet'));

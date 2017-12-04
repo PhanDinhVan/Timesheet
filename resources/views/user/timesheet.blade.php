@@ -49,15 +49,7 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 <script src="js/jquery/jquery-ui.min.js"></script>
 <script>
-    // thieu thang nay khong delete timesheet duoc
-    $(document).ready(function(){
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-    });
-
+    
      // show taskname dung voi tung project in modal add lan dau tien load len
     $('body').delegate('#add','click',function(e){
 
@@ -170,12 +162,15 @@
         if (result) {
             var id = $(this).val();
             $.ajax({
+            	//thieu thang headers khong delete duoc timesheet
+            	headers: {
+		          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        },
                 type : 'post',
                 url : "{{url('deleteByAjax')}}",
                 data : {id:id},
                 dataType : 'json',
                 success:function(data){
-                     // alert(data);
                     $('.table-responsive .table tbody tr.id'+id).remove();
                     //load lai page timesheet
                     init_reload();
@@ -396,12 +391,12 @@
         })
     }
 
-    $( function() {
+    // $( function() {
         
-        $( "#searchItem" ).autocomplete({
-          source: 'http://localhost/Timesheet/public/search'
-        });
-    });
+    //     $( "#searchItem" ).autocomplete({
+    //       source: 'http://localhost/Timesheet/public/search'
+    //     });
+    // });
 
 
     //==========================================

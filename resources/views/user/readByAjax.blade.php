@@ -22,8 +22,8 @@
 		@foreach($timesheet as $key => $value)
 			<tr class="id{{$value->id}}">
 				<td>{{$value->id}}</td>
-				<td class="projectname">{{$value->projectname}}</td>
-				<td class="taskname">{{$value->taskname}}</td>
+				<td>{{$value->projectname}}</td>
+				<td>{{$value->taskname}}</td>
 				<td class="username">{{$value->firstname}} {{$value->lastname}}</td>
 				<td class="working_time" style="text-align: center;">{{$value->working_time}}</td>
 				<td class="overtime" style="text-align: center;">{{$value->overtime}}</td>
