@@ -2,6 +2,11 @@
 
 @section('content')
 
+<style type="text/css">
+    #error{
+        display: none;
+    }
+</style>
 
 <!-- Page Content -->
 <div class="container">
@@ -14,9 +19,10 @@
 			  	<div class="panel-heading">Reset Password</div>
 			  	<div class="panel-body">
 			  		@if(count($errors) > 0)
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger" id="error">
                             @foreach($errors->all() as $err)
                                 {{$err}} <br>
+                                @break
                             @endforeach
                         </div>
                     @endif
@@ -36,11 +42,10 @@
 			    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 			    		<div class="form-group">
                             <label>Username</label>
-                            <input class="form-control" type="text" name="username" placeholder="Please enter username"/>
+                            @foreach($username as $value)
+                                <input class="form-control" type="text" name="username" value="{{ $value->email }}" readonly="" />
+                            @endforeach
                         </div>
-                        @foreach($username as $value)
-                        <input class="form-control" value="{{ $value->email }}" type="hidden" name="email"/>
-                        @endforeach
                         <input value="{{ $token }}" type="hidden" name="token"/>
 						<div class="form-group">
                             <label>New password</label>
@@ -60,5 +65,33 @@
     </div>
     <!-- end slide -->
 </div>
+@include('error.messages')
 <!-- end Page Content -->
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'new_password') {
+                $('#new_password').modal('show');
+            }
+            else if(err == 'password_min'){
+                $('#password_min').modal('show');
+            }
+            else if(err == 'password_max'){
+                $('#password_max').modal('show');
+            }
+            else if(err == 'confirm_password'){
+                $('#confirm_password').modal('show');
+            }
+            else{
+                $('#confirmation_password').modal('show');
+            }
+        }
+    </script>
 @endsection

@@ -1,8 +1,7 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<script src="js/jquery/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
 
-<!-- <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search"> -->
 <table class="table" id="list_timesheet">
 	<thead>
 		<tr>
@@ -118,16 +117,5 @@
         });
     })
 
-    // $(document).ready(function(){
-    //     $('#list_timesheet').DataTable({
-    //         dom: 'Bfrtip',
-    //         buttons: [
-    //             'copyHtml5',
-    //             'excelHtml5',
-    //             'csvHtml5',
-    //             'pdfHtml5'
-    //         ]
-    //     })
-    // })
 </script>
 

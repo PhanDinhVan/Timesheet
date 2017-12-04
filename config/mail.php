@@ -59,7 +59,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'timesheet.amagumo@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Philippe Nguyen'),
+        'name' => env('MAIL_FROM_NAME', 'Amagumo Labs'),
     ],
     // 'from' => [
     //     'address' => env('MAIL_FROM_ADDRESS', 'administrator@gmail.com'),// điền email gửi

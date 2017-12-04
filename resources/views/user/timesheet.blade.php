@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<!-- <link href="css/jquery/jquery-ui.min.css" rel="stylesheet" /> -->
+
 
 <!-- thieu thang nay khong delete timesheet duoc  -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,6 +41,7 @@
     </div>
 </div>
 
+@include('error.messages')
 
 
 <!-- /#page-wrapper -->	
@@ -159,6 +162,8 @@
     //=============== delete timesheet ==================
     $(document).on('click','.btn-dell',function(e){
         var result = confirm("Do you want to delete?");
+        // $('#delete_timesheet').modal('show');
+
         if (result) {
             var id = $(this).val();
             $.ajax({
@@ -176,8 +181,7 @@
                     init_reload();
                     function init_reload(){
                         setInterval( function() {
-                                   window.location.reload();
-                 
+                            window.location.reload();
                         },500);
                     }
                 }

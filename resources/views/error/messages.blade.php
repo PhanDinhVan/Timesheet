@@ -122,3 +122,261 @@
 
     </div>
 </div>
+
+<!-- delete timesheet NOT DONT -->
+<div id="delete_timesheet" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Incorrect</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Username or password incorrect!</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- email have change password -->
+<div id="username_null" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>You have changed your password with this link. Send mail if you want to change your password</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- send_mail_null -->
+<div id="send_mail_null" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Send mail</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Email is not empty</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Not found email -->
+<div id="not_found_email" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Send mail</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>We can't find a user with that e-mail address.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- mail expired -->
+<div id="mail_expired" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Expired</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>It has been 30 minutes since you received the email, please kindly resend it.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- enter new password -->
+<div id="new_password" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Please enter new password!</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- password min -->
+<div id="password_min" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Password must be at least 3 characters.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- password max -->
+<div id="password_max" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Password of up to 32 characters.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- confirm password -->
+<div id="confirm_password" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Please confirm password.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- confirmation password -->
+<div id="confirmation_password" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Password</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>The password confirmation does not match.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- no internet -->
+<div id="no_internet" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Internet</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>There is no Internet connection</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

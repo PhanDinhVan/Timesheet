@@ -57,14 +57,14 @@ class LoginController extends Controller
                 'password'=>'required'
             ],
             [
-                'email.required'=>'Email is not empty',
-                'password.required'=>'Passwords is not empty'
+                'email.required'=>'email',
+                'password.required'=>'password'
             ]); 
         
         if(Auth::attempt(['username'=>$request->email, 'password'=>$request->password])){
             return redirect('user/timesheet');
         }else{
-            return redirect('login')->with('thongbao','Login unsuccessful...!!!');
+            return redirect('login')->with('thongbao','incorrect');
         }
     }
 
