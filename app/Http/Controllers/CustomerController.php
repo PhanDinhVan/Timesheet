@@ -20,21 +20,10 @@ class CustomerController extends Controller
     public function postAdd(Request $request){
     	$this->validate($request,
     		[
-    			'name'=>'required|min:2',
-    			'email'=>'required|email|unique:customers,email',
-    			'city'=>'required|min:2',
-    			'country'=>'required|min:2'
+    			'email'=>'unique:customers,email'
     		],
     		[
-    			'name.required'=>'Please enter customer name',
-    			'name.min'=>'Customer name minimum 2 characters',
-    			'email.required'=>'Please enter customer email',
-    			'email.email'=>'Email malformed',
-    			'email.unique'=>'Customer name is exits',
-    			'city.required'=>'Please enter customer city',
-    			'city.min'=>'Customer city minimum 2 characters',
-    			'country.required'=>'Please enter customer country',
-    			'country.min'=>'Country city minimum 2 characters'
+    			'email.unique'=>'email_exits'
     		]);
 
     	$customer = new Customer;
@@ -53,20 +42,6 @@ class CustomerController extends Controller
     }
 
     public function postEdit(Request $request, $id){
-		$this->validate($request,
-		[
-			'name'=>'required|min:2',
-			'city'=>'required|min:2',
-			'country'=>'required|min:2'
-		],
-		[
-			'name.required'=>'Please enter customer name',
-			'name.min'=>'Customer name minimum 2 characters',
-			'city.required'=>'Please enter customer city',
-			'city.min'=>'Customer city minimum 2 characters',
-			'country.required'=>'Please enter customer country',
-			'country.min'=>'Country city minimum 2 characters'
-		]);
 
 		$customer = Customer::find($id);
 		$customer->name = $request->name;

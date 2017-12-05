@@ -29,6 +29,9 @@
 
     <!-- Custom Theme Style -->
     <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">
+    
+    <!-- css file error in fordel admin -->
+    <link rel="stylesheet" type="text/css"  href="css/mystyle.css">
   </head>
 
   <body class="nav-md">
@@ -134,6 +137,9 @@
     <!-- multiselect -->
     <script src="js/multiselect/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/multiselect/bootstrap-multiselect.css" />
+
+    <script type="text/javascript" src="admin_asset/vendors/jquery/jquery-validate/jquery.validate.min.js"></script>
+
 
     @yield('script')
     

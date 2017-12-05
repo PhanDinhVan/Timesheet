@@ -46,7 +46,7 @@ class PermissonController extends Controller
 			return redirect('admin/permisson/add')->with('thongbao','You add success');
 			
 		}else{
-			return redirect('admin/permisson/add')->with('error','Username and project name is exits');
+			return redirect('admin/permisson/add')->with('error','permission_exits');
 		}
 	}
 
@@ -58,23 +58,23 @@ class PermissonController extends Controller
 	}
 
 	public function postEdit(Request $request, $id){
-		$this->validate($request,
-			[
-				'username'=>'required',
-				'projectname'=>'required'
-			],
-			[
-				'username.required'=>'Please select username',
-				'projectname.required'=>'Please select project name'
-			]);
 
-		$permisson = Permisson::find($id);
-		$permisson->user_id = $request->username;
-		$permisson->project_id = $request->projectname;
-		
-		$permisson->save();
+		// Check username and project name have exits?
+		$temp = Permisson::where('user_id',$request->username)->where('project_id',$request->projectname)->get();
 
-		return redirect('admin/permisson/edit/'.$id)->with('thongbao','You edit success');
+		if($temp->isEmpty()){
+
+			$permisson = Permisson::find($id);
+			$permisson->user_id = $request->username;
+			$permisson->project_id = $request->projectname;
+			
+			$permisson->save();
+
+			return redirect('admin/permisson/edit/'.$id)->with('thongbao','You edit success');
+			
+		}else{
+			return redirect('admin/permisson/edit/'.$id)->with('error','permission_exits');
+		}
 	}
 
 	public function getDelete($id){

@@ -18,14 +18,6 @@ class EmployeeTypeController extends Controller
     }
 
     public function postAdd(Request $request){
-    	$this->validate($request,
-    		[
-    			'emp_type'=>'required|min:2'
-    		],
-    		[
-    			'emp_type.required'=>'Please enter employee type',
-    			'emp_type.min'=>'Employee types minimum 2 characters'
-    		]);
 
     	$employee_type = new Employee_Types;
     	$employee_type->type = $request->emp_type;
@@ -42,12 +34,10 @@ class EmployeeTypeController extends Controller
     public function postEdit(Request $request, $id){
     	$this->validate($request,
     		[
-    			'emp_type'=>'required|min:2|unique:employee_types,type'
+    			'emp_type'=>'unique:employee_types,type'
     		],
     		[
-    			'emp_type.required'=>'Please enter employee type',
-    			'emp_type.min'=>'Employee types minimum 2 characters',
-    			'emp_type.unique'=>'Employee types is exits'
+    			'emp_type.unique'=>'employee_exits'
     		]);
     	$employee_type = Employee_Types::find($id);
     	$employee_type->type = $request->emp_type;

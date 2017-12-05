@@ -1,0 +1,11 @@
+.error{
+    color: red;
+    margin-top: 1%;
+    font-weight: normal;
+}
+input.error{
+    border: 1px solid red;
+}
+#error{
+    display: none;
+}

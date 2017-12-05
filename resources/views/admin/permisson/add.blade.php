@@ -3,11 +3,6 @@
 
 <!-- Page Content --> 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-
 <div class="right_col" role="main">
       <!-- top tiles -->
      <div id="page-wrapper">
@@ -20,16 +15,9 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $err)
-                                    {{$err}} <br>
-                                @endforeach
-                            </div>
-                        @endif
 
                         @if(session('error'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error">
                                 {{session('error')}}
                             </div>
                         @endif
@@ -39,12 +27,13 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/permisson/add" method="POST">
+                        <form action="admin/permisson/add" method="POST" id="add_permisson">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
                                 <label>Username</label>
                                 <select class="form-control" name="username">
+                                    <option></option>
                                     @foreach($user as $value)
                                     <option value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
                                     @endforeach
@@ -53,6 +42,7 @@
                             <div class="form-group">
                                 <label>Project Name</label>
                                 <select class="form-control" name="projectname">
+                                    <option></option>
                                     @foreach($project as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                     @endforeach
@@ -71,9 +61,29 @@
         <!-- /.container-fluid -->
     </div>
 </div>
+@include('error.messages')
        
 <!-- /#page-wrapper -->	
 
- @endsection
+@endsection
+
+@section('script')
+    <!-- <script src="../resources/views/error/error.js"></script> -->
+    <script src="{{asset('js/error/error.js')}}"></script>
+
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'permission_exits') {
+                $('#permission_exits').modal('show');
+            }
+        }
+    </script>
+@endsection
 
 

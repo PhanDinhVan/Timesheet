@@ -7,7 +7,7 @@
     <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
 
-    <title>Admin - AMAGUMO Labs</title>
+    <title>Admin - Amagumo Labs</title>
 
     <!-- dùng để lấy đúng đường dẫn từ folder public -->
     <base href="{{asset('')}}">

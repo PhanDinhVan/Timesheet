@@ -43,7 +43,7 @@
             </div>
 
             <div class="modal-body">
-                <p>Please select customer name!</p>
+                <p>Please select username!</p>
             </div>
 
             <div class="modal-footer">
@@ -368,6 +368,99 @@
 
             <div class="modal-body">
                 <p>There is no Internet connection</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- email register customer is exits -->
+<div id="email_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add customer</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Email already exists</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- employee is exits -->
+<div id="employee_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Employee types</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Employee types is exits</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- permission is exits -->
+<div id="permission_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Permission</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Username and project name is exits</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- project is exits -->
+<div id="projectname_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Project</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Project name is exits</p>
             </div>
 
             <div class="modal-footer">

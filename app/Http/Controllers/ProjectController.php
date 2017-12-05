@@ -24,21 +24,10 @@ class ProjectController extends Controller
 	public function postAdd(Request $request){
 		$this->validate($request,
 			[
-				'name'=>'required|unique:projects,name',
-				'start_date'=>'required',
-                'end_date'=>'required',
-                'department'=>'required',
-                'status'=>'required',
-                'customer_id'=>'required'
+				'name'=>'unique:projects,name'
 			],
 			[
-				'name.required'=>'Please enter project name',
-				'name.unique'=>'Project name is exits',
-				'start_date.required'=>'Please enter start date',
-				'end_date.required'=>'Please enter end date',
-				'department.required'=>'Please select department',
-				'status.required'=>'Please select status',
-				'customer_id'=>'Please select customer'
+				'name.unique'=>'projectname_exits'
 			]);
 
 		$project = new Project;
@@ -63,20 +52,10 @@ class ProjectController extends Controller
 	public function postEdit(Request $request, $id){
 		$this->validate($request,
 			[
-				'name'=>'required',
-				'start_date'=>'required',
-                'end_date'=>'required',
-                'department'=>'required',
-                'status'=>'required',
-                'customer_id'=>'required'
+				'name'=>'unique:projects,name'
 			],
 			[
-				'name.required'=>'Please enter project name',
-				'start_date.required'=>'Please enter start date',
-				'end_date.required'=>'Please enter end date',
-				'department.required'=>'Please select department',
-				'status.required'=>'Please select status',
-				'customer_id'=>'Please select customer'
+				'name.unique'=>'projectname_exits'
 			]);
 
 		$project = Project::find($id);

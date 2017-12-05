@@ -15,20 +15,13 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $err)
-                                    {{$err}} <br>
-                                @endforeach
-                            </div>
-                        @endif
 
                         @if(session('thongbao'))
                             <div class="alert alert-success">
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/customer/edit/{{$customer->id}}" method="POST">
+                        <form action="admin/customer/edit/{{$customer->id}}" method="POST" id="edit_customer">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
@@ -63,4 +56,7 @@
 
 @endsection
 
-
+@section('script')
+    <!-- <script src="../resources/views/error/error.js"></script> -->
+    <script src="{{asset('js/error/error.js')}}"></script>
+@endsection

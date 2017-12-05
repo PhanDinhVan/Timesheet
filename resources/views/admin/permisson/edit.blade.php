@@ -2,9 +2,9 @@
 @section('content')
 
 <!-- Page Content --> 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
 
 <div class="right_col" role="main">
       <!-- top tiles -->
@@ -23,6 +23,12 @@
                                 @foreach($errors->all() as $err)
                                     {{$err}} <br>
                                 @endforeach
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger" id="error">
+                                {{session('error')}}
                             </div>
                         @endif
 
@@ -66,9 +72,26 @@
         <!-- /.container-fluid -->
     </div>
 </div>
-       
+@include('error.messages')
+
 <!-- /#page-wrapper -->	
 
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'permission_exits') {
+                $('#permission_exits').modal('show');
+            }
+        }
+    </script>
 @endsection
 
 

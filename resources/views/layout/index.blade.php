@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <base href="{{asset('')}}">
 
-    <title>AMAGUMO Labs - @yield('title')</title>
+    <title>Amagumo Labs @yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

@@ -16,9 +16,10 @@
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
                         @if(count($errors) > 0)
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error">
                                 @foreach($errors->all() as $err)
                                     {{$err}} <br>
+                                    @break
                                 @endforeach
                             </div>
                         @endif
@@ -28,7 +29,7 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/customer/add" method="POST">
+                        <form action="admin/customer/add" method="POST" id="add_customer">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
@@ -58,9 +59,31 @@
         <!-- /.container-fluid -->
     </div>
 </div>
-       
+@include('error.messages')
 <!-- /#page-wrapper -->	
 
+@endsection
+
+
+@section('script')
+    <script src="{{asset('js/error/error.js')}}"></script>
+    <!-- <script src="{{asset('../resources/views/error/error.js')}}"></script> -->
+
+    <!-- check email is exits -->
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'email_exits') {
+                $('#email_exits').modal('show');
+            }
+        }
+    </script>
+    
 @endsection
 
 
