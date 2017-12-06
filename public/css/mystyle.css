@@ -6,6 +6,26 @@
 input.error{
     border: 1px solid red;
 }
+select.error{
+	border: 1px solid red;
+    color: #555;
+}
 #error{
     display: none;
+}
+
+/*dung cho man hinh dien thoai (Responsive )*/
+@media only screen and (max-width: 375px){
+	#dataTables-example {
+		width: 100%;
+	    overflow: hidden;
+	    overflow-x: auto;
+	    display: block;
+	}
+	#report_info{
+		width: 100%;
+	    overflow: hidden;
+	    overflow-x: auto;
+	    display: block;
+	}
 }

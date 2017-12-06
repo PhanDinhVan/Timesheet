@@ -20,16 +20,6 @@ class TaskController extends Controller
     }
 
     public function postAdd(Request $request){
-    	$this->validate($request,
-    		[
-    			'taskname'=>'required|min:3',
-    			'project_id'=>'required'
-    		],
-    		[
-    			'taskname.required'=>'Please enter task name',
-    			'taskname.min'=>'Task name has at least 3 characters',
-    			'project_id.required'=>'Please select project name'
-    		]);
 
         // Check taskname and project name have exits?
         $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->get();
@@ -45,7 +35,7 @@ class TaskController extends Controller
             return redirect('admin/task/add')->with('thongbao','You add success');
             
         }else{
-            return redirect('admin/task/add')->with('error','Taskname and project name is exits');
+            return redirect('admin/task/add')->with('error','taskname_exits');
         }
     	
     }
@@ -57,19 +47,9 @@ class TaskController extends Controller
     }
 
     public function postEdit(Request $request, $id){
-        $this->validate($request,
-            [
-                'taskname'=>'required|min:3',
-                'project_id'=>'required'
-            ],
-            [
-                'taskname.required'=>'Please enter task name',
-                'taskname.min'=>'Task name has at least 3 characters',
-                'project_id.required'=>'Please select project name'
-            ]);
 
         // Check taskname and project name have exits?
-        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('comments',$request->comments)->get();
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('availability',$request->availability)->get();
         if($temp->isEmpty()){
 
             $task = Task::find($id);
@@ -82,7 +62,7 @@ class TaskController extends Controller
             return redirect('admin/task/edit/'.$id)->with('thongbao','You edit success');
             
         }else{
-            return redirect('admin/task/edit/'.$id)->with('error','Taskname and project name is exits');
+            return redirect('admin/task/edit/'.$id)->with('error','taskname_exits');
         }
         
     }

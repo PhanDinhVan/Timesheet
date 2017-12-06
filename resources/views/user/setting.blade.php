@@ -13,13 +13,22 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7">
-                  @if(session('thongbao'))
-                    <div class="alert alert-success">
-                        {{session('thongbao')}}    
-                    </div>
-                  @endif
+                    @if(session('thongbao'))
+                        <div class="alert alert-success">
+                            {{session('thongbao')}}    
+                        </div>
+                     @endif
 
-                  	<form action="user/setting" method="POST">
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger" >
+                            @foreach($errors->all() as $err)
+                                {{$err}} <br>
+                               
+                            @endforeach
+                        </div>
+                    @endif
+
+                  	<form action="user/setting" method="POST" id="user_setting">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         
                         <div class="form-group">
@@ -37,7 +46,7 @@
                         <div class="form-group">
                         	<input type="checkbox" name="changePassword" id="changePassword">
                             <label>Change Password</label>
-                            <input class="form-control password" type="password" name="password" placeholder="Please enter your password" disabled="" />
+                            <input class="form-control password" type="password" name="password" id="password" placeholder="Please enter your password" disabled="" />
                         </div>
                         <div class="form-group">
                             <label>Password Again</label>
@@ -61,6 +70,7 @@
 @endsection
 
 @section('script')
+   
     <script>
         $(document).ready(function(){
             $("#changePassword").change(function(){
@@ -72,4 +82,6 @@
             });
         });
     </script>
+    <script src="{{asset('js/error/error.js')}}"></script>
+
  @endsection

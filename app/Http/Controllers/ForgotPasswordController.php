@@ -37,6 +37,8 @@ class ForgotPasswordController extends Controller
             }
             else{
 
+                $this->deleteToken($username);
+
                 $length = 50;
                 $token = bin2hex(random_bytes($length));
 
@@ -57,5 +59,9 @@ class ForgotPasswordController extends Controller
         }
         
         
+    }
+
+    public function deleteToken($email){
+        $token = Password_Resets::where('email',$email)->delete();
     }
 }

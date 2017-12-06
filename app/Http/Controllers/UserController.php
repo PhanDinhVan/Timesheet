@@ -22,29 +22,10 @@ class UserController extends Controller
     public function postAdd(Request $request){
         $this->validate($request,
             [
-            	'firstname'=>'required',
-            	'lastname'=>'required',
-                'start_date'=>'required',
-                'end_date'=>'required',
-                // kiem tra email k rong, k duoc trung trong table users voi field email, no co phai la email?
-                'email'=>'required|unique:users,username|email',
-                'password'=>'required|min:3|max:32',
-                // same-> kiem tra passwordAgain co giong voi password
-                'passwordAgain'=>'required|same:password'
+                'email'=>'unique:users,username'
             ],
             [
-            	'firstname.required'=>'Please enter your firstname',
-            	'lastname.required'=>'Please enter your lastname',
-                'start_date.required'=>'Please select start date',
-                'end_date.required'=>'Please select end date',
-                'email.required'=>'Please enter your username',
-                'email.unique'=>'Username is exits',
-                'email.email'=>'Username invalidate',
-                'password.required'=>'Please enter your password',
-                'password.min'=>'Password must be at least 3 characters',
-                'password.max'=>'Passwords of up to 32 characters',
-                'passwordAgain.required'=>'Please enter your password again',
-                'passwordAgain.same'=>'Passwords again not like password'
+                'email.unique'=>'email_exits'
             ]);
 
         $user = new Users;

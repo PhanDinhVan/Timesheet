@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Users
+                    <h1 class="page-header">Employee Type
                         <small>List</small>
                     </h1>
                 </div>
@@ -22,7 +22,7 @@
                   @endif
                 </div>
                 
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" id="employee_type">
                     <thead>
                         <tr align="center">
                             <th>ID</th>

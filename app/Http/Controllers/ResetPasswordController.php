@@ -54,7 +54,7 @@ class ResetPasswordController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            $this->deleteToken($request->username);
+            // $this->deleteToken($request->username);
 
             return redirect('login')->with('send','Change password success.');
 
@@ -66,7 +66,7 @@ class ResetPasswordController extends Controller
         }
     }
 
-    public function deleteToken($email){
-        $token = Password_Resets::where('email',$email)->delete();
-    }
+    // public function deleteToken($email){
+    //     $token = Password_Resets::where('email',$email)->delete();
+    // }
 }

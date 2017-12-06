@@ -29,6 +29,9 @@
 
     <!-- Custom Theme Style -->
     <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">
+    
+    <!-- css file error in fordel admin -->
+    <link rel="stylesheet" type="text/css"  href="css/mystyle.css">
   </head>
 
   <body class="nav-md">
@@ -125,6 +128,8 @@
 
     <!-- Custom Theme Scripts -->
     <script src="admin_asset/build/js/custom.min.js"></script>
+
+    <script type="text/javascript" src="admin_asset/vendors/jquery/jquery-validate/jquery.validate.min.js"></script>
 
     @yield('script')
     

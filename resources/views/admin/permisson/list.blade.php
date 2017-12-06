@@ -22,7 +22,7 @@
                   @endif
                 </div>
                 
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" id="permisson_users_projects">
                     <thead>
                      
                         <tr align="center">
@@ -80,7 +80,7 @@
     var prevTDVal = "";
 
     // gom dong cua cot username
-    $("#dataTables-example tbody tr td.username").each(function() { //for each first td in every tr
+    $("#permisson_users_projects tbody tr td.username").each(function() { //for each first td in every tr
         var $this = $(this);
         if ($this.text() == prevTDVal) { // check value of previous td text
           span++;

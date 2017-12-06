@@ -15,16 +15,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $err)
-                                    {{$err}} <br>
-                                @endforeach
-                            </div>
-                        @endif
-
                         @if(session('error'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error">
                                 {{session('error')}}
                             </div>
                         @endif
@@ -34,7 +26,7 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/task/edit/{{$task->id}}" method="POST">
+                        <form action="admin/task/edit/{{$task->id}}" method="POST" id="edit_task">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
@@ -80,9 +72,27 @@
         <!-- /.container-fluid -->
     </div>
 </div>
+@include('error.messages') 
        
 <!-- /#page-wrapper -->	
 
+@endsection
+
+@section('script')
+    <script src="{{asset('js/error/error.js')}}"></script>
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'taskname_exits') {
+                $('#taskname_exits').modal('show');
+            }
+        }
+    </script>
 @endsection
 
 

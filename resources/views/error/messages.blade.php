@@ -158,7 +158,7 @@
             </div>
 
             <div class="modal-body">
-                <p>You have changed your password with this link. Send mail if you want to change your password</p>
+                <p>This password reset token is invalid.</p>
             </div>
 
             <div class="modal-footer">
@@ -470,6 +470,57 @@
 
     </div>
 </div>
+
+
+<!-- taskname is exits -->
+<div id="taskname_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Task</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Taskname and project name is exits</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- email register user is exits -->
+<div id="user_exits" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add user</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Email already exists</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok-circle"></span> Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+                        
+
 
 
 

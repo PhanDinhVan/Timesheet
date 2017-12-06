@@ -21,7 +21,7 @@
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
                         @if(count($errors) > 0)
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error">
                                 @foreach($errors->all() as $err)
                                     {{$err}} <br>
                                 @endforeach
@@ -33,7 +33,7 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="admin/user/add" method="POST">
+                        <form action="admin/user/add" method="POST" id="add_user">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
                             <div class="form-group">
@@ -73,6 +73,7 @@
 							<div class="form-group">
                                 <label>Employee Type</label>
    								<select class="form-control" name="employee_type_id">
+                                    <option></option>
                                     @foreach($employee_types as $value)
                                     <option value="{{$value->id}}">{{$value->type}}</option>
                                     @endforeach
@@ -80,7 +81,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="form-control" type="password" name="password" placeholder="Please enter your password" />
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Please enter your password" />
                             </div>
                             <div class="form-group">
                                 <label>Password Again</label>
@@ -107,9 +108,30 @@
         <!-- /.container-fluid -->
     </div>
 </div>
-       
+@include('error.messages')  
 <!-- /#page-wrapper -->	
 
- @endsection
+@endsection
+
+@section('script')
+    <!-- <script src="../resources/views/error/error.js"></script> -->
+    <script src="{{asset('js/error/error.js')}}"></script>
+    <script type="text/javascript">
+        // var err = document.getElementById('error').innerText;
+        var error = document.getElementById('error');
+        if(error != null) {
+            //err = document.getElementById('error').innerText;
+            var err = $('#error').text();
+            //cut space
+            err = err.replace(/\s+/g, '');
+            if(err == 'email_exits') {
+                $('#user_exits').modal('show');
+            }
+        }
+    </script>
+    
+@endsection
+
+
 
 

@@ -49,8 +49,8 @@
                                 {{"Close"}}
                             @endif
                           </td>
-                          <td>{{$value->start_date }}</td>
-                          <td>{{$value->end_date}}</td>
+                          <td class="start_date">{{$value->start_date }}</td>
+                          <td class="end_date">{{$value->end_date}}</td>
                           <td>{{$value->customer->name}}</td>
                           <td><i class="fa fa-trash-o"></i><a href="admin/project/delete/{{$value->id}}"> Delete</a></td>
                           <td><i class="fa fa-pencil-square-o"></i> <a href="admin/project/edit/{{$value->id}}">Edit</a></td>
@@ -68,4 +68,36 @@
        
 <!-- /#page-wrapper --> 
 
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+    // setting date_time_entries
+        var start_date = $('table tbody .start_date');
+        start_date.each(function() {
+            var a = $(this);
+            var date_time = a.text();
+            var myDate = new Date(date_time);
+            var month =  myDate.getMonth() + 1;
+
+        var full_date = myDate.getFullYear() + "-" + month + "-" + myDate.getDate();
+        // alert(full_date);
+        a.text(full_date);
+
+        });
+
+
+        var end_date = $('table tbody .end_date');
+        end_date.each(function() {
+            var a = $(this);
+            var date_time = a.text();
+            var myDate = new Date(date_time);
+            var month =  myDate.getMonth() + 1;
+
+        var full_date = myDate.getFullYear() + "-" + month + "-" + myDate.getDate();
+        // alert(full_date);
+        a.text(full_date);
+
+        });
+  </script>
 @endsection
