@@ -42,7 +42,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div style="float: right;">{{ $employee_type->links() }}</div>
             </div>
             <!-- /.row -->
         </div>
@@ -52,4 +51,54 @@
        
 <!-- /#page-wrapper --> 
 
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $('#employee_type').dataTable({
+              'paging':   true,  // Table pagination
+              'ordering': true,  // Column ordering
+              'info':     false,  // Bottom left status text
+              'responsive': true, // https://datatables.net/extensions/responsive/examples/
+              'bLengthChange': false, // hide records per page
+              // 'searching': false, // hide Search
+              // 'rowsGroup': [0], // gop row of column 
+              
+              oLanguage: {
+                  sSearch:      'Search: ',
+                  sLengthMenu:  '_MENU_ records per page',
+                  zeroRecords:  'Nothing found - sorry',
+                  infoEmpty:    'No records available',
+                  infoFiltered: '(filtered from MAX total records)'
+              },
+              // Datatable Buttons setup
+              dom: '<"html5buttons"B>lTfgitp',
+          columnDefs: [  
+
+            // dinh nghia cho delete edit
+            { "targets": [2],
+             "orderable": false,
+             "type": "string"
+            }, 
+            { "targets": [3],
+             "orderable": false,
+             "type": "string"
+            }      
+       
+            
+            ],
+              buttons: [
+                  {extend: 'copy',  className: 'btn-sm' },
+                  {extend: 'csv',   className: 'btn-sm' },
+                  {extend: 'excel', className: 'btn-sm', title: 'XLS-File'},
+                  {extend: 'pdf',   className: 'btn-sm', title: $('title').text() },
+                  {extend: 'print', className: 'btn-sm' }
+              ]
+       
+      });
+
+    })
+  </script>
 @endsection

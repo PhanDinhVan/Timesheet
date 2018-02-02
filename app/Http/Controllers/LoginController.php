@@ -33,7 +33,7 @@ class LoginController extends Controller
         if(Auth::attempt(['username'=>$request->email, 'password'=>$request->password])){
             return redirect('admin/user/list');
         }else{
-            return redirect('admin/login')->with('thongbao','incorrect');
+            return redirect('login')->with('thongbao','incorrect');
         }
     }
 
@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     	//$users->rememberToken();
         Auth::logout();
-        return redirect('admin/login');
+        return redirect('login');
     }
 
     public function getLoginUser(){

@@ -2,6 +2,13 @@
 <script src="js/jquery/jquery.js"></script>
 <script src="js/datepicker/bootstrap-datepicker.js"></script>
 
+<!-- <link rel="stylesheet" type="text/css" href="admin_asset/vendors/dataTables/css/jquery.dataTables.css"> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+<script type="text/javascript" charset="utf8" src="admin_asset/vendors/dataTables/js/jquery.dataTables.js"></script>
+<!-- lam dep datatable -->
+<link rel="stylesheet" type="text/css" href="admin_asset/vendors/dataTables/css/jquery.dataTables_themeroller.css">
+<!-- <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"> -->
+
 <table class="table" id="list_timesheet">
 	<thead>
 		<tr>
@@ -114,6 +121,61 @@
 		    // alert(full_date);
 		    a.text(full_date);
 
+        });
+
+        $('#list_timesheet').dataTable({
+                'paging':   true,  // Table pagination
+                'ordering': true,  // Column ordering
+                'info':     false,  // Bottom left status text
+                'responsive': true, // https://datatables.net/extensions/responsive/examples/
+                'bLengthChange': false, // hide records per page
+                'searching': true, // hide Search
+                  
+                  // Text translation options
+                  // Note the required keywords between underscores (e.g MENU)
+            
+                oLanguage: {
+                    sSearch:      'Search: ',
+                    sLengthMenu:  '_MENU_ records per page',
+                    zeroRecords:  'Nothing found - sorry',
+                    infoEmpty:    'No records available',
+                    infoFiltered: '(filtered from MAX total records)'
+                  },
+                  // Datatable Buttons setup
+                dom: '<"html5buttons"B>lTfgitp',
+            columnDefs: [  
+                
+                // { "targets": [0],  // thu tu column
+                //  "visible": true,  // cho phep hien thi
+                //  "searchable": true, // cho phep search
+                //  "orderable": false,  // cho phep sap xep
+                //  "type": "string"
+                // }, 
+
+                // dinh nghia cho delete edit
+                {   "targets": [6],
+                    "orderable": false,
+                    "type": "string"
+                }, 
+                {   "targets": [7],
+                    "orderable": false,
+                    "type": "string"
+                }, 
+                {   "targets": [8],
+                    "orderable": false,
+                    "type": "string"
+                }      
+           
+                
+                ],
+                    buttons: [
+                        {extend: 'copy',  className: 'btn-sm' },
+                        {extend: 'csv',   className: 'btn-sm' },
+                        {extend: 'excel', className: 'btn-sm', title: 'XLS-File'},
+                        {extend: 'pdf',   className: 'btn-sm', title: $('title').text() },
+                        {extend: 'print', className: 'btn-sm' }
+                    ]
+           
         });
     })
 

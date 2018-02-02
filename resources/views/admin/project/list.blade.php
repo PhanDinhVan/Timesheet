@@ -22,7 +22,7 @@
                   @endif
                 </div>
                 
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" id="project_list">
                     <thead>
                         <tr align="center">
                             <th>ID</th>
@@ -58,7 +58,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div style="float: right;">{{ $project->links() }}</div>
             </div>
             <!-- /.row -->
         </div>
@@ -99,5 +98,51 @@
         a.text(full_date);
 
         });
+
+        $(document).ready(function(){
+
+            $('#project_list').dataTable({
+                'paging':   true,  // Table pagination
+                'ordering': true,  // Column ordering
+                'info':     false,  // Bottom left status text
+                'responsive': true, // https://datatables.net/extensions/responsive/examples/
+                'bLengthChange': false, // hide records per page
+                // 'searching': false, // hide Search
+                // 'rowsGroup': [0], // gop row of column 
+              
+        
+                oLanguage: {
+                    sSearch:      'Search: ',
+                    sLengthMenu:  '_MENU_ records per page',
+                    zeroRecords:  'Nothing found - sorry',
+                    infoEmpty:    'No records available',
+                    infoFiltered: '(filtered from MAX total records)'
+                 },
+                // Datatable Buttons setup
+                dom: '<"html5buttons"B>lTfgitp',
+             columnDefs: [  
+            
+                // dinh nghia cho delete edit
+                {   "targets": [7],
+                    "orderable": false,
+                    "type": "string"
+                }, 
+                {   "targets": [8],
+                    "orderable": false,
+                    "type": "string"
+                }      
+            
+            ],
+              buttons: [
+                    {extend: 'copy',  className: 'btn-sm' },
+                    {extend: 'csv',   className: 'btn-sm' },
+                    {extend: 'excel', className: 'btn-sm', title: 'XLS-File'},
+                    {extend: 'pdf',   className: 'btn-sm', title: $('title').text() },
+                    {extend: 'print', className: 'btn-sm' }
+              ]
+       
+        });
+
+    })
   </script>
 @endsection

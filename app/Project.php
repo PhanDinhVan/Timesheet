@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     //
-    protected $table = "Projects";
+    protected $table = "projects";
     public $timestamps = false;
 
      public function customer(){

@@ -20,11 +20,9 @@
                     </div>
                   @endif
                 </div>
-                
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" id="tasks_list">
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>Project Name</th>
                           <th>Taks Name</th>
                           <th>Comments</th>
@@ -33,11 +31,10 @@
                           <th>Edit</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="myTable">
                       	@foreach($task as $value)
                         <tr>
-                          <td>{{$value->id}}</td>
-                          <td>{{$value->project->name}}</td>
+                          <td class="project_Name">{{$value->project->name}}</td>
                           <td>{{$value->taskname}}</td>
                           <td>{{$value->comments}}</td>
                           <td>
@@ -53,11 +50,76 @@
                         @endforeach
                       </tbody>
                 </table>
-                <div style="float: right;">{{ $task->links() }}</div>
+                
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
     </div>
 </div>
+@endsection
+
+@section('script')
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $('#tasks_list').dataTable({
+              'paging':   true,  // Table pagination
+              'ordering': true,  // Column ordering
+              'info':     false,  // Bottom left status text
+              'responsive': true, // https://datatables.net/extensions/responsive/examples/
+              'bLengthChange': false, // hide records per page
+              // 'searching': false, // hide Search
+              'rowsGroup': [0], // gop row of column 
+              
+              // Text translation options
+              // Note the required keywords between underscores (e.g MENU)
+        
+              oLanguage: {
+                  sSearch:      'Search: ',
+                  sLengthMenu:  '_MENU_ records per page',
+                  zeroRecords:  'Nothing found - sorry',
+                  infoEmpty:    'No records available',
+                  infoFiltered: '(filtered from MAX total records)'
+              },
+              // Datatable Buttons setup
+              dom: '<"html5buttons"B>lTfgitp',
+          columnDefs: [  
+            
+            // { "targets": [0],  // thu tu column
+            //  "visible": true,  // cho phep hien thi
+            //  "searchable": true, // cho phep search
+            //  "orderable": false,  // cho phep sap xep
+            //  "type": "string"
+            // }, 
+
+            // dinh nghia cho delete edit
+            { "targets": [4],
+             "orderable": false,
+             "type": "string"
+            }, 
+            { "targets": [5],
+             "orderable": false,
+             "type": "string"
+            }      
+       
+            
+            ],
+              buttons: [
+                  {extend: 'copy',  className: 'btn-sm' },
+                  {extend: 'csv',   className: 'btn-sm' },
+                  {extend: 'excel', className: 'btn-sm', title: 'XLS-File'},
+                  {extend: 'pdf',   className: 'btn-sm', title: $('title').text() },
+                  {extend: 'print', className: 'btn-sm' }
+              ]
+       
+      });
+
+    })
+
+
+
+</script>
+
 @endsection

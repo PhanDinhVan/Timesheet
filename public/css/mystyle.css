@@ -29,3 +29,37 @@ select.error{
 	    display: block;
 	}
 }
+
+/*k bi trang bang*/
+@media only screen and (max-width: 757px){
+	.table{
+	    table-layout: fixed;
+	    overflow: hidden;
+	    overflow-x: auto;
+	    display: block;
+	}
+}
+.footer_admin{
+	width: 100%;
+}
+footer{
+	text-align: center;
+}
+/*.right_col{
+	min-height: 730px !important;
+}*/
+.start_date_fr{
+    width: 40%;
+    float: left;
+}
+.end_date_fr{
+    width: 40%;
+    float: left;
+    margin-left: 5%;
+}
+.customer_fr{
+    width: 85%;
+}
+.availability{
+    margin-right: 2%;
+}

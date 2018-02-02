@@ -50,7 +50,8 @@
               <!-- datepicker -->
               <script type="text/javascript">
                 $('.date').datepicker({  
-                   format: 'yyyy-mm-dd'
+                   format: 'yyyy-mm-dd',
+                   autoclose: true,
                  });  
               </script>
 
@@ -87,7 +88,7 @@
                   </select>
               </div>
               <div class="form-group">
-                  <label>Note</label>
+                  <label>Notes</label>
 		              <textarea class="form-control" name="note" id="note" cols="50" rows="4"></textarea>
               </div>
 

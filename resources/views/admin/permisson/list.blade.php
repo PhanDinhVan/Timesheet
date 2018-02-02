@@ -46,7 +46,6 @@
                        @endforeach
                     </tbody>
                 </table>
-                <div style="float: right;">{{ $permisson->links() }}</div>
             </div>
             <!-- /.row -->
         </div>
@@ -60,43 +59,66 @@
 
 
 @section('script')
-<!--  <script>
- 	$(document).on('click','.acb',function(e){
-        var result = confirm("Do you want to delete?");
-        if (result) {
-            
-        }
-        else{
-        	window.location.href = " {{ URL::to('admin/permisson/list') }}";
-        }
-    })
- </script> -->
-
-<script type="text/javascript">
-  $(document).ready(function(){
-
-    var span = 1;
-    var prevTD = "";
-    var prevTDVal = "";
-
-    // gom dong cua cot username
-    $("#permisson_users_projects tbody tr td.username").each(function() { //for each first td in every tr
-        var $this = $(this);
-        if ($this.text() == prevTDVal) { // check value of previous td text
-          span++;
-          if (prevTD != "") {
-              prevTD.attr("rowspan", span); // add attribute to previous td
-              $this.remove(); // remove current td
-          }
-        } else {
-          prevTD     = $this; // store current td 
-          prevTDVal  = $this.text();
-          span       = 1;
-        }
-    });
-
-  })
   
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $('#permisson_users_projects').dataTable({
+              'paging':   true,  // Table pagination
+              'ordering': true,  // Column ordering
+              'info':     false,  // Bottom left status text
+              'responsive': true, // https://datatables.net/extensions/responsive/examples/
+              'bLengthChange': false, // hide records per page
+              // 'searching': false, // hide Search
+              'rowsGroup': [0], // gop row of column 
+              
+              // Text translation options
+              // Note the required keywords between underscores (e.g MENU)
+        
+              oLanguage: {
+                  sSearch:      'Search: ',
+                  sLengthMenu:  '_MENU_ records per page',
+                  zeroRecords:  'Nothing found - sorry',
+                  infoEmpty:    'No records available',
+                  infoFiltered: '(filtered from MAX total records)'
+              },
+              // Datatable Buttons setup
+              dom: '<"html5buttons"B>lTfgitp',
+          columnDefs: [  
+            
+            // { "targets": [0],  // thu tu column
+            //  "visible": true,  // cho phep hien thi
+            //  "searchable": true, // cho phep search
+            //  "orderable": false,  // cho phep sap xep
+            //  "type": "string"
+            // }, 
+
+            // dinh nghia cho delete edit
+            { "targets": [2],
+             "orderable": false,
+             "type": "string"
+            }, 
+            { "targets": [3],
+             "orderable": false,
+             "type": "string"
+            }      
+       
+            
+            ],
+              buttons: [
+                  {extend: 'copy',  className: 'btn-sm' },
+                  {extend: 'csv',   className: 'btn-sm' },
+                  {extend: 'excel', className: 'btn-sm', title: 'XLS-File'},
+                  {extend: 'pdf',   className: 'btn-sm', title: $('title').text() },
+                  {extend: 'print', className: 'btn-sm' }
+              ]
+       
+      });
+
+    })
+
+
+
 </script>
 
 @endsection

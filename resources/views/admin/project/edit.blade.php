@@ -27,18 +27,18 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/project/edit/{{$project->id}}" method="POST" id="edit_project">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
-                            <div class="form-group">
+                            <div class="form-group start_date_fr">
                                 <label>Name</label>
                                 <input class="form-control" name="name" value="{{$project->name}}" placeholder="Please enter project name" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group end_date_fr">
                                 <label>Department </label>
                                 <select class="form-control" name="department">
                                     @foreach($employee_type as $value)
@@ -48,41 +48,32 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option 
-                                        @if($project->status == 1) {{"selected"}} @endif 
-                                        value="1">{{"Active"}}</option>
-                                    <option 
-                                        @if($project->status == 0) {{"selected"}} @endif 
-                                        value="0">{{"Close"}}</option>
-                                </select>
-                            </div>
 
-                            <div class="form-group">
+                            <div class="form-group start_date_fr">
                                 <label>Start Date</label>
-   								<input class="date form-control" type="text" name="start_date" value="{{$project->start_date}}">
+                                <input class="date form-control" type="text" name="start_date" value="{{$project->start_date}}">
                             </div>
                             <!-- datepicker -->
                             <script type="text/javascript">
-							    $('.date').datepicker({  
-							       format: 'yyyy-mm-dd'
-							     });  
-							</script>
+                                $('.date').datepicker({  
+                                   format: 'yyyy-mm-dd',
+                                   autoclose: true
+                                 });  
+                            </script>
 
-							<div class="form-group">
+                            <div class="form-group end_date_fr">
                                 <label>End Date</label>
-   								<input class="enddate form-control" type="text" name="end_date" value="{{$project->end_date}}">
+                                <input class="enddate form-control" type="text" name="end_date" value="{{$project->end_date}}">
                             </div>
                             <!-- datepicker -->
                             <script type="text/javascript">
-							    $('.enddate').datepicker({  
-							       format: 'yyyy-mm-dd'
-							     });  
-							</script>
+                                $('.enddate').datepicker({  
+                                   format: 'yyyy-mm-dd',
+                                   autoclose: true
+                                 });  
+                            </script>
 
-							<div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Customer Name </label>
                                 <select class="form-control" name="customer_id">
                                     @foreach($customer as $value)
@@ -91,6 +82,24 @@
                                         value="{{$value->id}}">{{$value->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+							
+                            <div class="form-group">
+                                <label style="margin-right: 2%">Status</label>
+                                <label class="radio-inline">
+                                    <input name="status" value="1" type="radio"
+                                        @if($project->status == 1)
+                                            {{"checked"}}
+                                        @endif
+                                    >Active
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="status" value="0" type="radio"
+                                        @if($project->status == 0)
+                                            {{"checked"}}
+                                        @endif
+                                    >Close
+                                </label>
                             </div>
                             <button type="submit" class="btn btn-default">Save</button>
                             <!-- <button type="reset" class="btn btn-default">Reset</button> -->

@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     //
     public function getList(){
-    	$task = Task::paginate(10);
+    	$task = Task::groupBy('tasks.project_id')->groupBy('tasks.taskname')->get();
     	return view('admin/task/list',['task'=>$task]);
     }
 
@@ -49,7 +49,7 @@ class TaskController extends Controller
     public function postEdit(Request $request, $id){
 
         // Check taskname and project name have exits?
-        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('availability',$request->availability)->get();
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('availability',$request->availability)->where('comments',$request->comments)->get();
         if($temp->isEmpty()){
 
             $task = Task::find($id);

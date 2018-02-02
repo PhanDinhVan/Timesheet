@@ -9,7 +9,12 @@
   <div class="nav_menu">
     <nav>
       <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        @if(Auth::check()) 
+          @if(Auth::user()->position == 1)
+            <a id="menu_toggle" href="admin/user/list"><i class="fa fa-bars"></i></a>
+          @endif
+        @endif
+        <!-- <button class="btn btn-info">Admin</button> -->
       </div>
 
       <ul class="nav navbar-nav navbar-right">

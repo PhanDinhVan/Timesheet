@@ -7,15 +7,11 @@ $(document).ready(function() {
             		required: true,
             		minlength: 2
             	},
-            email: {
+            contact: {
                     required: true,
-                    email: true
+                    minlength: 2
                 },
             city: {
-            		required: true,
-            		minlength: 2
-            	},
-            country:{
             		required: true,
             		minlength: 2
             	}
@@ -25,23 +21,33 @@ $(document).ready(function() {
 	            		required: "Please enter customer name",
 	            		minlength: "Customer name minimum 2 characters"
 	            	},
-	            email: {
-	                    required: "Please enter email",
-	                    email: "Please enter a valid email address.",
-	                },
+                contact: {
+                    required: "Please enter contact name",
+                    minlength: "Contact name minimum 2 characters"
+                },
 	            city: {
 	                    required: "Please enter city",
 	                    minlength: "City minimum 2 characters.",
 	                },
-	            country: {
-	                    required: "Please enter country",
-	                    minlength: "Country minimum 2 characters.",
-	                },
-            
         }, highlight: function(element) {
             $(element).addClass('error');
         }, unhighlight: function(element) {
             $(element).removeClass('error');
+        }
+    });
+
+    // set value input country
+    $('#dropDown_select').on('change', function() {
+        // alert( this.value );
+        $('#country').val(this.value);
+    })
+
+    // process not select
+    $( "#target" ).click(function() {
+        var a = $('#dropDown_select').val();
+        if(a == null || a == ""){
+            swal("Please select country!", " ", "error");
+            return false;
         }
     });
 
@@ -57,7 +63,7 @@ $(document).ready(function() {
             		required: true,
             		minlength: 2
             	},
-            country:{
+            contact:{
             		required: true,
             		minlength: 2
             	}
@@ -71,15 +77,29 @@ $(document).ready(function() {
 	                    required: "Please enter city",
 	                    minlength: "City minimum 2 characters.",
 	                },
-	            country: {
-	                    required: "Please enter country",
-	                    minlength: "Country minimum 2 characters.",
+	            contact: {
+	                    required: "Please enter contact",
+	                    minlength: "Contact name minimum 2 characters",
 	                },
             
         }, highlight: function(element) {
             $(element).addClass('error');
         }, unhighlight: function(element) {
             $(element).removeClass('error');
+        }
+    });
+
+    // set value input country edit
+    $('#dropDown_select_edit').on('change', function() {
+        $('#country_edit').val(this.value);
+    })
+
+    // process not select
+    $( "#target_edit" ).click(function() {
+        var a = $('#dropDown_select_edit').val();
+        if(a == null || a == ""){
+            swal("Please select country!", " ", "error");
+            return false;
         }
     });
 

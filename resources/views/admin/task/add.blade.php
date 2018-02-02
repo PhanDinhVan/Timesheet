@@ -23,18 +23,13 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/task/add" method="POST" id="add_task">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            
-                            <div class="form-group">
-                                <label>Task Name</label>
-                                <input class="form-control" name="taskname" placeholder="Please enter task name" />
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group start_date_fr">
                                 <label>Project Name</label>
                                 <select class="form-control" name="project_id">
                                     <option></option>
@@ -43,9 +38,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group end_date_fr">
+                                <label>Task Name</label>
+                                <input class="form-control" name="taskname" placeholder="Please enter task name" />
+                            </div>
+                            <div class="form-group customer_fr">
                                 <label>Comments</label>
-                                <input class="form-control" name="comments" placeholder="Please enter comments" />
+                                <textarea class="form-control" name="comments" placeholder="Please enter comments" rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn btn-default">Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>

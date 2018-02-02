@@ -8,7 +8,7 @@ class Users extends Model
 {
     //
     // declare table - khai bao table
-    protected $table = "Users";
+    protected $table = "users";
     public $timestamps = false;
 
     public function employee_types(){

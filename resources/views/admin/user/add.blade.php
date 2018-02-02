@@ -29,65 +29,69 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/user/add" method="POST" id="add_user">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
-                            <div class="form-group">
+                            <div class="form-group start_date_fr">
                                 <label>First Name</label>
                                 <input class="form-control" name="firstname" placeholder="Please enter your name" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group end_date_fr">
                                 <label>Last Name</label>
                                 <input class="form-control" name="lastname" placeholder="Please enter your name" />
                             </div>
-                            <div class="form-group">
+                            
+                            <div class="form-group start_date_fr">
                                 <label>Username</label>
                                 <input class="form-control" type="email" name="email" placeholder="Please enter your email" />
                             </div>
-                            <div class="form-group">
-                                <label>Start Date</label>
-   								<input class="date form-control" type="text" name="start_date">
-                            </div>
-                            <!-- datepicker -->
-                            <script type="text/javascript">
-							    $('.date').datepicker({  
-							       format: 'yyyy-mm-dd'
-							     });  
-							</script>
-
-							<div class="form-group">
-                                <label>End Date</label>
-   								<input class="enddate form-control" type="text" name="end_date">
-                            </div>
-                            <!-- datepicker -->
-                            <script type="text/javascript">
-							    $('.enddate').datepicker({  
-							       format: 'yyyy-mm-dd'
-							     });  
-							</script>
-
-							<div class="form-group">
+                            <div class="form-group end_date_fr">
                                 <label>Employee Type</label>
-   								<select class="form-control" name="employee_type_id">
+                                <select class="form-control" name="employee_type_id">
                                     <option></option>
                                     @foreach($employee_types as $value)
                                     <option value="{{$value->id}}">{{$value->type}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group start_date_fr">
+                                <label>Start Date</label>
+   								<input class="date form-control" type="text" name="start_date">
+                            </div>
+                            <!-- datepicker -->
+                            <script type="text/javascript">
+							    $('.date').datepicker({  
+							       format: 'yyyy-mm-dd',
+                                   autoclose: true
+							     });  
+							</script>
+
+							<div class="form-group end_date_fr">
+                                <label>End Date</label>
+   								<input class="enddate form-control" type="text" name="end_date">
+                            </div>
+                            <!-- datepicker -->
+                            <script type="text/javascript">
+							    $('.enddate').datepicker({  
+							       format: 'yyyy-mm-dd',
+                                   autoclose: true
+							     });  
+							</script>
+
+							
+                            <div class="form-group start_date_fr">
                                 <label>Password</label>
                                 <input class="form-control" type="password" name="password" id="password" placeholder="Please enter your password" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group end_date_fr">
                                 <label>Password Again</label>
                                 <input class="form-control" type="password" name="passwordAgain" placeholder="Please enter your password" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Position</label>
                                 <label class="radio-inline">
                                     <input name="quyen" value="1" type="radio">Admin

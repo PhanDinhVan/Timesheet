@@ -8,7 +8,7 @@ class Employee_Types extends Model
 {
     //
         // declare table - khai bao table
-    protected $table = "Employee_Types";
+    protected $table = "employee_types";
     // them thang nay de khong tu dong insert `updated_at`, `created_at` vao table
     public $timestamps = false;
 

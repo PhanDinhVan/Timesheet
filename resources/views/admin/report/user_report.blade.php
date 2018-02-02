@@ -6,10 +6,12 @@
         margin: 0px;
     }
     .from{
-        width: 50%;
+        width: 67%;
+        text-align: center;
     }
     .to{
-        width: 50%; margin-left: 5%;
+        width: 67%; margin-left: 5%;
+        text-align: center;
     }
     .panel-body{
         padding-bottom: 4px;

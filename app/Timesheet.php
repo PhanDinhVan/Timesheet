@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Timesheet extends Model
 {
     //
-    protected $table = "Time_entries";
+    protected $table = "time_entries";
     public $timestamps = false;
 
     // public function task(){

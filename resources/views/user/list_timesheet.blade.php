@@ -101,7 +101,7 @@ div.foo{
 </div>  
 <!-- datepicker -->
 <script type="text/javascript">
-  $("#datepicker").datepicker({format: 'yyyy-mm-dd'}).datepicker("setDate", new Date());
+  $("#datepicker").datepicker({format: 'yyyy-mm-dd', autoclose: true}).datepicker("setDate", new Date());
   // $('.date').datepicker({  
   //    format: 'yyyy-mm-dd'
   //  });  
@@ -113,7 +113,7 @@ div.foo{
       <table>
         <tr>
           <td>
-            <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search">
+            <!-- <input id="searchItem" type="search" name="searchItem" class="form-control" placeholder="Search"> -->
           </td>
         </tr>
       </table>

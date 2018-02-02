@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     //
 	public function getList(){
-		$project = Project::paginate(10);
+		$project = Project::get();
 		return view('admin/project/list',['project'=>$project]);
 	}
 
@@ -50,13 +50,6 @@ class ProjectController extends Controller
 	}
 
 	public function postEdit(Request $request, $id){
-		$this->validate($request,
-			[
-				'name'=>'unique:projects,name'
-			],
-			[
-				'name.unique'=>'projectname_exits'
-			]);
 
 		$project = Project::find($id);
 		$project->name = $request->name;

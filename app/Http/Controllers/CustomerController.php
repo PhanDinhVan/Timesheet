@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     //
     public function getList(){
-    	$customer = Customer::paginate(10);
+    	$customer = Customer::get();
     	return view('admin/customer/list',['customer'=>$customer]);
     }
 
@@ -18,16 +18,10 @@ class CustomerController extends Controller
     }
 
     public function postAdd(Request $request){
-    	$this->validate($request,
-    		[
-    			'email'=>'unique:customers,email'
-    		],
-    		[
-    			'email.unique'=>'email_exits'
-    		]);
-
+    	
     	$customer = new Customer;
     	$customer->name = $request->name;
+        $customer->contact = $request->contact;
     	$customer->email = $request->email;
     	$customer->city = $request->city;
     	$customer->country = $request->country;
@@ -45,6 +39,8 @@ class CustomerController extends Controller
 
 		$customer = Customer::find($id);
 		$customer->name = $request->name;
+        $customer->contact = $request->contact;
+        $customer->email = $request->email;
 		$customer->city = $request->city;
 		$customer->country = $request->country;
 		$customer->save();

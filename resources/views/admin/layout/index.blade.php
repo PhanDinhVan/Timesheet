@@ -29,6 +29,8 @@
 
     <!-- Custom Theme Style -->
     <link href="admin_asset/build/css/custom.min.css" rel="stylesheet">
+
+    
     
     <!-- css file error in fordel admin -->
     <link rel="stylesheet" type="text/css"  href="css/mystyle.css">
@@ -40,7 +42,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Amagumo Lab's</span></a>
+              <a class="site_title"><i class="fa fa-paw"></i> <span>Amagumo Lab's</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -79,8 +81,8 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            <a href="http://www.amagumolabs.com/">Amagumo Labs</a> &copy; 2017 - All rights reserved 
+          <div class="pull-right footer_admin">
+                <a href="http://www.amagumolabs.com/">Amagumo Labs</a> &copy; <?php echo date('Y'); ?> - All rights reserved 
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -130,10 +132,17 @@
     <script src="admin_asset/build/js/custom.min.js"></script>
     <script src="js/datetimepicker/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="css/datetimepicker/bootstrap-datepicker.css" />
+
     <!-- jQuery hien thi next-, pre khi tra ve compact or reponse -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+    <!-- hien thi nut filter column cua datatables -->
+    <!-- <link rel="stylesheet" type="text/css" href="admin_asset/vendors/dataTables/css/jquery.dataTables.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+    <script type="text/javascript" charset="utf8" src="admin_asset/vendors/dataTables/js/jquery.dataTables.js"></script>
+    <!-- lam dep datatable -->
+    <link rel="stylesheet" type="text/css" href="admin_asset/vendors/dataTables/css/jquery.dataTables_themeroller.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"> -->
+    <!-- gop row of column -->
+    <script src="admin_asset/vendors/dataTables/js/dataTables.rowsGroup.js"></script>
     <!-- multiselect -->
     <script src="js/multiselect/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/multiselect/bootstrap-multiselect.css" />

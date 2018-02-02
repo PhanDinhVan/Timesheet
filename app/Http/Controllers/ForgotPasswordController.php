@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller
 
                 Mail::to($username)->send(new UserEmail($token));
             
-                return redirect('login')->with('send','We have send email to you. Please check your inbox.');
+                return redirect('login')->with('send','send_success');
             }
         }
         catch(\Exception $e){

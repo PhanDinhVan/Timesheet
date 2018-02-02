@@ -21,8 +21,9 @@
         margin-left: 5%;
     }
     .date{
-        width: 50%; 
+        width: 67%; 
         margin-left: 5%;
+        text-align: center;
     }
     .show-report-info{
         text-align: center;
