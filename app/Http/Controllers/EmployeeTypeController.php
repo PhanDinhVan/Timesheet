@@ -23,7 +23,7 @@ class EmployeeTypeController extends Controller
     	$employee_type->type = $request->emp_type;
     	$employee_type -> save();
 
-    	return redirect('admin/employee_type/add')->with('thongbao','You add success');
+    	return redirect('admin/employee_type/list')->with('thongbao','You add success');
     }
 
     public function getEdit($id){
@@ -43,7 +43,7 @@ class EmployeeTypeController extends Controller
     	$employee_type->type = $request->emp_type;
     	$employee_type -> save();
 
-    	return redirect('admin/employee_type/edit/'.$id)->with('thongbao','You edit success');
+    	return redirect('admin/employee_type/list')->with('thongbao','You edit success');
     }
 
     public function getDelete($id){

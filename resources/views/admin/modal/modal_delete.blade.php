@@ -75,3 +75,43 @@
     </div>
 </div>
 
+
+<!-- Delete Employee_type -->
+<div class="modal fade" id="delete_employee_type" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Employee Type</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want delete?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" id="id_delete_employee_type" class="btn btn-info" role="button">Yes</a>
+                <button type="button" class="btn btn-default cancel" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Permisson -->
+<div class="modal fade" id="delete_permisson" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Permisson</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want delete?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" id="id_delete_permisson" class="btn btn-info" role="button">Yes</a>
+                <button type="button" class="btn btn-default cancel" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+

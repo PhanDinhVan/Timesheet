@@ -743,6 +743,31 @@ File: Main Css
   padding: 2%;
 }
 
+/*of report chart*/
+.charts {
+  height: auto !important;
+  margin: 0 auto;                            
+  position: relative;
+  width: 100% !important;
+  text-align: center;
+}
+.charts > div{
+  /*cho bieu do nam ngang*/
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+}
+
+.show-report-info {
+  text-align: center;
+  margin-top: 2%;
+}
+
+.searchs {
+  float: right;
+}
+
 /* ===========
    Common
  =============*/
@@ -855,6 +880,7 @@ a:hover, a:active, a:focus {
   background-clip: padding-box;
   margin-bottom: 20px;
   background-color: #ffffff;
+  min-height: 75vh;
 }
 
 .header-title {
@@ -5869,7 +5895,7 @@ File: Responsive
     display: block;
   }
   body {
-    padding-bottom: 85px;
+    padding-bottom: 5px;
   }
   .search-bar {
     display: none !important;

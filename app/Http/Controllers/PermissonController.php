@@ -45,7 +45,7 @@ class PermissonController extends Controller
 			$permisson->project_id = $request->projectname;
 			$permisson->save();
 
-			return redirect('admin/permisson/add')->with('thongbao','You add success');
+			return redirect('admin/permisson/list')->with('thongbao','You add success');
 			
 		}else{
 			return redirect('admin/permisson/add')->with('error','permission_exits');
@@ -72,7 +72,7 @@ class PermissonController extends Controller
 			
 			$permisson->save();
 
-			return redirect('admin/permisson/edit/'.$id)->with('thongbao','You edit success');
+			return redirect('admin/permisson/list')->with('thongbao','You edit success');
 			
 		}else{
 			return redirect('admin/permisson/edit/'.$id)->with('error','permission_exits');

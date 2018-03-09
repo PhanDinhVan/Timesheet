@@ -1,79 +1,59 @@
 @extends('admin.layout.index')
 @section('content')
 
-<!-- Page Content --> 
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
-
-<div class="right_col" role="main">
-      <!-- top tiles -->
-     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Permisson
-                        <small>Edit</small>
-                    </h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-box">
+            @if(session('error'))
+                <div class="alert alert-danger errors" id="error">
+                    {{session('error')}}
                 </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $err)
-                                    {{$err}} <br>
-                                @endforeach
-                            </div>
-                        @endif
+            @endif
+            <h2 class="m-t-0 header-titles"> <b>edit permisson</b></h2>
+            <form action="admin/permisson/edit/{{$permisson->id}}" method="POST" id="edit_permisson">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                        @if(session('error'))
-                            <div class="alert alert-danger" id="error">
-                                {{session('error')}}
-                            </div>
-                        @endif
-
-                        @if(session('thongbao'))
-                            <div class="alert alert-success customer_fr">
-                                {{session('thongbao')}}
-                            </div>
-                        @endif
-                        <form action="admin/permisson/edit/{{$permisson->id}}" method="POST">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            
-                            <div class="form-group customer_fr">
-                                <label>Username</label>
-                                <select class="form-control" name="username">
-                                    @foreach($user as $value)
-                                    <option 
-                                        @if($value->id == $permisson->user_id) {{"selected"}} @endif 
-                                        value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group customer_fr">
-                                <label>Project Name </label>
-                                <select class="form-control" name="projectname">
-                                    @foreach($project as $value)
-                                    <option 
-                                        @if($value->id == $permisson->project_id) {{"selected"}} @endif 
-                                        value="{{$value->id}}">{{$value->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            
-                            
-                            <div class="form-group customer_fr">
-                                <button type="submit" class="btn btn-success right_add">Save</button>
-                                <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
-                            </div>
-                        <form>
+                <div class="form-group row">
+                    <div class=" col-md-6 offset-md-3">
+                        <label class="col-form-label">Username</label>
+                        <select class="form-control" name="username">
+                            @foreach($user as $value)
+                            <option 
+                                @if($value->id == $permisson->user_id) {{"selected"}} @endif 
+                                value="{{$value->id}}">{{$value->firstname}} {{$value->lastname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <!-- /.row -->
+
+                <div class="form-group row">
+                    <div class=" col-md-6 offset-md-3">
+                        <label class="col-form-label">Project Name</label>
+                        <select class="form-control" name="projectname">
+                            @foreach($project as $value)
+                            <option 
+                                @if($value->id == $permisson->project_id) {{"selected"}} @endif 
+                                value="{{$value->id}}">{{$value->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3 offset-md-3">
+                        <a href="javascript:document.getElementById('edit_permisson').reset();">Clear all</a>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-info right_add">Save</button>
+                        <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
+                    </div>
+                </div>
+                
+            </form>
         </div>
-        <!-- /.container-fluid -->
     </div>
 </div>
+
 @include('error.messages')
 
 <!-- /#page-wrapper -->	

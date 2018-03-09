@@ -168,6 +168,10 @@
         <script src="admin_asset/page_login/assets/js/bootstrap-datepicker.js"></script> -->
         <script src="js/datetimepicker/bootstrap-datepicker.min.js"></script>
         <link rel="stylesheet" href="css/datetimepicker/bootstrap-datepicker.css" />
+
+        <script src="js/d3js/d3.js"></script>
+        <script src="js/d3js/d3plus.js"></script>
+        <script src="js/timesheet/timesheet.js"></script>
         
 
         @yield('script')

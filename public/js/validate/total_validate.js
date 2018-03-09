@@ -145,3 +145,19 @@ $(document).on('click','.delete-customer',function(e){
     $("#id_delete_customer").attr("href", "admin/customer/delete/"+id);
 })
 /* -----  End page customer  -----*/
+
+/* -----  Start page employee_type  -----*/
+$(document).on('click','.delete-employee-type',function(e){
+    // get value the a
+    var id = $(this).attr('href');
+    $("#id_delete_employee_type").attr("href", "admin/employee_type/delete/"+id);
+})
+/* -----  End page employee_type  -----*/
+
+/* -----  Start page Permisson  -----*/
+$(document).on('click','.delete-permisson',function(e){
+    // get value the a
+    var id = $(this).attr('href');
+    $("#id_delete_permisson").attr("href", "admin/permisson/delete/"+id);
+})
+/* -----  End page Permisson  -----*/
