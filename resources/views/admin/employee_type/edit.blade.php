@@ -26,20 +26,21 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/employee_type/edit/{{$employee_type->id}}" method="POST" id="edit_employee_type">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Employee Type</label>
                                 <input class="form-control" name="emp_type" value="{{$employee_type->type}}" placeholder="Please enter employee type" />
                             </div>
-                            <button type="submit" class="btn btn-default">Save</button>
-                            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/employee_type/list') }}">Cancel</a>
+                            <div class="form-group customer_fr">
+                                <button type="submit" class="btn btn-success right_add">Save</button>
+                                <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/employee_type/list') }}">Cancel</a>
+                            </div>
                         <form>
                 </div>
             </div>

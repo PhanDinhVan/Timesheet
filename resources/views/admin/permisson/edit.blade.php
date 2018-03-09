@@ -33,14 +33,14 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/permisson/edit/{{$permisson->id}}" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Username</label>
                                 <select class="form-control" name="username">
                                     @foreach($user as $value)
@@ -50,7 +50,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Project Name </label>
                                 <select class="form-control" name="projectname">
                                     @foreach($project as $value)
@@ -61,9 +61,11 @@
                                 </select>
                             </div>
                             
-                            <button type="submit" class="btn btn-default">Save</button>
-                            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
+                            
+                            <div class="form-group customer_fr">
+                                <button type="submit" class="btn btn-success right_add">Save</button>
+                                <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
+                            </div>
                         <form>
                 </div>
             </div>

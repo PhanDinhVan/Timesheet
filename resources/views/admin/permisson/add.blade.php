@@ -9,9 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Permisson
-                        <small>Add new</small>
-                    </h1>
+                    <h1 class="page-header"> new permisson </h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
@@ -23,14 +21,14 @@
                         @endif
 
                         @if(session('thongbao'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success customer_fr">
                                 {{session('thongbao')}}
                             </div>
                         @endif
                         <form action="admin/permisson/add" method="POST" id="add_permisson">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Username</label>
                                 <select class="form-control" name="username">
                                     <option></option>
@@ -39,7 +37,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group customer_fr">
                                 <label>Project Name</label>
                                 <select class="form-control" name="projectname">
                                     <option></option>
@@ -48,10 +46,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
-                            <button type="submit" class="btn btn-default">Add</button>
-                            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
+                            <div class="form-group customer_fr">
+                                <a href="javascript:document.getElementById('add_permisson').reset();">Clear all</a>
+                            </div>
+                            <div class="form-group customer_fr">
+                                <button type="submit" class="btn btn-success right_add">Add</button>
+                                <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/permisson/list') }}">Cancel</a>
+                            </div>
                         <form>
                 </div>
                

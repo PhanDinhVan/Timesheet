@@ -12,7 +12,9 @@ class PermissonController extends Controller
     //
     public function getList(){
     	// Phan trang khi lay du lieu ra all() tren trang view de {{ $permisson->links() }}
-    	$permisson = Permisson::groupBy('permisson_users_projects.user_id')->groupBy('permisson_users_projects.project_id')->get();
+    	$project = Project::select('id')->get();
+    	$permisson = Permisson::groupBy('permisson_users_projects.user_id')->groupBy('permisson_users_projects.project_id')->whereIn('permisson_users_projects.project_id', $project)->get();
+    	// die($permisson);
         return view('admin.permisson.list',['permisson'=>$permisson]);
     }
 

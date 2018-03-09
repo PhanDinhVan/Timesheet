@@ -3,81 +3,94 @@
 
 <!-- Page Content --> 
 
-<div class="right_col" role="main">
-      <!-- top tiles -->
-     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Task
-                        <small>Edit</small>
-                    </h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-box">
+            @if(session('error'))
+                <div class="alert alert-danger errors" id="error">
+                    {{session('error')}}
                 </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(session('error'))
-                            <div class="alert alert-danger" id="error">
-                                {{session('error')}}
-                            </div>
-                        @endif
+            @endif
 
-                        @if(session('thongbao'))
-                            <div class="alert alert-success customer_fr">
-                                {{session('thongbao')}}
-                            </div>
-                        @endif
-                        <form action="admin/task/edit/{{$task->id}}" method="POST" id="edit_task">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            
-                            <div class="form-group start_date_fr">
-                                <label>Project Name</label>
-                                <select class="form-control" name="project_id">
-                                    @foreach($project as $value)
-                                    <option 
-                                        @if($task->project_id == $value->id) {{"selected"}} @endif 
-                                        value="{{$value->id}}">{{$value->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group end_date_fr">
-                                <label>Task Name</label>
-                                <input class="form-control" name="taskname" value="{{$task->taskname}}" placeholder="Please enter employee type" />
-                            </div>
-                            
-                            <div class="form-group customer_fr">
-                                <label>Comments</label>
-                                <textarea class="form-control" name="comments" placeholder="Please enter employee type" rows="4" cols="80" id="myTextArea">
-                                    {{$task->comments}}
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="availability">Availability</label>
-                                <label class="radio-inline">
-                                    <input name="availability" value="0" type="radio"
-                                        @if($task->availability == 0)
-                                            {{"checked"}}
-                                        @endif
-                                    >No
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="availability" value="1" type="radio"
-                                        @if($task->availability == 1)
-                                            {{"checked"}}
-                                        @endif
-                                    >Yes
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-default">Save</button>
-                            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/task/list') }}">Cancel</a>
-                        <form>
+            @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                        {{$err}} <br>
+                    @endforeach
                 </div>
-            </div>
-            <!-- /.row -->
+            @endif
+            <h2 class="m-t-0 header-titles"> <b>edit tasks</b></h2>
+            <form action="admin/task/edit/{{$task->id}}" method="POST" id="edit_task">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+                <div class="form-group row">
+                    <div class=" col-md-3 offset-md-3">
+                        <label class="col-form-label">Project Name</label>
+                        <select class="form-control" name="project_id">
+                            @foreach($project as $value)
+                            <option 
+                                @if($task->project_id == $value->id) {{"selected"}} @endif 
+                                value="{{$value->id}}">{{$value->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-form-label">Task Name</label>
+                        <input class="form-control" name="taskname" value="{{$task->taskname}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class=" col-md-6 offset-md-3">
+                        <label class="col-form-label">Comments</label>
+                        <textarea class="form-control" name="comments" rows="4" cols="80" id="myTextArea">
+                            {{$task->comments}}
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6 offset-md-3">
+                        <div>
+                            <label class="col-form-label">Availability</label>
+                        </div>
+                        
+                        <div class="radio radio-info form-check-inline">
+                            <input type="radio" id="inlineRadio2" name="availability" value="1" 
+                                @if($task->availability == 1)
+                                    {{"checked"}}
+                                @endif
+                            >
+                            <label for="inlineRadio2"> Yes </label>
+                        </div>
+
+                        <div class="radio radio-info form-check-inline">
+                            <input type="radio" id="inlineRadio1"  name="availability" value="0" 
+                                @if($task->availability == 0)
+                                    {{"checked"}}
+                                @endif
+                            >
+                            <label for="inlineRadio1"> No </label>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3 offset-md-3">
+                        <a href="javascript:document.getElementById('edit_task').reset();">Clear all</a>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-info right_add">Save</button>
+                        <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/task/list') }}">Cancel</a>
+                    </div>
+                </div>
+                
+            </form>
         </div>
-        <!-- /.container-fluid -->
     </div>
 </div>
+
 @include('error.messages') 
        
 <!-- /#page-wrapper -->	

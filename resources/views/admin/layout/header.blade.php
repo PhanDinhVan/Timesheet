@@ -1,27 +1,28 @@
-<!-- Navigation -->
-<div class="top_nav">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-      </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt="">{{Auth::user()->lastname}}
-            <span class=" fa fa-angle-down"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            @if(Auth::check())
-            <li><a href="admin/user/edit/{{Auth::user()->id}}"><i class="fa fa-cog pull-right"></i> Settings </a></li>
-            <li><a href="admin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out </a></li>
-            @else
-                return redirect('admin/login'); 
-            @endif
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
+<li class="list-inline-item dropdown notification-list">
+    <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
+       aria-haspopup="false" aria-expanded="false">
+        <img src="admin_asset/page_login/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+        <!-- item-->
+        <div class="dropdown-item noti-title">
+            <h5 class="text-overflow"><small class="text-white">Welcome! {{Auth::user()->lastname}}</small> </h5>
+        </div>
+
+        @if(Auth::check())
+            <!-- item-->
+            <a href="admin/user/edit/{{Auth::user()->id}}" class="dropdown-item notify-item">
+                <i class="mdi mdi-settings"></i> <span>Settings</span>
+            </a>
+
+            <!-- item-->
+            <a href="admin/logout" class="dropdown-item notify-item">
+                <i class="mdi mdi-logout"></i> <span>Logout</span>
+            </a>
+        @else
+            return redirect('admin/login'); 
+        @endif
+        
+    </div>
+</li>

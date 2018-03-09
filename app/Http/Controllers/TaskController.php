@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     //
     public function getList(){
-    	$task = Task::groupBy('tasks.project_id')->groupBy('tasks.taskname')->get();
+    	$task = Task::groupBy('tasks.project_id')->groupBy('tasks.taskname')->groupBy('tasks.availability')->get();
     	return view('admin/task/list',['task'=>$task]);
     }
 
@@ -29,10 +29,10 @@ class TaskController extends Controller
             $taskname->taskname = $request->taskname;
             $taskname->project_id = $request->project_id;
             $taskname->comments = $request->comments;
-            $taskname->availability = 1;
+            $taskname->availability = $request->availability;
             $taskname->save();
 
-            return redirect('admin/task/add')->with('thongbao','You add success');
+            return redirect('admin/task/list')->with('thongbao','You add success');
             
         }else{
             return redirect('admin/task/add')->with('error','taskname_exits');
@@ -49,7 +49,7 @@ class TaskController extends Controller
     public function postEdit(Request $request, $id){
 
         // Check taskname and project name have exits?
-        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->where('availability',$request->availability)->where('comments',$request->comments)->get();
+        $temp = Task::where('taskname',$request->taskname)->where('project_id',$request->project_id)->get();
         if($temp->isEmpty()){
 
             $task = Task::find($id);
@@ -59,10 +59,34 @@ class TaskController extends Controller
             $task->availability = $request->availability;
             $task->save();
 
-            return redirect('admin/task/edit/'.$id)->with('thongbao','You edit success');
+            return redirect('admin/task/list')->with('thongbao','You edit success');
             
         }else{
+
+            // $check_task = Task::where('comments',$request->comments)->where('availability',$request->availability)->get();
+            // if($check_task->isEmpty()){
+            //     $task = Task::find($id);
+            //     $task->taskname = $request->taskname;
+            //     $task->project_id = $request->project_id;
+            //     $task->comments = $request->comments;
+            //     $task->availability = $request->availability;
+            //     $task->save();
+
+            //     return redirect('admin/task/list')->with('thongbao','You edit success');
+            // }
+
+            $task = Task::find($id);
+            if($task->comments != $request->comments || $task->availability != $request->availability){
+                
+                $task->comments = $request->comments;
+                $task->availability = $request->availability;
+                $task->save();
+
+                return redirect('admin/task/list')->with('thongbao','You edit success');
+            }
+
             return redirect('admin/task/edit/'.$id)->with('error','taskname_exits');
+            
         }
         
     }

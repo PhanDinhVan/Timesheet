@@ -1,20 +1,20 @@
-<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
-<script src="js/jquery/jquery.js"></script>
-<script src="js/datepicker/bootstrap-datepicker.js"></script>
-<script src="js/datepicker/moment.min.js"></script>
-<link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<link href="../css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<script src="../js/jquery/jquery.js"></script>
+<script src="../js/datepicker/bootstrap-datepicker.js"></script>
+<script src="../js/datepicker/moment.min.js"></script>
+<link href="../css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="../js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 
 <style type="text/css">
   .admin{
-    width: 40%; 
+    width: 49%; 
     float: left;
   }
   .projectname_admin{
     width: 40%; 
     float: left; 
-    margin-left: 20%;
+    margin-left: 11%;
   }
 
   .projectname{
@@ -28,6 +28,17 @@
   }
   #date_add{
     text-align: center;
+  }
+  .users {
+    width: 40%; 
+    float: left; 
+    margin-left: 20%;
+  }
+  .admin_working_time {
+    width: 22%; 
+    float: left; 
+    margin-left: 3%; 
+    margin-right: 11%;
   }
 </style>
 
@@ -52,7 +63,7 @@
                   {{session('thongbao')}}
               </div>
           @endif
-          <form action="user/timesheet" method="POST" id="frm-add">
+          <form action="<?=Request::root()?>/user/timesheet" method="POST" id="frm-add">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="position_add" id="position_add" value="{{ Auth::user()->position }}">
               
@@ -81,7 +92,7 @@
                     </select>
                 </div>
 
-                <div class="form-group" style="width: 20%; float: left;">
+                <div class="form-group" style="width: 24%; float: left;">
                     <label>Date</label>
                     <input class="date_add form-control" type="text" id="date_add" name="date_time_entries">
                 </div>
@@ -90,7 +101,7 @@
                   $("#date_add").datepicker({format: 'yyyy-mm-dd', autoclose: true}).datepicker("setDate", new Date());
                 </script>
 
-                <div class="form-group admin" style="width: 17%; float: left; margin-left: 3%; margin-right: 20%;">
+                <div class="form-group admin_working_time">
                     <label>Working Time</label>
                       <input class="timepicker form-control" type="text" id="working_time_admin" style="text-align: center;"> 
                       <input class="timepicker form-control" type="hidden" id="working_time_admin2" name="working_time_admin"> 
@@ -141,7 +152,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group" style="width: 17%; float: left;">
+                <div class="form-group" style="width: 40%; float: left;">
                   <label>Date</label>
                   <input class="date_add form-control" type="text" id="date_add" name="date_time_entries">
                 </div>
@@ -149,7 +160,7 @@
                 <script type="text/javascript">
                   $("#date_add").datepicker({format: 'yyyy-mm-dd'}).datepicker("setDate", new Date());
                 </script>
-                <div class="form-group users" style="width: 17%; float: left; margin-left: 43%; margin-right: 18%;">
+                <div class="form-group users">
                   <label>Working Time</label>
                   <input class="timepicker form-control" type="text" id="working_time_users" style="text-align: center;">
                   <input class="timepicker form-control" type="hidden" id="working_time_users2" name="working_time_users"> 
@@ -180,12 +191,12 @@
                     <textarea class="form-control" name="note" cols="50" rows="4"></textarea>
                 </div>
              
-              <div class="modal-footer" style="margin-top: 7%; padding: 0%; padding-top: 3%; margin-bottom: -2%;">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-save"></span> Save</button>
-              </div>
-          </form>
-      </div>
+                <div class="modal-footer" style="margin-top: 7%; padding: 0%; padding-top: 3%; margin-bottom: -2%;">
+                    <button type="button" class="btn btn-default cancel" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    <button type="submit" class="btn btn-info" ><span class="glyphicon glyphicon-save"></span> Save</button>
+                </div>
+            </form>
+        </div>
     </div>
   </div>
 </div>

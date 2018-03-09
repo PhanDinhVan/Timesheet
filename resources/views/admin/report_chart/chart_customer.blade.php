@@ -8,12 +8,12 @@
         position: relative;
         width: 300px;
     }
-    label{
+   /* label{
         float: left;
         margin-right: 1%;
         margin-top: 0.5%;
-    }
-    #sel1{
+    }*/
+    /*#sel1{
         width: 20%;
         float: left;
     }
@@ -24,74 +24,80 @@
         width: 67%; 
         margin-left: 5%;
         text-align: center;
-    }
+    }*/
     .show-report-info{
         text-align: center;
         margin-top: 2%;
     }
-    .panel-body{
+    /*.panel-body{
         padding-bottom: 4px;
-    }
+    }*/
 </style>
 
-<div class="right_col" role="main">
-      <!-- top tiles -->
-     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Chart report
-                        <small>Customer</small>
-                    </h1>
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7">
-                  @if(session('thongbao'))
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <h2 class="m-t-0 m-b-20 header-titles"><b>Chart Report Customer</b></h2>
+
+            <div class="col-lg-7">
+                @if(session('thongbao'))
                     <div class="alert alert-success">
                         {{session('thongbao')}}    
                     </div>
-                  @endif
+                @endif
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9">
+
+                    <div class="p-20">
+                        <form class="form-horizontal">
+                            
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="col-form-label">From</label>
+                                    <input type="text" name="from" id="from" class="form-control" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" >
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="col-form-label">To</label>
+                                    <input type="text" name="to" id="to" class="form-control" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class=" col-md-3">
+                                    <label class="col-form-label">Select customer</label>
+                                    <select class="form-control" id="select_customer">
+                                        <option></option>
+                                        @foreach($customer as $value)
+                                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class=" col-md-3 offset-md-3">
+                                    <button type="button" class="btn btn-info" id="searchCustomer" onclick="changeData()">
+                                        <span class="glyphicon glyphicon-search"></span> Search
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </form>
+
+                    </div>
                 </div>
             </div>
-            <!-- /.row -->
-            <div class="panel panel-default">
-            	<div class="panel-heading">
-            		<table>
-            			<tr>
-            				<td><b>From </b></td>
-            				<td>
-            					<input type="text" name="from" id="from" class="form-control date" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}">
-            				</td>
-            				<!-- <td style="width: 5%;"></td> -->
-            				<td><b>To </b></td>
-            				<td>
-            					<input type="text" name="to" id="to" class="form-control date" placeholder="yyyy-mm-dd" required value="{{ date('Y-m-d') }}">
-            				</td>
-            			</tr>
-            		</table>
-            	</div>
-            	<div class="panel-body">
-            		
-                	<label>Select customer</label>
-			      	<select class="form-control" id="sel1">
-			      		<option></option>
-			      		@foreach($customer as $value)
-			        		<option value="{{ $value->id }}">{{ $value->name }}</option>
-			        	@endforeach
-			      	</select>
-			      	<button onClick="changeData()" class="btn btn-info">Go <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-            	</div>
-                
-            	<div class="show-report-info">
-            		 <div class ="chart" id="chart"></div>
-            	</div>
 
-            	
+            <div class="show-report-info">
+                
+                <div class ="chart" id="chart"></div>
             </div>
+                
         </div>
-        <!-- /.container-fluid -->
     </div>
 </div>
+
 @include('error.messages')
 
 
@@ -108,13 +114,15 @@
     $('#from').datepicker({
         changeMonth:true,
         changeYear:true,
-        format:'yyyy-mm-dd'
+        format:'yyyy-mm-dd',
+        autoclose: true
     });
 
     $('#to').datepicker({
         changeMonth:true,
         changeYear:true,
-        format:'yyyy-mm-dd'
+        format:'yyyy-mm-dd',
+        autoclose: true
     });
 
     $(document).ready(function(){
@@ -127,7 +135,7 @@
 
     function changeData(){
         document.getElementById("chart").innerHTML = "";
-        var e = document.getElementById("sel1");
+        var e = document.getElementById("select_customer");
         var id = e.options[e.selectedIndex].value;
         var name = e.options[e.selectedIndex].text;
         var from = $('#from').val();
@@ -321,6 +329,10 @@
         }
         
     }
+
+    $(document).ready(function(){
+        $('#chart_customer').multiSelect();
+    });
 </script>
 	
 @endsection

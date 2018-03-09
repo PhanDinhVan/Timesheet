@@ -123,7 +123,8 @@
 		$('#from').datepicker({
 			changeMonth:true,
 			changeYear:true,
-			format:'yyyy-mm-dd'
+			format:'yyyy-mm-dd',
+            autoclose: true
 		});
 
 		// $('#from').change(function () {
@@ -136,7 +137,8 @@
 		$('#to').datepicker({
 			changeMonth:true,
 			changeYear:true,
-			format:'yyyy-mm-dd'
+			format:'yyyy-mm-dd',
+            autoclose: true
 		});
 
 		// $('#to').change(function () {

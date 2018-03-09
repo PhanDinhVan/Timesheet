@@ -2,63 +2,70 @@
 @section('content')
 
 <!-- Page Content --> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
-<div class="right_col" role="main">
-      <!-- top tiles -->
-     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Customers
-                        <small>Edit</small>
-                    </h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-box">
+            @if(count($errors) > 0)
+                <div class="alert alert-danger errors" id="error">
+                    @foreach($errors->all() as $err)
+                        {{$err}} <br>
+                    @endforeach
                 </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
+            @endif
+            <h2 class="m-t-0 header-titles"> <b>edit customer</b></h2>
+            <form action="admin/customer/edit/{{$customer->id}}" method="POST" id="edit_customer">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                        @if(session('thongbao'))
-                            <div class="alert alert-success customer_fr">
-                                {{session('thongbao')}}
-                            </div>
-                        @endif
-                        <form action="admin/customer/edit/{{$customer->id}}" method="POST" id="edit_customer">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            
-                            <div class="form-group start_date_fr">
-                                <label>Name</label>
-                                <input class="form-control" name="name" value="{{$customer->name}}" placeholder="Please enter company name" />
-                            </div>
-                            <div class="form-group end_date_fr">
-                                <label>Contact</label>
-                                <input class="form-control" name="contact" value="{{$customer->contact}}" placeholder="Please enter contact name" />
-                            </div>
-                            <div class="form-group start_date_fr">
-                                <label>Email</label>
-                                <input class="form-control" name="email" value="{{$customer->email}}" placeholder="Please enter email" />
-                            </div>
-                            <div class="form-group end_date_fr">
-                                <label>City</label>
-                                <input class="form-control" name="city" value="{{$customer->city}}" placeholder="Please enter city" />
-                            </div>
-                            <div class="form-group customer_fr">
-                                <label>Country</label>
-                                <input class="form-control" name="country" value="{{$customer->country}}" id="country_edit" type="hidden" />
-                                <select class="form-control selectpicker countrypicker" data-live-search="true" data-flag="true" data-default="{{$customer->country}}" id="dropDown_select_edit">
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-default" id="target_edit">Save</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
-                            <a class="btn btn-default btn-close" href="{{ URL::to('admin/customer/list') }}">Cancel</a>
-                        <form>
+                <div class="form-group row">
+                    <div class=" col-md-3 offset-md-3">
+                        <label class="col-form-label">Company Name</label>
+                        <input class="form-control" name="name" value="{{$customer->name}}" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-form-label">Industry</label>
+                        <input class="form-control" name="industry" value="{{$customer->industry}}" />
+                    </div>
                 </div>
-            </div>
-            <!-- /.row -->
+
+                <div class="form-group row">
+                    <div class=" col-md-3 offset-md-3">
+                        <label class="col-form-label">Contact Name</label>
+                        <input class="form-control" name="contact" value="{{$customer->contact}}" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-form-label">Email</label>
+                        <input class="form-control" name="email" value="{{$customer->email}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class=" col-md-3 offset-md-3">
+                        <label class="col-form-label">Country</label>
+                        <input class="form-control" name="country" value="{{$customer->country}}" id="country_edit" type="hidden" />
+                        <select class="form-control selectpicker countrypicker" data-live-search="true" data-flag="true" data-default="{{$customer->country}}" id="dropDown_select_edit">
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-form-label">City</label>
+                        <input class="form-control" name="city" value="{{$customer->city}}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3 offset-md-3">
+                        <a href="javascript:document.getElementById('edit_customer').reset();">Clear all</a>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-info right_add" id="target_edit">Save</button>
+                        <a class="btn btn-default btn-close right_add cancel" href="{{ URL::to('admin/customer/list') }}">Cancel</a>
+                    </div>
+                </div>
+                
+            </form>
         </div>
-        <!-- /.container-fluid -->
     </div>
 </div>
-       
 <!-- /#page-wrapper -->	
 
 @endsection

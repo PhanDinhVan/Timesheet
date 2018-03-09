@@ -39,7 +39,7 @@ class ProjectController extends Controller
 		$project->customer_id = $request->customer_id;
 		$project->save();
 
-		return redirect('admin/project/add')->with('thongbao','You add success');
+		return redirect('admin/project/list')->with('thongbao','You add success');
 	}
 
 	public function getEdit($id){
@@ -60,7 +60,7 @@ class ProjectController extends Controller
 		$project->customer_id = $request->customer_id;
 		$project->save();
 
-		return redirect('admin/project/edit/'.$id)->with('thongbao','You edit success');
+		return redirect('admin/project/list')->with('thongbao','You edit success');
 	}
 
 	public function getDelete($id){

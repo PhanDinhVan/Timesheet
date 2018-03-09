@@ -24,11 +24,11 @@ class AdminLoginMiddleware
                 return $next($request);
             }
             else{
-                return redirect('admin/login');
+                return redirect('login');
             }
         }
         else{
-            return redirect('admin/login');
+            return redirect('login');
         }
     }
 }

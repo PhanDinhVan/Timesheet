@@ -43,7 +43,7 @@ class UserController extends Controller
         $user->status = 1;
         $user->save();
 
-        return redirect('admin/user/add')->with('thongbao','You add success');
+        return redirect('admin/user/list')->with('thongbao','You add success');
 
     }
 
@@ -75,6 +75,7 @@ class UserController extends Controller
         $user->start_date = $request->start_date;
         $user->end_date = $request->end_date;
         $user->employee_type_id = $request->employee_type_id;
+        $user->status = $request->status;
 
         if($request->changePassword == "on"){
             $this->validate($request,
@@ -96,7 +97,8 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('admin/user/edit/'.$id)->with('thongbao','You edit success');
+        // return redirect('admin/user/edit/'.$id)->with('thongbao','You edit success');
+        return redirect('admin/user/list')->with('thongbao','You edit success');
     }
 
     public function getDelete($id){

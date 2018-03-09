@@ -25,9 +25,10 @@ class CustomerController extends Controller
     	$customer->email = $request->email;
     	$customer->city = $request->city;
     	$customer->country = $request->country;
+        $customer->industry = $request->industry;
     	$customer -> save();
 
-    	return redirect('admin/customer/add')->with('thongbao','You add success');
+    	return redirect('admin/customer/list')->with('thongbao','You add success');
     }
 
     public function getEdit($id){
@@ -43,9 +44,10 @@ class CustomerController extends Controller
         $customer->email = $request->email;
 		$customer->city = $request->city;
 		$customer->country = $request->country;
+        $customer->industry = $request->industry;
 		$customer->save();
 
-		return redirect('admin/customer/edit/'.$id)->with('thongbao','You edit success');
+		return redirect('admin/customer/list')->with('thongbao','You edit success');
     }
 
     public function getDelete($id){

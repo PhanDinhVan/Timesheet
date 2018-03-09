@@ -1,6 +1,6 @@
 .error{
     color: red;
-    margin-top: 1%;
+    /*margin-top: 1%;*/
     font-weight: normal;
 }
 input.error{
@@ -62,4 +62,15 @@ footer{
 }
 .availability{
     margin-right: 2%;
+}
+.right_add{
+	float: right;
+	margin-left: 2%;
+}
+.page-header{
+	text-transform: uppercase;
+}
+.cancel{
+	background-color: #2A3F54;
+	color: white;
 }

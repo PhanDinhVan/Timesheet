@@ -1,4 +1,4 @@
-<style type="text/css">
+<!-- <style type="text/css">
     .alert-danger{
         background-color: #f2dede;
         color: #a94442;
@@ -6,7 +6,7 @@
         border: 1px solid transparent;
         border-radius: 4px;
     }
-</style>
+</style> -->
 
 <!-- select customer name -->
 <div id="select_customer_name" class="modal fade" role="dialog">

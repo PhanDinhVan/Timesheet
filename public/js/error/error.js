@@ -14,7 +14,11 @@ $(document).ready(function() {
             city: {
             		required: true,
             		minlength: 2
-            	}
+            	},
+            industry: {
+                    required: true,
+                    minlength: 2
+                }
         },
         messages: {
 	            name: {
@@ -26,11 +30,17 @@ $(document).ready(function() {
                     minlength: "Contact name minimum 2 characters"
                 },
 	            city: {
-	                    required: "Please enter city",
-	                    minlength: "City minimum 2 characters.",
-	                },
+                    required: "Please enter city",
+                    minlength: "City minimum 2 characters.",
+                },
+                industry: {
+                    required: "Please enter industry",
+                    minlength: "Industry minimum 2 characters.",
+                },
         }, highlight: function(element) {
             $(element).addClass('error');
+            $('.start_date_fr').css('height', '87px');
+            $('.end_date_fr').css('height', '87px');
         }, unhighlight: function(element) {
             $(element).removeClass('error');
         }
@@ -66,7 +76,11 @@ $(document).ready(function() {
             contact:{
             		required: true,
             		minlength: 2
-            	}
+            	},
+            industry: {
+                    required: true,
+                    minlength: 2
+                }
         },
         messages: {
 	            name: {
@@ -81,9 +95,15 @@ $(document).ready(function() {
 	                    required: "Please enter contact",
 	                    minlength: "Contact name minimum 2 characters",
 	                },
+                industry: {
+                    required: "Please enter industry",
+                    minlength: "Industry minimum 2 characters.",
+                },
             
         }, highlight: function(element) {
             $(element).addClass('error');
+            // $('.start_date_fr').css('height', '87px');
+            // $('.end_date_fr').css('height', '87px');
         }, unhighlight: function(element) {
             $(element).removeClass('error');
         }
@@ -176,12 +196,12 @@ $(document).ready(function() {
             department: {
                     required: true,
                 },
-            start_date: {
-                    required: true,
-                },
-            end_date:{
-                    required: true,
-                },
+            // start_date: {
+            //         required: true,
+            //     },
+            // end_date:{
+            //         required: true,
+            //     },
             customer_id:{
                     required: true,
                 }
@@ -194,12 +214,12 @@ $(document).ready(function() {
                 department: {
                         required: "Please select department",
                     },
-                start_date: {
-                        required: "Please select start date",
-                    },
-                end_date: {
-                        required: "Please select end date",
-                    },
+                // start_date: {
+                //         required: "Please select start date",
+                //     },
+                // end_date: {
+                //         required: "Please select end date",
+                //     },
                 customer_id: {
                         required: "Please select customer name",
                     },
@@ -222,12 +242,12 @@ $(document).ready(function() {
             department: {
                     required: true,
                 },
-            start_date: {
-                    required: true,
-                },
-            end_date:{
-                    required: true,
-                },
+            // start_date: {
+            //         required: true,
+            //     },
+            // end_date:{
+            //         required: true,
+            //     },
             customer_id:{
                     required: true,
                 }
@@ -240,12 +260,12 @@ $(document).ready(function() {
                 department: {
                         required: "Please select department",
                     },
-                start_date: {
-                        required: "Please select start date",
-                    },
-                end_date: {
-                        required: "Please select end date",
-                    },
+                // start_date: {
+                //         required: "Please select start date",
+                //     },
+                // end_date: {
+                //         required: "Please select end date",
+                //     },
                 customer_id: {
                         required: "Please select customer name",
                     },
@@ -307,7 +327,6 @@ $(document).ready(function() {
         }
     });
 
-
     // add user
     $("#add_user").validate({
         rules: {
@@ -323,12 +342,12 @@ $(document).ready(function() {
                     required: true,
                     email: true
                 },
-            start_date: {
-                    required: true,
-                },
-            end_date:{
-                    required: true,
-                },
+            // start_date: {
+            //         required: true,
+            //     },
+            // end_date:{
+            //         required: true,
+            //     },
             employee_type_id:{
                     required: true,
                 },
@@ -354,12 +373,12 @@ $(document).ready(function() {
                         required: "Please enter email",
                         email: "Please enter a valid email address"
                     },
-                start_date: {
-                        required: "Please select start date",
-                    },
-                end_date: {
-                        required: "Please select end date",
-                    },
+                // start_date: {
+                //         required: "Please select start date",
+                //     },
+                // end_date: {
+                //         required: "Please select end date",
+                //     },
                 employee_type_id: {
                         required: "Please select employee type"
                     },
@@ -374,6 +393,8 @@ $(document).ready(function() {
             
         }, highlight: function(element) {
             $(element).addClass('error');
+            // $('.start_date_fr').css('height', '87px');
+            // $('.end_date_fr').css('height', '87px');
         }, unhighlight: function(element) {
             $(element).removeClass('error');
         }
