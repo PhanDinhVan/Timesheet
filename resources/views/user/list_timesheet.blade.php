@@ -3,39 +3,48 @@
 <script src="../js/datepicker/bootstrap-datepicker.js"></script>
 
 <style type="text/css">
-  #dayofweek{
-    width: 10%; 
-    margin-left: 10%; 
-    text-align: center;
-    /*float: left;*/
-  }
 
-  .foo p {
-    font-size: 6vw;
-    letter-spacing: 1vh;
-  }
+    .foo p {
+        font-size: 6vw;
+        letter-spacing: 1vh;
+    }
 
-  .foo { 
-    /*height: auto;
-    position: relative;*/
-    text-align: center;
-    font-weight: bold;
-  }
+    .foo { 
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #hidden {
+        visibility: hidden;
+    }
+
+    .dayofweek {
+        float: left;
+    }
+
+    .dayofweek input, label {
+        text-align: center;
+    }
 
 </style>
 
 <div class="foo">
-  <!-- <button id="add" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#yourModal" style="float: left;">
-      Add Time <i class="mdi mdi-plus-circle-outline"></i>
-  </button> -->
   <p>TIMESHEET</p>
 </div>
+<div class="form-group row">
+    <div class=" col-md-6">
+        <div class=" col-md-3 dayofweek">
+            <label class="col-form-label">Today</label>
+            <input class="form-control date" type="text" id="datepicker">
+            
+        </div>
 
-<div class="form-group">
-  <label style="width: 100%;">Today</label>
-  <input class="date form-control" type="text" id="datepicker" style="width: 9%; float: left;">
-  <label class="form-control" readonly="" id="dayofweek" type="text"></label>
-</div>  
+        <div class="col-md-3 dayofweek">
+            <label class="col-form-label" id="hidden">hidden</label>
+            <label class="form-control" readonly="" id="dayofweek" type="text"></label>
+        </div>
+    </div>
+</div>
 <!-- datepicker -->
 <script type="text/javascript">
   $("#datepicker").datepicker({format: 'yyyy-mm-dd', autoclose: true}).datepicker("setDate", new Date());

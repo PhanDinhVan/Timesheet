@@ -92,8 +92,9 @@
                //var count = customer_id.length;
               // alert(count)
               // alert('Value ID   '+customer_id);
-              console.log(customer_id);
+              // console.log(customer_id);
               //console.log(count);
+              
             if(customer_id != '' && customer_id !== null) {
                 $.get("admin/report/showReportCustomer",{from:from,to:to,customer_id:customer_id}, function(data){
                     // console.log(data)
